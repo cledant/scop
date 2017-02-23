@@ -1,56 +1,71 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   scop_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/23 12:37:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/23 15:16:45 by cledant          ###   ########.fr       */
+/*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
+/*   Updated: 2017/02/23 18:52:52 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	test_fct(GLFWwindow *win)
+int		scop_init_glfw(t_env *env)
 {
-	glfwSetWindowShouldClose(win, GLFW_TRUE);
-}
-
-int		main(void)
-{
-	GLFWwindow	*win;
-	int			h;
-	int			w;
+	int		w;
+	int		h;
 
 	if (!glfwInit())
-	{
-		printf("GLFW INIT FAILED !\n");
 		return (0);
-	}
-	printf("Init OK !\n");
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	if ((win = glfwCreateWindow(1280, 720, "This is Test!", NULL, NULL)) == NULL)
-	{
-		printf("WINDOW CREATION FAILED !\n");
-		glfwTerminate();
+	if ((env->win = glfwCreateWindow(e->win_w, e->win_h, "Scop", NULL, NULL))
+			== NULL)
 		return (0);
-	}
-	glfwSetWindowCloseCallback(win, test_fct);
+	if (glfwSetWindowCloseCallback(win, scop_close_callback) == NULL)
+		return (0);
 	glfwMakeContextCurrent(win);
 	glfwGetFramebufferSize(win, &w, &h);
 	glViewport(0, 0, w, h);
-	while (!glfwWindowShouldClose(win))
+	return (1);
+}
+
+void	scop_init_env(t_env *env)
+{
+	env->win = NULL;
+	env->win_h = 720;
+	env->win_w = 1280;
+}
+
+void	scop_main(t_env *env)
+{
+	glClearColor(0.2f, 0.3f, 0.3f, 0.1f);
+	glClear(GL_COLOR_BUFFER_BIT);
+	while (!glfwWindowShouldClose(e->win))
 	{
 		glfwPollEvents();
-		glClearColor(0.2f, 0.3f, 0.3f, 0.1f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		glfwSwapBuffers(win);
+		glfwSwapBuffers(e->win);
 	}
-	glfwDestroyWindow(win);
-	glfwTerminate();
-	return (0);
+}
+
+int		main(void)
+{
+	t_env		env;
+	t_err		err;
+
+	if ((glfwSetErrorCallback(scop_error_callback)) == NULL)
+	{
+		puts("Error setting error callback");
+		return (0);
+	}
+	scop_init_env(&env);
+	if ((err = scop_init_glfw(&env)) != ERR_NONE)
+		return (scop_exit(&env));
+	scop_main(&env);	
+	return (scop_exit(&env));
 }
