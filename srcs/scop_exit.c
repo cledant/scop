@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 18:46:19 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/23 18:49:47 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/23 20:50:13 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		scop_exit(t_env *env)
 {
 	if (env->win != NULL)
-		glfwDestroyWindow(e->win);
+		glfwDestroyWindow(env->win);
 	glfwTerminate();
 	return (0);
 }
