@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 12:58:39 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/24 18:03:25 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/24 19:21:13 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char				*read_shader_file(const char *path)
 		return (fail_read(shader_code, stream));
 	if (fseek(stream, 0, SEEK_SET) == -1)
 		return (fail_read(shader_code, stream));
-	if (fread(shader_code, size, 1, stream) != (unsigned long)size)
+	if (fread(shader_code, size, 1, stream) != 1)
 		return (fail_read(shader_code, stream));
 	shader_code[size] = '\0';
 	fclose(stream);
