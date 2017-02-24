@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/24 12:57:04 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/24 13:05:29 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ void	scop_main(t_env *env)
 
 int		scop_init_gl_shaders(t_env *env)
 {
-	if (scop_gl_load_shader(env, GL_VERTEX_SHADER,
+	if (scop_gl_load_shader(&(env->vertex_shader), GL_VERTEX_SHADER,
 			"./shaders/scop_vertex_shader.glsl") == 0)
 		return (0);
-	if (scop_gl_load_shader(env, GL_VERTEX_SHADER,
+	if (scop_gl_load_shader(&(env->fragment_shader), GL_VERTEX_SHADER,
 			"./shaders/scop_vertex_shader.glsl") == 0)
 		return (0);
 	if (scop_gl_create_shader_program(env) == 0)
