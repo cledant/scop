@@ -6,7 +6,7 @@
 #    By: cledant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 10:40:13 by cledant           #+#    #+#              #
-#    Updated: 2017/02/24 12:57:08 by cledant          ###   ########.fr        #
+#    Updated: 2017/02/24 18:03:41 by cledant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ INCLUDES_GLFW = ./glfw/include/GLFW
 GLFW_PATH = ./glfw/src
 
 SRCS_NAME = scop_init.c scop_glfw_close_callback.c scop_glfw_error_callback.c \
-			scop_exit.c scop_gl_load_shader.c
+			scop_exit.c scop_gl_load_shader.c scop_gl_create_shader_program.c
 
 INCLUDES = ./includes
 

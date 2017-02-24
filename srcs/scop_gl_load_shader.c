@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 12:58:39 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/24 14:06:54 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/24 18:03:25 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static inline char	*fail_read(char *code, FILE *stream)
 {
 	if (code != NULL)
 		free(code);
-	fclose(stream)
+	fclose(stream);
 	return (NULL);
 }
 
@@ -43,7 +43,7 @@ char				*read_shader_file(const char *path)
 		return (fail_read(shader_code, stream));
 	if (fseek(stream, 0, SEEK_SET) == -1)
 		return (fail_read(shader_code, stream));
-	if (fread(shader_code, size, 1, stream) != size)
+	if (fread(shader_code, size, 1, stream) != (unsigned long)size)
 		return (fail_read(shader_code, stream));
 	shader_code[size] = '\0';
 	fclose(stream);
@@ -64,11 +64,11 @@ int		scop_gl_load_shader(GLuint *shader, GLenum type, const char *path)
 	if ((shader_code = read_shader_file(path)) == NULL)
 		return (shader_fail());
 	putchar('.');
-	glShaderSource(*shader, 1, &shader_code, NULL);
+	glShaderSource(*shader, 1, (const GLchar *const *)&shader_code, NULL);
 	glCompileShader(*shader);
 	if (shader_code != NULL)
 		free(shader_code);
-	glGetShaderiv(*shader, GL_COMPILE_STATUS, &succes)
+	glGetShaderiv(*shader, GL_COMPILE_STATUS, &success);
 	if (!success)
 		return (shader_fail());
 	puts("OK !");
