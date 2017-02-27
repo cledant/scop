@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/27 18:43:14 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/27 19:17:10 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,15 +131,10 @@ void	scop_main(t_env *env)
 		(t_vec3){1.5f, 0.2f, -1.5f},
 		(t_vec3){-1.3f, 1.0f, -1.5f}};
 	size_t	counter;
-	GLfloat	angle;
 
 	glUseProgram(env->shader_prog);
 	scop_test_vertex_init(env);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-	//Matrix init
-	scop_mat4_init(&view);
-	scop_mat4_init(&proj);
-	scop_mat4_init(&model);
 	//Matrix set value
 	//Note secondaire : Calculer barycentrei de l obj + translater orig + ... + retour au centre ?
 	scop_mat4_set_translation(&view, (t_vec3){0.0f, 0.0f, 2.0f});
@@ -153,15 +148,11 @@ void	scop_main(t_env *env)
 		counter = 0;
 		glfwPollEvents();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//Set rotation matrix
-
 		//Draw vertex
 		glBindVertexArray(env->vao);
 		while (counter < 10)
 		{
-			angle = 20.0f * counter;
 			scop_mat4_set_translation(&model, cube_pos[counter]);
-//			scop_mat4_add_rotation(&model, angle, (t_vec3){1.0f, 0.3f ,0.5f});
 			glUniformMatrix4fv(env->m_model, 1, GL_TRUE, (GLfloat *)&model);
 			glDrawElements(GL_TRIANGLES, 3 * 12, GL_UNSIGNED_INT, 0);
 			counter++;

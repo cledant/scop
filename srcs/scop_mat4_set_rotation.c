@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 11:12:35 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/27 16:38:59 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/27 19:10:42 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,9 @@ void	scop_mat4_set_rotation(t_mat4 *matrix, const float angle, t_vec3 axis)
 	(*matrix)[8] = axis.z * axis.x * (1 - cosa) - axis.y * sina;
 	(*matrix)[9] = axis.z * axis.y * (1 - cosa) + axis.x * sina;
 	(*matrix)[10] = cosa + axis.z * axis.z * (1 - cosa);
+	(*matrix)[11] = 0.0f;
+	(*matrix)[12] = 0.0f;
+	(*matrix)[13] = 0.0f;
+	(*matrix)[14] = 0.0f;
+	(*matrix)[15] = 1.0f;
 }
