@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop_mat4_set_translation.c                        :+:      :+:    :+:   */
+/*   scop_mat4_set_identity.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/27 10:49:48 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/27 15:29:50 by cledant          ###   ########.fr       */
+/*   Created: 2017/02/27 13:11:21 by cledant           #+#    #+#             */
+/*   Updated: 2017/02/27 15:08:06 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	scop_mat4_set_translation(t_mat4 *matrix, const t_vec3 tr)
+void	scop_mat4_set_identity(t_mat4 *matrix)
 {
-	(*matrix)[3] = tr.x;
-	(*matrix)[7] = tr.y;
-	(*matrix)[11] = tr.z;
 	(*matrix)[0] = 1.0f;
 	(*matrix)[5] = 1.0f;
 	(*matrix)[10] = 1.0f;
+	(*matrix)[15] = 1.0f;
 }
