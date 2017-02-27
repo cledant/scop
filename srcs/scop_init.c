@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/27 17:09:15 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/27 17:26:45 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		scop_glfw_init(t_env *env)
 	glfwSetWindowCloseCallback(env->win, scop_glfw_close_callback);
 	glfwMakeContextCurrent(env->win);
 	glViewport(0, 0, env->win_w, env->win_h);
+	glEnable(GL_DEPTH_TEST);
 	return (1);
 }
 
@@ -45,14 +46,14 @@ void	scop_init_env(t_env *env)
 void	scop_test_vertex_init(t_env	*env)
 {
 	GLfloat vertices[] = {
-		0.2f, 0.2f, 0.5f, 1.0f, 0.0f, 0.0f,
-		0.2f, -0.2f, 0.5f, 0.0f, 1.0f, 0.0f,
-		-0.2f, -0.2f, 0.5f, 0.0f, 0.0f, 1.0f,
-		-0.2f, 0.2f, 0.5f, 0.5f, 0.5f, 0.5f,
-		0.2f, 0.2f, -0.5f, 0.0f, 0.0f, 1.0f,
-		0.2f, -0.2f, -0.5f, 0.0f, 1.0f, 0.0f,
-		-0.2f, -0.2f, -0.5f, 1.0f, 0.0f, 0.0f,
-		-0.2f, 0.2f, -0.5f, 0.5f, 0.5f, 0.5f
+		0.2f, 0.2f, 0.2f, 1.0f, 0.0f, 0.0f,
+		0.2f, -0.2f, 0.2f, 0.0f, 1.0f, 0.0f,
+		-0.2f, -0.2f, 0.2f, 0.0f, 0.0f, 1.0f,
+		-0.2f, 0.2f, 0.2f, 0.5f, 0.5f, 0.5f,
+		0.2f, 0.2f, -0.2f, 0.0f, 0.0f, 1.0f,
+		0.2f, -0.2f, -0.2f, 0.0f, 0.5f, 0.5f,
+		-0.2f, -0.2f, -0.2f, 0.5f, 0.0f, 0.5f,
+		-0.2f, 0.2f, -0.2f, 0.5f, 0.5f, 0.0f
 	};
 	GLuint indices[] = {
 		0, 1, 3,
@@ -116,22 +117,34 @@ void	debug_state(void)
 void	scop_main(t_env *env)
 {
 	t_mat4	model;
+	t_mat4	view;
+	t_mat4	proj;
 
+	glUseProgram(env->shader_prog);
 	scop_test_vertex_init(env);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	//Matrix init
+	scop_mat4_init(&view);
+	scop_mat4_init(&proj);
 	scop_mat4_init(&model);
+	//Matrix set value
+	scop_mat4_set_translation(&view, (t_vec3){0.0f, 0.0f, 2.0f});
+	scop_mat4_set_perspective(&proj, (t_vec4){45.0f,
+		(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
+	//Matrix Bind values
+	glUniformMatrix4fv(env->m_proj, 1, GL_TRUE, (GLfloat *)&(proj));
+	glUniformMatrix4fv(env->m_view, 1, GL_TRUE, (GLfloat *)&(view));
 	while (!glfwWindowShouldClose(env->win))
 	{
 
 		glfwPollEvents();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glUseProgram(env->shader_prog);
 		//Set rotation matrix
 		scop_mat4_set_rotation(&model, (GLfloat)glfwGetTime() * 50.0f, (t_vec3){1.0f, 1.0f ,1.0f});
 		glUniformMatrix4fv(env->m_model, 1, GL_FALSE, (GLfloat *)&model);
 		//Draw vertex
 		glBindVertexArray(env->vao);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 3 * 12, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 		glfwSwapBuffers(env->win);
 	}
@@ -153,25 +166,12 @@ int		scop_gl_init_shaders(t_env *env)
 
 int		scop_gl_init_matrix(t_env *env)
 {
-	t_mat4	view;
-	t_mat4	proj;
-
-	//Matrix init
-	scop_mat4_init(&view);
-	scop_mat4_init(&proj);
-	//Matrix set value
-	scop_mat4_set_translation(&view, (t_vec3){0.0f, 0.0f, 2.0f});
-	scop_mat4_set_perspective(&proj, (t_vec4){45.0f,
-		(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
 	if ((env->m_model = glGetUniformLocation(env->shader_prog, "model")) == -1)
 		return (0);
 	if ((env->m_proj = glGetUniformLocation(env->shader_prog, "proj")) == -1)
 		return (0);
 	if ((env->m_view = glGetUniformLocation(env->shader_prog, "view")) == -1)
 		return (0);
-	glUseProgram(env->shader_prog);
-	glUniformMatrix4fv(env->m_proj, 1, GL_TRUE, (GLfloat *)&(proj));
-	glUniformMatrix4fv(env->m_view, 1, GL_TRUE, (GLfloat *)&(view));
 	return (1);
 }
 
