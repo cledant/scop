@@ -6,7 +6,7 @@
 #    By: cledant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 10:40:13 by cledant           #+#    #+#              #
-#    Updated: 2017/02/24 20:24:03 by cledant          ###   ########.fr        #
+#    Updated: 2017/02/27 12:12:40 by cledant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ INCLUDES_GLFW = ./glfw/include/GLFW
 GLFW_PATH = ./glfw/src
 
 SRCS_NAME = scop_init.c scop_glfw_close_callback.c scop_glfw_error_callback.c \
-			scop_exit.c scop_gl_load_shader.c scop_gl_create_shader_program.c
+			scop_exit.c scop_gl_load_shader.c scop_gl_create_shader_program.c \
+			scop_mat4_init.c scop_mat4_set_translation.c scop_mat4_set_rotation.c \
+			scop_mat4_set_perspective.c scop_math_deg_to_rad.c scop_vec3_normalize.c
 
 INCLUDES = ./includes
 

@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/24 20:33:49 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/27 12:12:06 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int		scop_glfw_init(t_env *env)
 void	scop_init_env(t_env *env)
 {
 	env->win = NULL;
-	env->win_h = 720;
-	env->win_w = 1280;
+	env->win_h = 1000;
+	env->win_w = 1000;
 	env->vbo = 0;
 	env->vao = 0;
 	env->ebo = 0;
@@ -45,28 +45,42 @@ void	scop_init_env(t_env *env)
 void	scop_test_vertex_init(t_env	*env)
 {
 	GLfloat vertices[] = {
-		0.5f, 0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f,
-		-0.5f, 0.5f, 0.0f
+		0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+		0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
+		-0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f
 	};
 	GLuint indices[] = {
 		0, 1, 3,
 		1, 2, 3
 	};
+	t_mat4	model;
+	t_mat4	view;
+	t_mat4	proj;
 	//Tout return du void !
 	//Init
 	glGenBuffers(1, &(env->vbo));  //nbr obj ds buffer
 	glGenVertexArrays(1, &(env->vao));
 	glGenBuffers(1, &(env->ebo));
+	//Matrix init
+	scop_mat4_init(&model);
+	scop_mat4_init(&view);
+	scop_mat4_init(&proj);
+	//Matrix set value
+	scop_mat4_set_translation(&view, (t_vec3){0.0f, 0.0f, -3.0f});
+	scop_mat4_set_projection(&proj, (t_vec4){45.0f,
+		(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
 	//Attrib
 	glBindVertexArray(env->vao);
 	glBindBuffer(GL_ARRAY_BUFFER, env->vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, env->ebo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid *)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid *)0);
 	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
+		(GLvoid *)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 }
