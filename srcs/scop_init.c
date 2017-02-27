@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/27 17:26:45 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/27 18:43:14 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ void	scop_init_env(t_env *env)
 void	scop_test_vertex_init(t_env	*env)
 {
 	GLfloat vertices[] = {
-		0.2f, 0.2f, 0.2f, 1.0f, 0.0f, 0.0f,
-		0.2f, -0.2f, 0.2f, 0.0f, 1.0f, 0.0f,
-		-0.2f, -0.2f, 0.2f, 0.0f, 0.0f, 1.0f,
-		-0.2f, 0.2f, 0.2f, 0.5f, 0.5f, 0.5f,
-		0.2f, 0.2f, -0.2f, 0.0f, 0.0f, 1.0f,
-		0.2f, -0.2f, -0.2f, 0.0f, 0.5f, 0.5f,
-		-0.2f, -0.2f, -0.2f, 0.5f, 0.0f, 0.5f,
-		-0.2f, 0.2f, -0.2f, 0.5f, 0.5f, 0.0f
+		0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
+		0.5f, -0.5f, 0.5f, 0.0f, 1.0f, 0.0f,
+		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+		-0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f,
+		0.5f, 0.5f, -0.5f, 0.0f, 0.0f, 1.0f,
+		0.5f, -0.5f, -0.5f, 0.0f, 0.5f, 0.5f,
+		-0.5f, -0.5f, -0.5f, 0.5f, 0.0f, 0.5f,
+		-0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.0f
 	};
 	GLuint indices[] = {
 		0, 1, 3,
@@ -119,6 +119,19 @@ void	scop_main(t_env *env)
 	t_mat4	model;
 	t_mat4	view;
 	t_mat4	proj;
+	t_vec3	cube_pos[10] = {
+		(t_vec3){0.0f, 0.0f, 0.0f},
+		(t_vec3){2.0f, 5.0f, -15.0f},
+		(t_vec3){-1.5f, -2.2f, -2.5f},
+		(t_vec3){-3.8f, -2.0f, -12.3f},
+		(t_vec3){2.4f, -0.4f, -3.5f},
+		(t_vec3){-1.7f, 3.0f, -7.5f},
+		(t_vec3){1.3f, -2.0f, -2.5f},
+		(t_vec3){1.5f, 2.0f, -2.5f},
+		(t_vec3){1.5f, 0.2f, -1.5f},
+		(t_vec3){-1.3f, 1.0f, -1.5f}};
+	size_t	counter;
+	GLfloat	angle;
 
 	glUseProgram(env->shader_prog);
 	scop_test_vertex_init(env);
@@ -128,23 +141,31 @@ void	scop_main(t_env *env)
 	scop_mat4_init(&proj);
 	scop_mat4_init(&model);
 	//Matrix set value
+	//Note secondaire : Calculer barycentrei de l obj + translater orig + ... + retour au centre ?
 	scop_mat4_set_translation(&view, (t_vec3){0.0f, 0.0f, 2.0f});
-	scop_mat4_set_perspective(&proj, (t_vec4){45.0f,
+	scop_mat4_set_perspective(&proj, (t_vec4){90.0f,
 		(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
 	//Matrix Bind values
 	glUniformMatrix4fv(env->m_proj, 1, GL_TRUE, (GLfloat *)&(proj));
 	glUniformMatrix4fv(env->m_view, 1, GL_TRUE, (GLfloat *)&(view));
 	while (!glfwWindowShouldClose(env->win))
 	{
-
+		counter = 0;
 		glfwPollEvents();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		//Set rotation matrix
-		scop_mat4_set_rotation(&model, (GLfloat)glfwGetTime() * 50.0f, (t_vec3){1.0f, 1.0f ,1.0f});
-		glUniformMatrix4fv(env->m_model, 1, GL_FALSE, (GLfloat *)&model);
+
 		//Draw vertex
 		glBindVertexArray(env->vao);
-		glDrawElements(GL_TRIANGLES, 3 * 12, GL_UNSIGNED_INT, 0);
+		while (counter < 10)
+		{
+			angle = 20.0f * counter;
+			scop_mat4_set_translation(&model, cube_pos[counter]);
+//			scop_mat4_add_rotation(&model, angle, (t_vec3){1.0f, 0.3f ,0.5f});
+			glUniformMatrix4fv(env->m_model, 1, GL_TRUE, (GLfloat *)&model);
+			glDrawElements(GL_TRIANGLES, 3 * 12, GL_UNSIGNED_INT, 0);
+			counter++;
+		}
 		glBindVertexArray(0);
 		glfwSwapBuffers(env->win);
 	}
