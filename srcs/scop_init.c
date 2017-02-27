@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/27 19:17:10 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/27 20:55:23 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int		scop_glfw_init(t_env *env)
 		return (0);
 	glfwSetWindowCloseCallback(env->win, scop_glfw_close_callback);
 	glfwMakeContextCurrent(env->win);
-	glViewport(0, 0, env->win_w, env->win_h);
-	glEnable(GL_DEPTH_TEST);
 	return (1);
 }
 
@@ -41,6 +39,14 @@ void	scop_init_env(t_env *env)
 	env->shader_prog = 0;
 	env->vertex_shader = 0;
 	env->fragment_shader = 0;
+	env->m_proj = -1;
+	env->m_model = -1;
+	env->m_view = -1;
+	bzero(env->p_key, sizeof(int) * 1024);
+	env->cam_pos.x = 0.0f;
+	env->cam_pos.y = 0.0f;
+	env->cam_pos.z = 2.0f;
+	env->cam_speed = 0.005f;
 }
 
 void	scop_test_vertex_init(t_env	*env)
@@ -138,16 +144,16 @@ void	scop_main(t_env *env)
 	//Matrix set value
 	//Note secondaire : Calculer barycentrei de l obj + translater orig + ... + retour au centre ?
 	scop_mat4_set_translation(&view, (t_vec3){0.0f, 0.0f, 2.0f});
-	scop_mat4_set_perspective(&proj, (t_vec4){90.0f,
-		(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
 	//Matrix Bind values
-	glUniformMatrix4fv(env->m_proj, 1, GL_TRUE, (GLfloat *)&(proj));
 	glUniformMatrix4fv(env->m_view, 1, GL_TRUE, (GLfloat *)&(view));
 	while (!glfwWindowShouldClose(env->win))
 	{
 		counter = 0;
 		glfwPollEvents();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		scop_mat4_set_perspective(&proj, (t_vec4){90.0f,
+			(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
+		glUniformMatrix4fv(env->m_proj, 1, GL_TRUE, (GLfloat *)&(proj));
 		//Draw vertex
 		glBindVertexArray(env->vao);
 		while (counter < 10)
@@ -193,12 +199,17 @@ int		main(void)
 
 	glfwSetErrorCallback(scop_glfw_error_callback);
 	scop_init_env(&env);
+	scop_get_env(&env);
 	if (scop_glfw_init(&env) == 0)
 		return (scop_exit(&env));
+	glViewport(0, 0, env.win_w, env.win_h);
+	glEnable(GL_DEPTH_TEST);
 	if (scop_gl_init_shaders(&env) == 0)
 		return (scop_exit(&env));
 	if (scop_gl_init_matrix(&env) == 0)
 		return (scop_exit(&env));
+	glfwSetKeyCallback(env.win, scop_glfw_key_callback);
+	glfwSetWindowSizeCallback(env.win, scop_glfw_window_size_callback);
 	scop_main(&env);
 	return (scop_exit(&env));
 }
