@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/27 12:12:06 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/27 12:30:16 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,28 @@ void	scop_init_env(t_env *env)
 void	scop_test_vertex_init(t_env	*env)
 {
 	GLfloat vertices[] = {
-		0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
-		0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
-		-0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f
+		0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
+		0.5f, -0.5f, 0.5f, 0.0f, 1.0f, 0.0f,
+		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+		-0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f,
+		0.5f, 0.5f, -0.5f, 0.0f, 0.0f, 1.0f,
+		0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
+		-0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f
 	};
 	GLuint indices[] = {
 		0, 1, 3,
-		1, 2, 3
+		1, 2, 3,
+		0, 1, 5,
+		0, 5, 4,
+		2, 1, 6,
+		1, 6, 5,
+		2, 3, 6,
+		3, 7, 6,
+		0, 3, 7,
+		0, 4, 7,
+		7, 4, 6,
+		4, 5, 6
 	};
 	t_mat4	model;
 	t_mat4	view;
@@ -68,7 +82,7 @@ void	scop_test_vertex_init(t_env	*env)
 	scop_mat4_init(&proj);
 	//Matrix set value
 	scop_mat4_set_translation(&view, (t_vec3){0.0f, 0.0f, -3.0f});
-	scop_mat4_set_projection(&proj, (t_vec4){45.0f,
+	scop_mat4_set_perspective(&proj, (t_vec4){45.0f,
 		(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
 	//Attrib
 	glBindVertexArray(env->vao);

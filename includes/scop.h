@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/27 12:06:58 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/27 12:37:30 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	scop_mat4_init(t_mat4 *matrix);
 void	scop_mat4_set_translation(t_mat4 *matrix, const t_vec3 tr);
 void	scop_mat4_set_rotation(t_mat4 *matrix, const float angle, t_vec3 axis);
 void	scop_mat4_set_perspective(t_mat4 *matrix, const t_vec4 param);
-void	scop_vec3_normalize(t_vec3 *vec);
+void	scop_vec3_normalize(t_vec3 *param);
 float	scop_math_deg_to_rad(const float deg);
 void	debug_state(void);
 
