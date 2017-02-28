@@ -6,7 +6,7 @@
 #    By: cledant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 10:40:13 by cledant           #+#    #+#              #
-#    Updated: 2017/02/28 10:03:04 by cledant          ###   ########.fr        #
+#    Updated: 2017/02/28 13:39:36 by cledant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,10 @@ SRCS_NAME = scop_init.c scop_glfw_close_callback.c scop_glfw_error_callback.c \
 			scop_mat4_set_perspective.c scop_math_deg_to_rad.c \
 			scop_vec3_normalize.c scop_mat4_set_identity.c scop_get_env.c \
 			scop_glfw_key_callback.c  scop_glfw_window_size_callback.c \
-			scop_mat4_update_perspective.c
+			scop_mat4_update_perspective.c scop_vec3_set.c scop_vec3_substract.c \
+			scop_vec3_add.c scop_vec3_cross_prod.c scop_vec3_multiply_const.c \
+			scop_mat4_create_look_at.c scop_mat4_multiply.c scop_execute_mov.c \
+			scop_update_camera.c
 
 INCLUDES = ./includes
 

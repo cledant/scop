@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 10:12:56 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 13:37:20 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ void	scop_init_env(t_env *env)
 	env->m_model = -1;
 	env->m_view = -1;
 	bzero(env->p_key, sizeof(int) * 1024);
-	env->cam_pos.x = 0.0f;
-	env->cam_pos.y = 0.0f;
-	env->cam_pos.z = 2.0f;
-	env->cam_speed = 0.005f;
+	env->cam_speed = 0.01f;
 }
 
 void	scop_test_vertex_init(t_env	*env)
@@ -141,21 +138,23 @@ void	scop_main(t_env *env)
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	//Matrix set value
 	//Note secondaire : Calculer barycentrei de l obj + translater orig + ... + retour au centre ?
-	scop_mat4_set_translation(&(env->view), (t_vec3){0.0f, 0.0f, 2.0f});
 	scop_mat4_set_perspective(&(env->proj), (t_vec4){env->fov,
 		(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
+	scop_mat4_init(&(env->view));
 	//Matrix Bind values
-	glUniformMatrix4fv(env->m_view, 1, GL_TRUE, (GLfloat *)&(env->view));
 	while (!glfwWindowShouldClose(env->win))
 	{
 		counter = 0;
 		glfwPollEvents();
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		scop_execute_mov(env);
+		scop_update_camera(env);
 		scop_mat4_update_perspective(&(env->proj), (t_vec4){env->fov,
-			(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});	
+			(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
+		glUniformMatrix4fv(env->m_view, 1, GL_TRUE, (GLfloat *)&(env->view));
 		glUniformMatrix4fv(env->m_proj, 1, GL_TRUE, (GLfloat *)&(env->proj));
 		//Draw vertex
 		glBindVertexArray(env->vao);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		while (counter < 10)
 		{
 			scop_mat4_set_translation(&(env->model), cube_pos[counter]);
@@ -193,6 +192,17 @@ int		scop_gl_init_matrix(t_env *env)
 	return (1);
 }
 
+void	scop_vector_init(t_env *env)
+{
+	scop_vec3_set(&(env->cam_pos), 0.0f, 0.0f, 2.0f);
+	scop_vec3_set(&(env->cam_target), 0.0f, 0.0f, 0.0f);
+	scop_vec3_set(&(env->up_vec), 0.0f, 1.0f, 0.0f);
+	scop_vec3_set(&(env->cam_dir), 0.0f, 0.0f, 0.0f);
+	scop_vec3_set(&(env->cam_right), 0.0f, 0.0f, 0.0f);
+	scop_vec3_set(&(env->cam_up), 0.0f, 0.0f, 0.0f);
+	scop_vec3_set(&(env->cam_front), 0.0f, 0.0f, -1.0f);
+}
+
 int		main(void)
 {
 	t_env		env;
@@ -208,6 +218,7 @@ int		main(void)
 		return (scop_exit(&env));
 	if (scop_gl_init_matrix(&env) == 0)
 		return (scop_exit(&env));
+	scop_vector_init(&env);
 	glfwSetKeyCallback(env.win, scop_glfw_key_callback);
 	glfwSetWindowSizeCallback(env.win, scop_glfw_window_size_callback);
 	scop_main(&env);
