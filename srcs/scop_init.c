@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 19:22:28 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 20:05:50 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	scop_init_env(t_env *env)
 	env->win = NULL;
 	env->win_h = 1000;
 	env->win_w = 1000;
-	env->fov = 90.0f;
+	env->fov = 45.0f;
 	env->vbo = 0;
 	env->vao = 0;
 	env->ebo = 0;

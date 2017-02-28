@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 11:35:36 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 17:03:09 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 20:01:27 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void scop_mat4_set_perspective(t_mat4 *matrix, const t_vec4 param)
 	(*matrix)[2][0] = 0.0f;
 	(*matrix)[2][1] = 0.0f;
 	(*matrix)[2][2] = (-param.z - param.w) / (param.w - param.z);
-	(*matrix)[2][3] = (2.0f * param.z * param.w) / (param.w - param.z);
+	(*matrix)[2][3] = (-2.0f * param.z * param.w) / (param.w - param.z);
 	(*matrix)[3][0] = 0.0f;
 	(*matrix)[3][1] = 0.0f;
 	(*matrix)[3][2] = -1.0f;
