@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 16:37:58 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 17:13:12 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void	scop_mat4_set_translation(t_mat4 *matrix, const t_vec3 tr);
 void	scop_mat4_set_rotation(t_mat4 *matrix, const float angle, t_vec3 axis);
 void	scop_mat4_set_perspective(t_mat4 *matrix, const t_vec4 param);
 void	scop_mat4_set_identity(t_mat4 *matrix);
-void	scop_mat4_update_perspective(t_mat4 *matrix, const t_vec4 param);
+void	scop_mat4_set_camera(t_mat4 *view, const t_vec3 pos,
+			const t_vec3 target, const t_vec3 vec_up);
 void	scop_mat4_multiply(t_mat4 *result, const t_mat4 a, const t_mat4 b);
 /*
 ** VEC3 FUNCTIONS
@@ -116,8 +117,6 @@ void	scop_init_env(t_env *env);
 void	*scop_get_env(void *addr);
 void	scop_execute_mov(t_env *env);
 void	scop_init_vector(t_env *env);
-void	scop_update_camera(t_mat4 *view, const t_vec3 pos, const t_vec3 target,
-			const t_vec3 vec_up);
 /*
 ** TEST FUNCTIONS
 */

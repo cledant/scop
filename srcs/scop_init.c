@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 16:36:11 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 17:13:02 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void	scop_main(t_env *env)
 	//Matrix set value
 	//Note secondaire : Calculer barycentrei de l obj + translater orig + ... + retour au centre ?
 	scop_mat4_set_perspective(&(env->proj), (t_vec4){env->fov,
-		(GLfloat)env->win_w / (GLfloat)env->win_h, 1.0f, 100.0f});
+		(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
 	scop_mat4_init(&(env->view));
 	//Matrix Bind values
 	while (!glfwWindowShouldClose(env->win))
@@ -150,9 +150,9 @@ void	scop_main(t_env *env)
 		glfwPollEvents();
 		scop_execute_mov(env);
 		scop_vec3_add(&pos_front, env->pos, env->front);
-		scop_update_camera(&(env->view), env->pos, pos_front, env->up_vec);
-		scop_mat4_update_perspective(&(env->proj), (t_vec4){env->fov,
-			(GLfloat)env->win_w / (GLfloat)env->win_h, 1.0f, 100.0f});
+		scop_mat4_set_camera(&(env->view), env->pos, pos_front, env->up_vec);
+		scop_mat4_set_perspective(&(env->proj), (t_vec4){env->fov,
+			(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
 		glUniformMatrix4fv(env->m_view, 1, GL_TRUE, (GLfloat *)&(env->view));
 		glUniformMatrix4fv(env->m_proj, 1, GL_TRUE, (GLfloat *)&(env->proj));
 		//Draw vertex
@@ -196,7 +196,7 @@ int		scop_gl_init_matrix(t_env *env)
 
 void	scop_vector_init(t_env *env)
 {
-	scop_vec3_set(&(env->pos), 0.0f, 0.0f, 4.0f);
+	scop_vec3_set(&(env->pos), 0.0f, 0.0f, 2.0f);
 	scop_vec3_set(&(env->target), 0.0f, 0.0f, 0.0f);
 	scop_vec3_set(&(env->up_vec), 0.0f, 1.0f, 0.0f);
 	scop_vec3_set(&(env->front), 0.0f, 0.0f, -1.0f);

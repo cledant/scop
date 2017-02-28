@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop_update_camera.c                               :+:      :+:    :+:   */
+/*   scop_mat4_set_camera.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/28 13:37:45 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 16:02:39 by cledant          ###   ########.fr       */
+/*   Created: 2017/02/28 16:40:00 by cledant           #+#    #+#             */
+/*   Updated: 2017/02/28 16:40:05 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	scop_update_camera(t_mat4 *view, const t_vec3 pos, const t_vec3 target,
-			const t_vec3 vec_up)
+void	scop_mat4_set_camera(t_mat4 *view, const t_vec3 pos,
+			const t_vec3 target, const t_vec3 vec_up)
 {
 	t_vec3	dir;
 	t_vec3	right;
