@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 11:12:35 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/27 19:10:42 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 09:18:57 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,20 @@ void	scop_mat4_set_rotation(t_mat4 *matrix, const float angle, t_vec3 axis)
 	cosa = cosf(rad_angle);
 	sina = sinf(rad_angle);
 	scop_vec3_normalize(&axis);
-	(*matrix)[0] = cosa + (1 - cosa) * axis.x * axis.x;
-	(*matrix)[1] = axis.x * axis.y * (1 - cosa) - axis.z * sina;
-	(*matrix)[2] = axis.x * axis.z * (1 - cosa) + axis.y * sina;
-	(*matrix)[4] = axis.y * axis.x * (1 - cosa) + axis.z * sina;
-	(*matrix)[5] = cosa + axis.y * axis.y * (1 - cosa);
-	(*matrix)[6] = axis.y * axis.z * (1 - cosa) - axis.x * sina;
-	(*matrix)[8] = axis.z * axis.x * (1 - cosa) - axis.y * sina;
-	(*matrix)[9] = axis.z * axis.y * (1 - cosa) + axis.x * sina;
-	(*matrix)[10] = cosa + axis.z * axis.z * (1 - cosa);
-	(*matrix)[11] = 0.0f;
-	(*matrix)[12] = 0.0f;
-	(*matrix)[13] = 0.0f;
-	(*matrix)[14] = 0.0f;
-	(*matrix)[15] = 1.0f;
+	(*matrix)[0][0] = cosa + (1 - cosa) * axis.x * axis.x;
+	(*matrix)[0][1] = axis.x * axis.y * (1 - cosa) - axis.z * sina;
+	(*matrix)[0][2] = axis.x * axis.z * (1 - cosa) + axis.y * sina;
+	(*matrix)[0][3] = 0.0f;
+	(*matrix)[1][0] = axis.y * axis.x * (1 - cosa) + axis.z * sina;
+	(*matrix)[1][1] = cosa + axis.y * axis.y * (1 - cosa);
+	(*matrix)[1][2] = axis.y * axis.z * (1 - cosa) - axis.x * sina;
+	(*matrix)[1][3] = 0.0f;
+	(*matrix)[2][0] = axis.z * axis.x * (1 - cosa) - axis.y * sina;
+	(*matrix)[2][1] = axis.z * axis.y * (1 - cosa) + axis.x * sina;
+	(*matrix)[2][2] = cosa + axis.z * axis.z * (1 - cosa);
+	(*matrix)[2][3] = 0.0f;
+	(*matrix)[3][0] = 0.0f;
+	(*matrix)[3][1] = 0.0f;
+	(*matrix)[3][2] = 0.0f;
+	(*matrix)[3][3] = 1.0f;
 }

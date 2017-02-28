@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 10:45:30 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/27 10:47:08 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 09:13:45 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 void	scop_mat4_init(t_mat4 *matrix)
 {
-	(*matrix)[0] = 0.0f;
-	(*matrix)[1] = 0.0f;
-	(*matrix)[2] = 0.0f;
-	(*matrix)[3] = 0.0f;
-	(*matrix)[4] = 0.0f;
-	(*matrix)[5] = 0.0f;
-	(*matrix)[6] = 0.0f;
-	(*matrix)[7] = 0.0f;
-	(*matrix)[8] = 0.0f;
-	(*matrix)[9] = 0.0f;
-	(*matrix)[10] = 0.0f;
-	(*matrix)[11] = 0.0f;
-	(*matrix)[12] = 0.0f;
-	(*matrix)[13] = 0.0f;
-	(*matrix)[14] = 0.0f;
-	(*matrix)[15] = 1.0f;
+	(*matrix)[0][0] = 0.0f;
+	(*matrix)[0][1] = 0.0f;
+	(*matrix)[0][2] = 0.0f;
+	(*matrix)[0][3] = 0.0f;
+	(*matrix)[1][0] = 0.0f;
+	(*matrix)[1][1] = 0.0f;
+	(*matrix)[1][2] = 0.0f;
+	(*matrix)[1][3] = 0.0f;
+	(*matrix)[2][0] = 0.0f;
+	(*matrix)[2][1] = 0.0f;
+	(*matrix)[2][2] = 0.0f;
+	(*matrix)[2][3] = 0.0f;
+	(*matrix)[3][0] = 0.0f;
+	(*matrix)[3][1] = 0.0f;
+	(*matrix)[3][2] = 0.0f;
+	(*matrix)[3][3] = 1.0f;
 }

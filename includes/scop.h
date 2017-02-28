@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/27 20:51:43 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 09:12:00 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define PRESSED 1
 # define RELEASED 0
 
-typedef GLfloat		t_mat4[16];
+typedef GLfloat		t_mat4[4][4];
 
 typedef struct		s_vec3
 {
