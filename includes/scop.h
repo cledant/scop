@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 13:38:13 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 16:37:58 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,14 @@ typedef struct		s_env
 	t_mat4			proj;
 	t_mat4			model;
 	t_mat4			view;
-	t_mat4			look_at;
-	t_mat4			reverse_pos;
 	GLint			m_proj;
 	GLint			m_model;
 	GLint			m_view;
 	int				p_key[1024];
-	t_vec3			cam_pos;
-	t_vec3			cam_target;
+	t_vec3			pos;
+	t_vec3			target;
 	t_vec3			up_vec;
-	t_vec3			cam_dir;
-	t_vec3			cam_right;
-	t_vec3			cam_up;
-	t_vec3			cam_front;
+	t_vec3			front;
 	GLfloat			cam_speed;
 }					t_env;
 
@@ -98,8 +93,6 @@ void	scop_mat4_set_rotation(t_mat4 *matrix, const float angle, t_vec3 axis);
 void	scop_mat4_set_perspective(t_mat4 *matrix, const t_vec4 param);
 void	scop_mat4_set_identity(t_mat4 *matrix);
 void	scop_mat4_update_perspective(t_mat4 *matrix, const t_vec4 param);
-void	scop_mat4_create_look_at(t_mat4 *result, const t_vec3 cam_right,
-			const t_vec3 cam_up, const t_vec3 cam_dir);
 void	scop_mat4_multiply(t_mat4 *result, const t_mat4 a, const t_mat4 b);
 /*
 ** VEC3 FUNCTIONS
@@ -114,6 +107,7 @@ void	scop_vec3_multiply_const(t_vec3 *result, const t_vec3 a, const float cst);
 ** MATH FUNCTIONS
 */
 float	scop_math_deg_to_rad(const float deg);
+float	scop_dot_product(const t_vec3 a, const t_vec3 b);
 /*
 ** OTHER FUNCTION
 */
@@ -122,7 +116,8 @@ void	scop_init_env(t_env *env);
 void	*scop_get_env(void *addr);
 void	scop_execute_mov(t_env *env);
 void	scop_init_vector(t_env *env);
-void	scop_update_camera(t_env *env);
+void	scop_update_camera(t_mat4 *view, const t_vec3 pos, const t_vec3 target,
+			const t_vec3 vec_up);
 /*
 ** TEST FUNCTIONS
 */

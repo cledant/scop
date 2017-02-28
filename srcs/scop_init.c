@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 14:48:57 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 16:36:11 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void	scop_main(t_env *env)
 		(t_vec3){1.5f, 0.2f, -1.5f},
 		(t_vec3){-1.3f, 1.0f, -1.5f}};
 	size_t	counter;
+	t_vec3	pos_front;
 
 	glUseProgram(env->shader_prog);
 	scop_test_vertex_init(env);
@@ -139,22 +140,23 @@ void	scop_main(t_env *env)
 	//Matrix set value
 	//Note secondaire : Calculer barycentrei de l obj + translater orig + ... + retour au centre ?
 	scop_mat4_set_perspective(&(env->proj), (t_vec4){env->fov,
-		(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
+		(GLfloat)env->win_w / (GLfloat)env->win_h, 1.0f, 100.0f});
 	scop_mat4_init(&(env->view));
 	//Matrix Bind values
 	while (!glfwWindowShouldClose(env->win))
 	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		counter = 0;
 		glfwPollEvents();
 		scop_execute_mov(env);
-		scop_update_camera(env);
+		scop_vec3_add(&pos_front, env->pos, env->front);
+		scop_update_camera(&(env->view), env->pos, pos_front, env->up_vec);
 		scop_mat4_update_perspective(&(env->proj), (t_vec4){env->fov,
-			(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
-		glUniformMatrix4fv(env->m_view, 1, GL_TRUE, (GLfloat *)&(env->reverse_pos));
+			(GLfloat)env->win_w / (GLfloat)env->win_h, 1.0f, 100.0f});
+		glUniformMatrix4fv(env->m_view, 1, GL_TRUE, (GLfloat *)&(env->view));
 		glUniformMatrix4fv(env->m_proj, 1, GL_TRUE, (GLfloat *)&(env->proj));
 		//Draw vertex
 		glBindVertexArray(env->vao);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		while (counter < 10)
 		{
 			scop_mat4_set_translation(&(env->model), cube_pos[counter]);
@@ -194,13 +196,10 @@ int		scop_gl_init_matrix(t_env *env)
 
 void	scop_vector_init(t_env *env)
 {
-	scop_vec3_set(&(env->cam_pos), 0.0f, 0.0f, 4.0f);
-	scop_vec3_set(&(env->cam_target), 0.0f, 0.0f, 0.0f);
+	scop_vec3_set(&(env->pos), 0.0f, 0.0f, 4.0f);
+	scop_vec3_set(&(env->target), 0.0f, 0.0f, 0.0f);
 	scop_vec3_set(&(env->up_vec), 0.0f, 1.0f, 0.0f);
-	scop_vec3_set(&(env->cam_dir), 0.0f, 0.0f, 0.0f);
-	scop_vec3_set(&(env->cam_right), 0.0f, 0.0f, 0.0f);
-	scop_vec3_set(&(env->cam_up), 0.0f, 0.0f, 0.0f);
-	scop_vec3_set(&(env->cam_front), 0.0f, 0.0f, -1.0f);
+	scop_vec3_set(&(env->front), 0.0f, 0.0f, -1.0f);
 }
 
 int		main(void)
@@ -212,8 +211,8 @@ int		main(void)
 	scop_init_env(&env);
 	if (scop_glfw_init(&env) == 0)
 		return (scop_exit(&env));
-	glViewport(0, 0, env.win_w, env.win_h);
 	glEnable(GL_DEPTH_TEST);
+	glViewport(0, 0, env.win_w, env.win_h);
 	if (scop_gl_init_shaders(&env) == 0)
 		return (scop_exit(&env));
 	if (scop_gl_init_matrix(&env) == 0)

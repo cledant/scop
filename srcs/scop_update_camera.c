@@ -6,25 +6,38 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 13:37:45 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 14:39:41 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 16:02:39 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	scop_update_camera(t_env *env)
+void	scop_update_camera(t_mat4 *view, const t_vec3 pos, const t_vec3 target,
+			const t_vec3 vec_up)
 {
-	t_vec3		pos_front;
+	t_vec3	dir;
+	t_vec3	right;
+	t_vec3	cam_up;
 
-	scop_vec3_add(&pos_front, env->cam_pos, env->cam_front);
-	scop_vec3_substract(&(env->cam_dir), env->cam_pos, env->cam_target);
-	scop_vec3_normalize(&(env->cam_dir));
-	scop_vec3_cross_prod(&(env->cam_right), env->up_vec, env->cam_dir);
-	scop_vec3_normalize(&(env->cam_right));
-	scop_vec3_cross_prod(&(env->cam_up), env->cam_dir, env->cam_right);
-	scop_mat4_create_look_at(&(env->look_at), env->cam_right, pos_front,
-			env->cam_dir);
-	scop_mat4_set_translation(&(env->reverse_pos), (t_vec3){-env->cam_pos.x,
-			-env->cam_pos.y, -env->cam_pos.z});
-	scop_mat4_multiply(&(env->view), env->look_at, env->reverse_pos);
+	scop_vec3_substract(&dir, target, pos);
+	scop_vec3_normalize(&dir);
+	scop_vec3_cross_prod(&right, dir, vec_up);
+	scop_vec3_normalize(&right);
+	scop_vec3_cross_prod(&cam_up, right, dir);
+	(*view)[0][0] = right.x;
+	(*view)[0][1] = right.y;
+	(*view)[0][2] = right.z;
+	(*view)[0][3] = -scop_dot_product(right, pos);
+	(*view)[1][0] = cam_up.x;
+	(*view)[1][1] = cam_up.y;
+	(*view)[1][2] = cam_up.z;
+	(*view)[1][3] = -scop_dot_product(cam_up, pos);
+	(*view)[2][0] = -dir.x;
+	(*view)[2][1] = -dir.y;
+	(*view)[2][2] = -dir.z;
+	(*view)[2][3] = scop_dot_product(dir, pos);
+	(*view)[3][0] = 0.0f;
+	(*view)[3][1] = 0.0f;
+	(*view)[3][2] = 0.0f;
+	(*view)[3][3] = 1.0f;
 }
