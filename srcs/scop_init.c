@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/27 20:55:23 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 10:12:56 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	scop_init_env(t_env *env)
 	env->win = NULL;
 	env->win_h = 1000;
 	env->win_w = 1000;
+	env->fov = 90.0f;
 	env->vbo = 0;
 	env->vao = 0;
 	env->ebo = 0;
@@ -122,9 +123,6 @@ void	debug_state(void)
 
 void	scop_main(t_env *env)
 {
-	t_mat4	model;
-	t_mat4	view;
-	t_mat4	proj;
 	t_vec3	cube_pos[10] = {
 		(t_vec3){0.0f, 0.0f, 0.0f},
 		(t_vec3){2.0f, 5.0f, -15.0f},
@@ -143,23 +141,25 @@ void	scop_main(t_env *env)
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	//Matrix set value
 	//Note secondaire : Calculer barycentrei de l obj + translater orig + ... + retour au centre ?
-	scop_mat4_set_translation(&view, (t_vec3){0.0f, 0.0f, 2.0f});
+	scop_mat4_set_translation(&(env->view), (t_vec3){0.0f, 0.0f, 2.0f});
+	scop_mat4_set_perspective(&(env->proj), (t_vec4){env->fov,
+		(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
 	//Matrix Bind values
-	glUniformMatrix4fv(env->m_view, 1, GL_TRUE, (GLfloat *)&(view));
+	glUniformMatrix4fv(env->m_view, 1, GL_TRUE, (GLfloat *)&(env->view));
 	while (!glfwWindowShouldClose(env->win))
 	{
 		counter = 0;
 		glfwPollEvents();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		scop_mat4_set_perspective(&proj, (t_vec4){90.0f,
-			(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
-		glUniformMatrix4fv(env->m_proj, 1, GL_TRUE, (GLfloat *)&(proj));
+		scop_mat4_update_perspective(&(env->proj), (t_vec4){env->fov,
+			(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});	
+		glUniformMatrix4fv(env->m_proj, 1, GL_TRUE, (GLfloat *)&(env->proj));
 		//Draw vertex
 		glBindVertexArray(env->vao);
 		while (counter < 10)
 		{
-			scop_mat4_set_translation(&model, cube_pos[counter]);
-			glUniformMatrix4fv(env->m_model, 1, GL_TRUE, (GLfloat *)&model);
+			scop_mat4_set_translation(&(env->model), cube_pos[counter]);
+			glUniformMatrix4fv(env->m_model, 1, GL_TRUE, (GLfloat *)&(env->model));
 			glDrawElements(GL_TRIANGLES, 3 * 12, GL_UNSIGNED_INT, 0);
 			counter++;
 		}
@@ -197,9 +197,9 @@ int		main(void)
 {
 	t_env		env;
 
+	scop_get_env(&env);
 	glfwSetErrorCallback(scop_glfw_error_callback);
 	scop_init_env(&env);
-	scop_get_env(&env);
 	if (scop_glfw_init(&env) == 0)
 		return (scop_exit(&env));
 	glViewport(0, 0, env.win_w, env.win_h);

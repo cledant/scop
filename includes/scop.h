@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 09:12:00 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 10:07:23 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,16 @@ typedef struct		s_env
 	GLFWwindow		*win;
 	int				win_h;
 	int				win_w;
+	float			fov;
 	GLuint			vbo;
 	GLuint			vao;
 	GLuint			ebo;
 	GLuint			shader_prog;
 	GLuint			vertex_shader;
 	GLuint			fragment_shader;
+	t_mat4			proj;
+	t_mat4			model;
+	t_mat4			view;
 	GLint			m_proj;
 	GLint			m_model;
 	GLint			m_view;
@@ -79,6 +83,7 @@ void	scop_mat4_init(t_mat4 *matrix);
 void	scop_mat4_set_translation(t_mat4 *matrix, const t_vec3 tr);
 void	scop_mat4_set_rotation(t_mat4 *matrix, const float angle, t_vec3 axis);
 void	scop_mat4_set_perspective(t_mat4 *matrix, const t_vec4 param);
+void	scop_mat4_update_perspective(t_mat4 *matrix, const t_vec4 param);
 void	scop_mat4_set_identity(t_mat4 *matrix);
 void	scop_vec3_normalize(t_vec3 *param);
 float	scop_math_deg_to_rad(const float deg);
