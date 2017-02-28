@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 20:05:50 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 20:26:46 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,13 @@ void	scop_init_env(t_env *env)
 	env->m_model = -1;
 	env->m_view = -1;
 	bzero(env->p_key, sizeof(int) * 1024);
-	env->cam_speed = 0.05f;
+	env->cam_speed = 5.0f;
 	env->rot_x = 0.0f;
 	env->rot_y = 0.0f;
 	env->rot_z = 0.0f;
 	env->sensitivity = 0.05f;
+	env->delta_time = 0.0f;
+	env->prev_time = 0.0f;
 }
 
 void	scop_test_vertex_init(t_env	*env)
@@ -138,6 +140,7 @@ void	scop_main(t_env *env)
 		(t_vec3){-1.3f, 1.0f, -1.5f}};
 	size_t	counter;
 	t_vec3	pos_front;
+	float	curr_time;
 
 	glUseProgram(env->shader_prog);
 	scop_test_vertex_init(env);
@@ -150,6 +153,9 @@ void	scop_main(t_env *env)
 	//Matrix Bind values
 	while (!glfwWindowShouldClose(env->win))
 	{
+		curr_time = glfwGetTime();
+		env->delta_time = curr_time - env->prev_time;
+		env->prev_time = curr_time;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		counter = 0;
 		glfwPollEvents();

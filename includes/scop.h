@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 18:48:23 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 20:15:08 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct		s_env
 	float			rot_x;
 	float			rot_y;
 	float			rot_z;
+	float			delta_time;
+	float			prev_time;
 }					t_env;
 
 void	glBindVertexArray(GLuint arrays);
