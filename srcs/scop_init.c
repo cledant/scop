@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 17:13:02 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 19:22:28 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		scop_glfw_init(t_env *env)
 		return (0);
 	glfwSetWindowCloseCallback(env->win, scop_glfw_close_callback);
 	glfwMakeContextCurrent(env->win);
+	glfwSetInputMode(env->win, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	return (1);
 }
 
@@ -44,7 +45,11 @@ void	scop_init_env(t_env *env)
 	env->m_model = -1;
 	env->m_view = -1;
 	bzero(env->p_key, sizeof(int) * 1024);
-	env->cam_speed = 0.01f;
+	env->cam_speed = 0.05f;
+	env->rot_x = 0.0f;
+	env->rot_y = 0.0f;
+	env->rot_z = 0.0f;
+	env->sensitivity = 0.05f;
 }
 
 void	scop_test_vertex_init(t_env	*env)
@@ -196,10 +201,10 @@ int		scop_gl_init_matrix(t_env *env)
 
 void	scop_vector_init(t_env *env)
 {
-	scop_vec3_set(&(env->pos), 0.0f, 0.0f, 2.0f);
+	scop_vec3_set(&(env->pos), 0.0f, 0.0f, -1.0f);
 	scop_vec3_set(&(env->target), 0.0f, 0.0f, 0.0f);
 	scop_vec3_set(&(env->up_vec), 0.0f, 1.0f, 0.0f);
-	scop_vec3_set(&(env->front), 0.0f, 0.0f, -1.0f);
+	scop_vec3_set(&(env->front), 1.0f, 0.0f, 0.0f);
 }
 
 int		main(void)
@@ -219,6 +224,7 @@ int		main(void)
 		return (scop_exit(&env));
 	scop_vector_init(&env);
 	glfwSetKeyCallback(env.win, scop_glfw_key_callback);
+	glfwSetCursorPosCallback(env.win, scop_glfw_mouse_pos_callback);
 	glfwSetWindowSizeCallback(env.win, scop_glfw_window_size_callback);
 	scop_main(&env);
 	return (scop_exit(&env));

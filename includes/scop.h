@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 17:13:12 by cledant          ###   ########.fr       */
+/*   Updated: 2017/02/28 18:48:23 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ typedef struct		s_env
 	t_vec3			up_vec;
 	t_vec3			front;
 	GLfloat			cam_speed;
+	float			sensitivity;
+	float			last_x;
+	float			last_y;
+	float			rot_x;
+	float			rot_y;
+	float			rot_z;
 }					t_env;
 
 void	glBindVertexArray(GLuint arrays);
@@ -75,6 +81,7 @@ int		scop_glfw_init(t_env *env);
 void	scop_glfw_close_callback(GLFWwindow *win);
 void	scop_glfw_error_callback(int error, const char *desc);
 void	scop_glfw_window_size_callback(GLFWwindow *win, int w, int h);
+void	scop_glfw_mouse_pos_callback(GLFWwindow *win, double xpos, double ypos);
 void	scop_glfw_key_callback(GLFWwindow *win, int key, int scancode, int action,
 			int mods);
 /*
@@ -108,7 +115,7 @@ void	scop_vec3_multiply_const(t_vec3 *result, const t_vec3 a, const float cst);
 ** MATH FUNCTIONS
 */
 float	scop_math_deg_to_rad(const float deg);
-float	scop_dot_product(const t_vec3 a, const t_vec3 b);
+float	scop_math_dot_product(const t_vec3 a, const t_vec3 b);
 /*
 ** OTHER FUNCTION
 */
