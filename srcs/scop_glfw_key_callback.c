@@ -17,8 +17,8 @@ void scop_glfw_key_callback(GLFWwindow *win, int key, int scancode, int action,
 {
 	t_env	*env;
 
-	scancode++;
-	mods++;
+	(void)scancode;
+	(void)mods;
 	env = scop_get_env(NULL);
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(win, GL_TRUE);

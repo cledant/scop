@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 11:35:14 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 16:05:25 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 16:49:42 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,22 @@ static char		*extract_tex(const char *file)
 	t_tga_header	*head;
 	char			*tex;
 	size_t			size;
+	size_t			counter;
+	char			swap;
 
+	counter = 0;
 	head = (t_tga_header *)file;
 	size = sizeof(char) * 3 * head->img_w * head->img_h;
 	if ((tex = (char *)malloc(size)) == NULL)
 		return (NULL);
 	memcpy(tex, file + 18, size);
+	while (counter < (head->img_w * head->img_h * 3))
+	{
+		swap = tex[counter];
+		tex[counter] = tex[counter + 2];
+		tex[counter + 2] = swap;
+		counter += 3;
+	}
 	return (tex);
 }
 
@@ -65,7 +75,6 @@ static char		*check_and_extract_file(const char *file, const long size,
 	if (size < 18)
 		return (NULL);
 	head = (t_tga_header *)file;
-//	printf("header : id_len = %d\ncolor_map_type = %d\nimage_type = %d\npixel_depth = %d\nimage_w = %d\nimage_h = %d\n", head->id_len, head->color_map_type, head->image_type, head->pixel_depth, head->img_w, head->img_h);
 	if (head->id_len != 0)
 		return (NULL);
 	if (head->color_map_type != 0)
