@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 12:49:03 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 13:16:57 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ typedef struct		s_env
 	int				win_h;
 	int				win_w;
 	GLfloat			fov;
-	GLuint			vbo;
-	GLuint			vao;
-	GLuint			ebo;
-	GLuint			shader_prog;
-	GLuint			vertex_shader;
-	GLuint			fragment_shader;
+	GLuint			vbo;	//to free
+	GLuint			vao;	//to free
+	GLuint			ebo;	//to free
+	GLuint			shader_prog;	//to free
+	GLuint			vertex_shader;	//to free
+	GLuint			fragment_shader;	//to free
 	t_mat4			proj;
 	t_mat4			model;
 	t_mat4			view;
@@ -71,7 +71,10 @@ typedef struct		s_env
 	GLfloat			rot_y;
 	GLfloat			delta_time;
 	GLfloat			prev_time;
-	char			*tex;
+	char			*tex;	//to free
+	size_t			tex_w;
+	size_t			tex_h;
+	GLuint			texture;
 }					t_env;
 
 typedef struct		s_tga_header
@@ -137,7 +140,7 @@ void	scop_vec3_multiply_const(t_vec3 *result, const t_vec3 a, const float cst);
 float	scop_math_deg_to_rad(const float deg);
 float	scop_math_dot_product(const t_vec3 a, const t_vec3 b);
 /*
-** OTHER FUNCTION
+** OTHER FUNCTIONS
 */
 int		scop_exit(t_env *env);
 void	scop_init_env(t_env *env);
@@ -145,7 +148,11 @@ void	*scop_get_env(void *addr);
 void	scop_execute_mov(t_env *env);
 void	scop_execute_mouse_mov(t_env *env);
 void	scop_vector_init_env(t_env *env);
-char	*scop_load_texture(const char *path);
+/*
+** TEXTURE FUNCTIONS
+*/
+char	*scop_load_texture(const char *path, t_env *env);
+void	scop_gl_bind_texture(t_env *env);
 /*
 ** TEST FUNCTIONS
 */

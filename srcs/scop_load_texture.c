@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 11:35:14 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 12:45:20 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 13:02:05 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static char		*load_file(const char *path, long *size)
 	return (file);
 }
 
-static char		*check_and_extract_file(const char *file, const long size)
+static char		*check_and_extract_file(const char *file, const long size,
+					t_env *env)
 {
 	t_tga_header	*head;
 	char			*tex;
@@ -64,7 +65,7 @@ static char		*check_and_extract_file(const char *file, const long size)
 	if (size < 18)
 		return (NULL);
 	head = (t_tga_header *)file;
-	printf("header : id_len = %d\ncolor_map_type = %d\nimage_type = %d\npixel_depth = %d\nimage_w = %d\nimage_h = %d\n", head->id_len, head->color_map_type, head->image_type, head->pixel_depth, head->img_w, head->img_h);
+//	printf("header : id_len = %d\ncolor_map_type = %d\nimage_type = %d\npixel_depth = %d\nimage_w = %d\nimage_h = %d\n", head->id_len, head->color_map_type, head->image_type, head->pixel_depth, head->img_w, head->img_h);
 	if (head->id_len != 0)
 		return (NULL);
 	if (head->color_map_type != 0)
@@ -77,10 +78,12 @@ static char		*check_and_extract_file(const char *file, const long size)
 		return (NULL);
 	if ((tex = extract_tex(file)) == NULL)
 		return (NULL);
+	env->tex_w = head->img_w;
+	env->tex_h = head->img_h;
 	return (tex);
 }
 
-char			*scop_load_texture(const char *path)
+char			*scop_load_texture(const char *path, t_env *env)
 {
 	long	file_size;
 	char	*tex_file;
@@ -91,7 +94,7 @@ char			*scop_load_texture(const char *path)
 		printf("Scop : Texture : Can't open : %s\n", path);
 		return (NULL);
 	}
-	if ((tex = check_and_extract_file(tex_file, file_size)) == NULL)
+	if ((tex = check_and_extract_file(tex_file, file_size, env)) == NULL)
 	{
 		printf("Scop : Texture : Invalid file : %s\n", path);
 		if (tex_file != NULL)

@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 12:35:30 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 13:44:37 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,22 @@ void	scop_init_env(t_env *env)
 	env->delta_time = 0.0f;
 	env->prev_time = 0.0f;
 	env->tex = NULL;
+	env->tex_w = 0;
+	env->tex_h = 0;
+	env->texture = 0;
 }
 
 void	scop_test_vertex_init(t_env	*env)
 {
 	GLfloat vertices[] = {
-		0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-		0.5f, -0.5f, 0.5f, 0.0f, 1.0f, 0.0f,
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
-		-0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f,
-		0.5f, 0.5f, -0.5f, 0.0f, 0.0f, 1.0f,
-		0.5f, -0.5f, -0.5f, 0.0f, 0.5f, 0.5f,
-		-0.5f, -0.5f, -0.5f, 0.5f, 0.0f, 0.5f,
-		-0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.0f
+		0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+		0.5f, -0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+		-0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
+		0.5f, 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+		0.5f, -0.5f, -0.5f, 0.0f, 0.5f, 0.5f, 1.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f, 0.5f, 0.0f, 0.5f, 0.0f, 0.0f,
+		-0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f
 	};
 	GLuint indices[] = {
 		0, 1, 3,
@@ -86,16 +89,21 @@ void	scop_test_vertex_init(t_env	*env)
 	glGenVertexArrays(1, &(env->vao));
 	glGenBuffers(1, &(env->ebo));
 	//Attrib
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, env->texture);
 	glBindVertexArray(env->vao);
 	glBindBuffer(GL_ARRAY_BUFFER, env->vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, env->ebo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid *)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid *)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
 		(GLvoid *)(3 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+		(GLvoid *)(6 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(2);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 }
@@ -234,8 +242,9 @@ int		main(void)
 		return (scop_exit(&env));
 	glEnable(GL_DEPTH_TEST);
 	glViewport(0, 0, env.win_w, env.win_h);
-	if (scop_load_texture("./texture/renko_hg.tga") == 0)
+	if (scop_load_texture("./texture/renko_hg.tga", &env) == 0)
 		return (scop_exit(&env));
+	scop_gl_bind_texture(&env);
 	if (scop_gl_init_shaders(&env) == 0)
 		return (scop_exit(&env));
 	if (scop_gl_init_matrix(&env) == 0)
