@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 11:08:11 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 12:49:03 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ typedef GLfloat		t_mat4[4][4];
 
 typedef struct		s_vec3
 {
-	float			x;
-	float			y;
-	float			z;
+	GLfloat			x;
+	GLfloat			y;
+	GLfloat			z;
 }					t_vec3;
 
 typedef struct		s_vec4
 {
-	float			x;
-	float			y;
-	float			z;
-	float			w;
+	GLfloat			x;
+	GLfloat			y;
+	GLfloat			z;
+	GLfloat			w;
 }					t_vec4;
 
 typedef struct		s_env
@@ -45,7 +45,7 @@ typedef struct		s_env
 	GLFWwindow		*win;
 	int				win_h;
 	int				win_w;
-	float			fov;
+	GLfloat			fov;
 	GLuint			vbo;
 	GLuint			vao;
 	GLuint			ebo;
@@ -64,14 +64,33 @@ typedef struct		s_env
 	t_vec3			up_vec;
 	t_vec3			front;
 	GLfloat			cam_speed;
-	float			sensitivity;
-	float			last_x;
-	float			last_y;
-	float			rot_x;
-	float			rot_y;
-	float			delta_time;
-	float			prev_time;
+	GLfloat			sensitivity;
+	GLfloat			last_x;
+	GLfloat			last_y;
+	GLfloat			rot_x;
+	GLfloat			rot_y;
+	GLfloat			delta_time;
+	GLfloat			prev_time;
+	char			*tex;
 }					t_env;
+
+typedef struct		s_tga_header
+{
+	unsigned char	id_len;
+	unsigned char	color_map_type;
+	unsigned char	image_type;
+	unsigned char	unused_1;
+	unsigned char	unused_2;
+	unsigned char	unused_3;
+	unsigned char	unused_4;
+	unsigned char	unused_5;
+	unsigned short	x_orig;
+	unsigned short	y_orig;
+	unsigned short	img_w;
+	unsigned short	img_h;
+	unsigned char	pixel_depth;
+	unsigned char	img_desc;
+}					t_tga_header;
 
 void	glBindVertexArray(GLuint arrays);
 void	glGenVertexArrays(GLsizei n, GLuint *arrays);
@@ -125,7 +144,8 @@ void	scop_init_env(t_env *env);
 void	*scop_get_env(void *addr);
 void	scop_execute_mov(t_env *env);
 void	scop_execute_mouse_mov(t_env *env);
-void	scop_init_vector(t_env *env);
+void	scop_vector_init_env(t_env *env);
+char	*scop_load_texture(const char *path);
 /*
 ** TEST FUNCTIONS
 */

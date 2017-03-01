@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 11:08:52 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 12:35:30 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	scop_init_env(t_env *env)
 	env->sensitivity = 0.05f;
 	env->delta_time = 0.0f;
 	env->prev_time = 0.0f;
+	env->tex = NULL;
 }
 
 void	scop_test_vertex_init(t_env	*env)
@@ -197,15 +198,24 @@ int		scop_gl_init_shaders(t_env *env)
 int		scop_gl_init_matrix(t_env *env)
 {
 	if ((env->m_model = glGetUniformLocation(env->shader_prog, "model")) == -1)
+	{
+		puts("Scop : GL : Could not get info about matrix variable");
 		return (0);
+	}
 	if ((env->m_proj = glGetUniformLocation(env->shader_prog, "proj")) == -1)
+	{
+		puts("Scop : GL : Could not get info about matrix variable");
 		return (0);
+	}
 	if ((env->m_view = glGetUniformLocation(env->shader_prog, "view")) == -1)
+	{
+		puts("Scop : GL : Could not get info about matrix variable");
 		return (0);
+	}
 	return (1);
 }
 
-void	scop_vector_init(t_env *env)
+void	scop_vector_init_env(t_env *env)
 {
 	scop_vec3_set(&(env->pos), 0.0f, 0.0f, -1.0f);
 	scop_vec3_set(&(env->target), 0.0f, 0.0f, 0.0f);
@@ -224,11 +234,13 @@ int		main(void)
 		return (scop_exit(&env));
 	glEnable(GL_DEPTH_TEST);
 	glViewport(0, 0, env.win_w, env.win_h);
+	if (scop_load_texture("./texture/renko_hg.tga") == 0)
+		return (scop_exit(&env));
 	if (scop_gl_init_shaders(&env) == 0)
 		return (scop_exit(&env));
 	if (scop_gl_init_matrix(&env) == 0)
 		return (scop_exit(&env));
-	scop_vector_init(&env);
+	scop_vector_init_env(&env);
 	glfwSetKeyCallback(env.win, scop_glfw_key_callback);
 	glfwSetCursorPosCallback(env.win, scop_glfw_mouse_pos_callback);
 	glfwSetWindowSizeCallback(env.win, scop_glfw_window_size_callback);
