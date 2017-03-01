@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 15:02:51 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 17:22:15 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 
 # define PRESSED 1
 # define RELEASED 0
+
+# define BOT_LEFT 0
+# define BOT_RIGHT 1
+# define TOP_LEFT 2
+# define TOP_RIGHT 3
 
 typedef GLfloat		t_mat4[4][4];
 
@@ -59,6 +64,7 @@ typedef struct		s_env
 	GLint			u_model;
 	GLint			u_view;
 	GLint			u_tex;
+	GLint			u_tex_origin;
 	int				p_key[1024];
 	t_vec3			pos;
 	t_vec3			target;
@@ -76,6 +82,7 @@ typedef struct		s_env
 	size_t			tex_w;
 	size_t			tex_h;
 	GLuint			texture;
+	unsigned int	tex_origin;
 }					t_env;
 
 typedef struct		s_tga_header
@@ -153,6 +160,7 @@ void	scop_vector_init_env(t_env *env);
 ** TEXTURE FUNCTIONS
 */
 char	*scop_load_texture(const char *path, t_env *env);
+void	scop_set_origin_texture(const char image_desc, t_env *env);
 void	scop_gl_bind_texture(t_env *env);
 /*
 ** TEST FUNCTIONS

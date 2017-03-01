@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 11:35:14 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 16:49:42 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 17:03:54 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static char		*check_and_extract_file(const char *file, const long size,
 		return (NULL);
 	env->tex_w = head->img_w;
 	env->tex_h = head->img_h;
+	scop_set_origin_texture(head->img_desc, env);
 	return (tex);
 }
 

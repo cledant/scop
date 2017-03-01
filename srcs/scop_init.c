@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 16:51:32 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 17:52:05 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	scop_init_env(t_env *env)
 	env->tex_h = 0;
 	env->texture = 0;
 	env->u_tex = -1;
+	env->tex_origin = TOP_LEFT;
+	env->u_tex_origin = -1;
 }
 
 void	scop_test_vertex_init(t_env	*env)
@@ -213,6 +215,7 @@ void	scop_main(t_env *env)
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, env->texture);
 		glUniform1i(env->u_tex, 0);
+		glUniform1iv(env->u_tex, 1, (GLint *)&(env->tex_origin));
 		//Draw vertex
 		glBindVertexArray(env->vao);
 		while (counter < 10)
@@ -259,6 +262,12 @@ int		scop_gl_init_matrix(t_env *env)
 		return (0);
 	}
 	if ((env->u_tex = glGetUniformLocation(env->shader_prog, "tex")) == -1)
+	{
+		puts("Scop : GL : Could not get info about texture variable");
+		return (0);
+	}
+	if ((env->u_tex_origin = glGetUniformLocation(env->shader_prog, "tex_origin"))
+		== -1)
 	{
 		puts("Scop : GL : Could not get info about texture variable");
 		return (0);
