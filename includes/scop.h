@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 17:22:15 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 18:30:59 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct		s_env
 	size_t			tex_w;
 	size_t			tex_h;
 	GLuint			texture;
-	unsigned int	tex_origin;
+	int				tex_origin;
 }					t_env;
 
 typedef struct		s_tga_header

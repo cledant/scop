@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 17:52:05 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 18:37:27 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ void	scop_main(t_env *env)
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, env->texture);
 		glUniform1i(env->u_tex, 0);
-		glUniform1iv(env->u_tex, 1, (GLint *)&(env->tex_origin));
+		glUniform1iv(env->u_tex_origin, 1, (GLint *)&(env->tex_origin));
 		//Draw vertex
 		glBindVertexArray(env->vao);
 		while (counter < 10)
