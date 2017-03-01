@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 20:15:08 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 11:08:11 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct		s_env
 	float			last_y;
 	float			rot_x;
 	float			rot_y;
-	float			rot_z;
 	float			delta_time;
 	float			prev_time;
 }					t_env;
@@ -125,6 +124,7 @@ int		scop_exit(t_env *env);
 void	scop_init_env(t_env *env);
 void	*scop_get_env(void *addr);
 void	scop_execute_mov(t_env *env);
+void	scop_execute_mouse_mov(t_env *env);
 void	scop_init_vector(t_env *env);
 /*
 ** TEST FUNCTIONS

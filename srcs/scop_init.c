@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 20:26:46 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 11:08:52 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	scop_init_env(t_env *env)
 	env->cam_speed = 5.0f;
 	env->rot_x = 0.0f;
 	env->rot_y = 0.0f;
-	env->rot_z = 0.0f;
 	env->sensitivity = 0.05f;
 	env->delta_time = 0.0f;
 	env->prev_time = 0.0f;
@@ -160,6 +159,7 @@ void	scop_main(t_env *env)
 		counter = 0;
 		glfwPollEvents();
 		scop_execute_mov(env);
+		scop_execute_mouse_mov(env);
 		scop_vec3_add(&pos_front, env->pos, env->front);
 		scop_mat4_set_camera(&(env->view), env->pos, pos_front, env->up_vec);
 		scop_mat4_set_perspective(&(env->proj), (t_vec4){env->fov,
