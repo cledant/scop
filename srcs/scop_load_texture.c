@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 11:35:14 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 13:02:05 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 16:05:25 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static char		*check_and_extract_file(const char *file, const long size,
 		return (NULL);
 	if (head->pixel_depth != 24)
 		return (NULL);
-	if (head->img_w * head->img_h * 24 + 18 < size)
+	if (head->img_w * head->img_h * 3 + 18 > size)
 		return (NULL);
 	if ((tex = extract_tex(file)) == NULL)
 		return (NULL);

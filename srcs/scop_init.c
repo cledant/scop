@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 13:44:37 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 16:07:14 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	scop_init_env(t_env *env)
 	env->shader_prog = 0;
 	env->vertex_shader = 0;
 	env->fragment_shader = 0;
-	env->m_proj = -1;
-	env->m_model = -1;
-	env->m_view = -1;
+	env->u_proj = -1;
+	env->u_model = -1;
+	env->u_view = -1;
 	bzero(env->p_key, sizeof(int) * 1024);
 	env->cam_speed = 5.0f;
 	env->rot_x = 0.0f;
@@ -55,6 +55,7 @@ void	scop_init_env(t_env *env)
 	env->tex_w = 0;
 	env->tex_h = 0;
 	env->texture = 0;
+	env->u_tex = -1;
 }
 
 void	scop_test_vertex_init(t_env	*env)
@@ -89,8 +90,6 @@ void	scop_test_vertex_init(t_env	*env)
 	glGenVertexArrays(1, &(env->vao));
 	glGenBuffers(1, &(env->ebo));
 	//Attrib
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, env->texture);
 	glBindVertexArray(env->vao);
 	glBindBuffer(GL_ARRAY_BUFFER, env->vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -166,21 +165,27 @@ void	scop_main(t_env *env)
 		env->prev_time = curr_time;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		counter = 0;
+		//get events
 		glfwPollEvents();
 		scop_execute_mov(env);
 		scop_execute_mouse_mov(env);
+		//Maj matrix
 		scop_vec3_add(&pos_front, env->pos, env->front);
 		scop_mat4_set_camera(&(env->view), env->pos, pos_front, env->up_vec);
 		scop_mat4_set_perspective(&(env->proj), (t_vec4){env->fov,
 			(GLfloat)env->win_w / (GLfloat)env->win_h, 0.1f, 100.0f});
-		glUniformMatrix4fv(env->m_view, 1, GL_TRUE, (GLfloat *)&(env->view));
-		glUniformMatrix4fv(env->m_proj, 1, GL_TRUE, (GLfloat *)&(env->proj));
+		glUniformMatrix4fv(env->u_view, 1, GL_TRUE, (GLfloat *)&(env->view));
+		glUniformMatrix4fv(env->u_proj, 1, GL_TRUE, (GLfloat *)&(env->proj));
+		//Use texture
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, env->texture);
+		glUniform1i(env->u_tex, 0);
 		//Draw vertex
 		glBindVertexArray(env->vao);
 		while (counter < 10)
 		{
 			scop_mat4_set_translation(&(env->model), cube_pos[counter]);
-			glUniformMatrix4fv(env->m_model, 1, GL_TRUE, (GLfloat *)&(env->model));
+			glUniformMatrix4fv(env->u_model, 1, GL_TRUE, (GLfloat *)&(env->model));
 			glDrawElements(GL_TRIANGLES, 3 * 12, GL_UNSIGNED_INT, 0);
 			counter++;
 		}
@@ -205,19 +210,24 @@ int		scop_gl_init_shaders(t_env *env)
 
 int		scop_gl_init_matrix(t_env *env)
 {
-	if ((env->m_model = glGetUniformLocation(env->shader_prog, "model")) == -1)
+	if ((env->u_model = glGetUniformLocation(env->shader_prog, "model")) == -1)
 	{
 		puts("Scop : GL : Could not get info about matrix variable");
 		return (0);
 	}
-	if ((env->m_proj = glGetUniformLocation(env->shader_prog, "proj")) == -1)
+	if ((env->u_proj = glGetUniformLocation(env->shader_prog, "proj")) == -1)
 	{
 		puts("Scop : GL : Could not get info about matrix variable");
 		return (0);
 	}
-	if ((env->m_view = glGetUniformLocation(env->shader_prog, "view")) == -1)
+	if ((env->u_view = glGetUniformLocation(env->shader_prog, "view")) == -1)
 	{
 		puts("Scop : GL : Could not get info about matrix variable");
+		return (0);
+	}
+	if ((env->u_tex = glGetUniformLocation(env->shader_prog, "tex")) == -1)
+	{
+		puts("Scop : GL : Could not get info about texture variable");
 		return (0);
 	}
 	return (1);
@@ -242,14 +252,14 @@ int		main(void)
 		return (scop_exit(&env));
 	glEnable(GL_DEPTH_TEST);
 	glViewport(0, 0, env.win_w, env.win_h);
-	if (scop_load_texture("./texture/renko_hg.tga", &env) == 0)
+	if ((env.tex = scop_load_texture("./texture/renko_hg.tga", &env)) == NULL)
 		return (scop_exit(&env));
-	scop_gl_bind_texture(&env);
 	if (scop_gl_init_shaders(&env) == 0)
 		return (scop_exit(&env));
 	if (scop_gl_init_matrix(&env) == 0)
 		return (scop_exit(&env));
 	scop_vector_init_env(&env);
+	scop_gl_bind_texture(&env);
 	glfwSetKeyCallback(env.win, scop_glfw_key_callback);
 	glfwSetCursorPosCallback(env.win, scop_glfw_mouse_pos_callback);
 	glfwSetWindowSizeCallback(env.win, scop_glfw_window_size_callback);

@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 13:16:57 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/01 15:02:51 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ typedef struct		s_env
 	t_mat4			proj;
 	t_mat4			model;
 	t_mat4			view;
-	GLint			m_proj;
-	GLint			m_model;
-	GLint			m_view;
+	GLint			u_proj;
+	GLint			u_model;
+	GLint			u_view;
+	GLint			u_tex;
 	int				p_key[1024];
 	t_vec3			pos;
 	t_vec3			target;
