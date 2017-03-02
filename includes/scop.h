@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 18:30:59 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/02 19:26:35 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,16 @@
 # define TOP_LEFT 2
 # define TOP_RIGHT 3
 
+# define MAX_VAO 128
+# define MAX_MAT 128
+
 typedef GLfloat		t_mat4[4][4];
+
+typedef struct		s_vec2
+{
+	GLfloat			x;
+	GLfloat			y;
+}					t_vec2;
 
 typedef struct		s_vec3
 {
@@ -45,31 +54,100 @@ typedef struct		s_vec4
 	GLfloat			w;
 }					t_vec4;
 
-typedef struct		s_env
+typedef struct		s_face
+{
+	t_vec3			pos;
+	t_vec3			norm;
+	t_vec2			tex;
+}
+
+typedef struct		s_vao
+{
+	t_face			*face_array;
+	GLuint			gl_face_array;
+	size_t			nb_face;
+}
+
+typedef struct		s_mat
+{
+	char			*name;
+	t_vec3			amb_color;
+	t_vec3			diff_color;
+	t_vec3			spec_color;
+	GLfloat			shine;
+	char			*diff_tex_path;
+	char			*diff_tex;
+	size_t			tex_h;
+	size_t			tex_w;
+	int				tex_origin;
+	GLuint			gl_tex;
+}
+
+typedef struct		s_obj
+{
+	t_vec3			*v_pos;
+	size_t			nb_pos;
+	t_vec3			*v_norm;
+	size_t			nb_norm;
+	t_vec2			*v_tex;
+	size_t			nb_tex;
+	t_mat			mat[MAX_MAT];
+	size_t			nb_mat;
+	t_vao			vao[MAX_VAO];
+	size_t			nb_vao;
+}
+
+typedef struct		s_win
 {
 	GLFWwindow		*win;
 	int				win_h;
 	int				win_w;
 	GLfloat			fov;
-	GLuint			vbo;	//to free
-	GLuint			vao;	//to free
-	GLuint			ebo;	//to free
+}					t_win;
+
+typedef struct		s_shader
+{
 	GLuint			shader_prog;	//to free
 	GLuint			vertex_shader;	//to free
 	GLuint			fragment_shader;	//to free
+}					t_shader;
+
+typedef struct		s_light
+{
+	t_vec3			pos;
+	t_vec3			color;
+	GLfloat			p_amb;
+	Glfloat			p_diff;
+	GLfloat			p_spec;
+}					t_light;
+
+typedef struct		s_matrix
+{
 	t_mat4			proj;
 	t_mat4			model;
 	t_mat4			view;
-	GLint			u_proj;
-	GLint			u_model;
-	GLint			u_view;
-	GLint			u_tex;
-	GLint			u_tex_origin;
-	int				p_key[1024];
+}					t_matrix;
+
+typedef struct		s_uniform
+{
+	GLint			proj;
+	GLint			model;
+	GLint			view;
+	GLint			tex;
+	GLint			tex_origin;
+}					t_uniform;
+
+typedef struct		s_camera
+{
 	t_vec3			pos;
 	t_vec3			target;
 	t_vec3			up_vec;
 	t_vec3			front;
+}					t_camera;
+
+typedef struct		s_input
+{
+	int				p_key[1024];
 	GLfloat			cam_speed;
 	GLfloat			sensitivity;
 	GLfloat			last_x;
@@ -78,11 +156,18 @@ typedef struct		s_env
 	GLfloat			rot_y;
 	GLfloat			delta_time;
 	GLfloat			prev_time;
-	char			*tex;	//to free
-	size_t			tex_w;
-	size_t			tex_h;
-	GLuint			texture;
-	int				tex_origin;
+}					t_input;
+
+typedef struct		s_env
+{
+	t_win			win;
+	t_shader		shader;
+	t_uniform		uniform;
+	t_obj			obj;
+	t_light			light;
+	t_input			input;
+	t_camera		cam;
+	t_matrix		matrix;
 }					t_env;
 
 typedef struct		s_tga_header
