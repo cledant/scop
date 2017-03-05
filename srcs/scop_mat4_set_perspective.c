@@ -6,20 +6,21 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 11:35:36 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/28 20:01:27 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/05 14:50:06 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void scop_mat4_set_perspective(t_mat4 *matrix, const t_vec4 param)
+/*
+** param.x = fov in degree
+** param.y = ratio
+** param.z = near
+** param.w = far
+*/
+
+void	scop_mat4_set_perspective(t_mat4 *matrix, const t_vec4 param)
 {
-	/*
-	** param.x = fov in degree
-	** param.y = ratio
-	** param.z = near
-	** param.w = far
-	*/
 	float	rad_fov;
 	float	tanhalffov;
 

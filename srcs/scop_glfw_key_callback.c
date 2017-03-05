@@ -6,14 +6,14 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:39:39 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/05 14:11:33 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/05 14:50:40 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void scop_glfw_key_callback(GLFWwindow *win, int key, int scancode, int action,
-		int mods)
+void	scop_glfw_key_callback(GLFWwindow *win, int key, int scancode,
+			int action, int mods)
 {
 	t_env	*env;
 

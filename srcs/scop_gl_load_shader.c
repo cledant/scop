@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 12:58:39 by cledant           #+#    #+#             */
-/*   Updated: 2017/02/24 19:21:13 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/05 14:42:26 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ char				*read_shader_file(const char *path)
 	return (shader_code);
 }
 
-int		scop_gl_load_shader(GLuint *shader, GLenum type, const char *path)
+int					scop_gl_load_shader(GLuint *shader, GLenum type,
+						const char *path)
 {
 	char	*shader_code;
 	GLint	success;
