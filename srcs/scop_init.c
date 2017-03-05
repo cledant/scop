@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/05 14:29:13 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/05 15:22:28 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,10 +172,21 @@ void	scop_main(t_env *env)
 	}
 }
 
-int		main(void)
+static inline int		error_argv(int argc)
+{
+	if (argc < 2)
+		puts("Scop : no file");
+	else if (argc > 2)
+		puts("Scop : too much arguments");
+	return (0);
+}
+
+int						main(int argc, char **argv)
 {
 	t_env		env;
 
+	if (argc != 2)
+		return (error_argv(argc))
 	scop_get_env(&env);
 	glfwSetErrorCallback(scop_glfw_error_callback);
 	scop_init_env(&env);
@@ -184,6 +195,8 @@ int		main(void)
 	if (scop_gl_init_shaders(&env) == 0)
 		return (scop_exit(&env));
 	if (scop_gl_init_uniforms(&env) == 0)
+		return (scop_exit(&env));
+	if (scop_read_obj_files(&env, argv[1]) == 0)
 		return (scop_exit(&env));
 //	scop_gl_bind_texture(&env);
 	glfwSetKeyCallback(env.win.win, scop_glfw_key_callback);

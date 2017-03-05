@@ -6,20 +6,20 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:06:44 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/05 14:41:56 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/05 15:22:17 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static int		uniforms_error(char *name)
+static inline int	uniforms_error(char *name)
 {
 	printf("Scop : GL : Could not get info about this variable : %s\n",
 		name);
 	return (0);
 }
 
-int				scop_gl_init_uniforms(t_env *env)
+int					scop_gl_init_uniforms(t_env *env)
 {
 	if ((env->uniform.model_orig = glGetUniformLocation(env->shader.shader_prog,
 			"model_orig")) == -1)

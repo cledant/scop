@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/05 14:14:16 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/05 15:29:20 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,77 +191,94 @@ typedef struct		s_tga_header
 	unsigned char	img_desc;
 }					t_tga_header;
 
-void	glBindVertexArray(GLuint arrays);
-void	glGenVertexArrays(GLsizei n, GLuint *arrays);
+void				glBindVertexArray(GLuint arrays);
+void				glGenVertexArrays(GLsizei n, GLuint *arrays);
 /*
 ** GLFW FUNCTIONS
 */
-int		scop_glfw_init(t_env *env);
-void	scop_glfw_close_callback(GLFWwindow *win);
-void	scop_glfw_error_callback(int error, const char *desc);
-void	scop_glfw_window_size_callback(GLFWwindow *win, int w, int h);
-void	scop_glfw_mouse_pos_callback(GLFWwindow *win, double xpos, double ypos);
-void	scop_glfw_key_callback(GLFWwindow *win, int key, int scancode, int action,
-			int mods);
+int					scop_glfw_init(t_env *env);
+void				scop_glfw_close_callback(GLFWwindow *win);
+void				scop_glfw_error_callback(int error, const char *desc);
+void				scop_glfw_window_size_callback(GLFWwindow *win, int w,
+						int h);
+void				scop_glfw_mouse_pos_callback(GLFWwindow *win, double xpos,
+						double ypos);
+void				scop_glfw_key_callback(GLFWwindow *win, int key,
+						int scancode, int action, int mods);
 /*
 ** SHADER FUNCTIONS
 */
-int		scop_gl_init_shaders(t_env *env);
-int		scop_gl_init_uniforms(t_env *env);
-int		scop_gl_load_shader(GLuint *shader, GLenum s_type, const char *path);
-int		scop_gl_create_shader_program(t_env *env);
+int					scop_gl_init_shaders(t_env *env);
+int					scop_gl_load_shader(GLuint *shader, GLenum s_type,
+						const char *path);
+int					scop_gl_create_shader_program(t_env *env);
 /*
 ** MAT4 FUNCTIONS
 */
-void	scop_mat4_init(t_mat4 *matrix);
-void	scop_mat4_set_translation(t_mat4 *matrix, const t_vec3 tr);
-void	scop_mat4_set_rotation(t_mat4 *matrix, const float angle, t_vec3 axis);
-void	scop_mat4_set_perspective(t_mat4 *matrix, const t_vec4 param);
-void	scop_mat4_set_identity(t_mat4 *matrix);
-void	scop_mat4_set_camera(t_mat4 *view, const t_vec3 pos,
-			const t_vec3 target, const t_vec3 vec_up);
-void	scop_mat4_multiply(t_mat4 *result, const t_mat4 a, const t_mat4 b);
+void				scop_mat4_init(t_mat4 *matrix);
+void				scop_mat4_set_translation(t_mat4 *matrix, const t_vec3 tr);
+void				scop_mat4_set_rotation(t_mat4 *matrix, const float angle,
+						t_vec3 axis);
+void				scop_mat4_set_perspective(t_mat4 *matrix,
+						const t_vec4 param);
+void				scop_mat4_set_identity(t_mat4 *matrix);
+void				scop_mat4_set_camera(t_mat4 *view, const t_vec3 pos,
+						const t_vec3 target, const t_vec3 vec_up);
+void				scop_mat4_multiply(t_mat4 *result, const t_mat4 a,
+						const t_mat4 b);
 /*
 ** VEC3 FUNCTIONS
 */
-void	scop_vec3_normalize(t_vec3 *param);
-void	scop_vec3_set(t_vec3 *vec, const float x, const float y, const float z);
-void	scop_vec3_substract(t_vec3 *result, const t_vec3 a, const t_vec3 b);
-void	scop_vec3_add(t_vec3 *result, const t_vec3 a, const t_vec3 b);
-void	scop_vec3_cross_prod(t_vec3 *result, const t_vec3 a, const t_vec3 b);
-void	scop_vec3_multiply_const(t_vec3 *result, const t_vec3 a, const float cst);
+void				scop_vec3_normalize(t_vec3 *param);
+void				scop_vec3_set(t_vec3 *vec, const float x, const float y,
+						const float z);
+void				scop_vec3_substract(t_vec3 *result, const t_vec3 a,
+						const t_vec3 b);
+void				scop_vec3_add(t_vec3 *result, const t_vec3 a,
+						const t_vec3 b);
+void				scop_vec3_cross_prod(t_vec3 *result, const t_vec3 a,
+						const t_vec3 b);
+void				scop_vec3_multiply_const(t_vec3 *result, const t_vec3 a,
+						const float cst);
 /*
 ** MATH FUNCTIONS
 */
-float	scop_math_deg_to_rad(const float deg);
-float	scop_math_dot_product(const t_vec3 a, const t_vec3 b);
+float				scop_math_deg_to_rad(const float deg);
+float				scop_math_dot_product(const t_vec3 a, const t_vec3 b);
 /*
 ** ENV INIT FUNCTIONS
 */
-void	scop_init_env(t_env *env);
-void	scop_init_env_win(t_env *env);
-void	scop_init_env_shader(t_env *env);
-void	scop_init_env_uniform(t_env *env);
-void	scop_init_env_obj(t_env *env);
-void	scop_init_env_light(t_env *env);
-void	scop_init_env_input(t_env *env);
-void	scop_init_env_camera(t_env *env);
-void	scop_init_env_matrix(t_env *env);
+void				scop_init_env(t_env *env);
+void				scop_init_env_win(t_env *env);
+void				scop_init_env_shader(t_env *env);
+void				scop_init_env_uniform(t_env *env);
+void				scop_init_env_obj(t_env *env);
+void				scop_init_env_light(t_env *env);
+void				scop_init_env_input(t_env *env);
+void				scop_init_env_camera(t_env *env);
+void				scop_init_env_matrix(t_env *env);
+/*
+** OBJ FILE PARSER FUNCTIONS
+*/
+int					scop_read_obj_files(t_env *env, const char *path);
 /*
 ** OTHER FUNCTIONS
 */
-int		scop_exit(t_env *env);
-void	*scop_get_env(void *addr);
-void	scop_execute_mov(t_env *env);
-void	scop_execute_mouse_mov(t_env *env);
+int					scop_exit(t_env *env);
+void				*scop_get_env(void *addr);
+int					scop_gl_init_uniforms(t_env *env);
 /*
-** TEXTURE FUNCTIONS
+** UPDATE FROM INPUTS FUNCTIONS
 */
-char	*scop_load_texture(const char *path, t_env *env);
-void	scop_set_origin_texture(const char image_desc, t_env *env);
+void				scop_execute_mov(t_env *env);
+void				scop_execute_mouse_mov(t_env *env);
+/*
+** TEXTURE FUNCTIONS //to update
+*/
+char				*scop_load_texture(const char *path, t_env *env);
+void				scop_set_origin_texture(const char image_desc, t_env *env);
 /*
 ** TEST FUNCTIONS
 */
-void	scop_test_vertex_init(t_env *env);
-void	debug_state(void);
+void				debug_state(void);
 #endif
