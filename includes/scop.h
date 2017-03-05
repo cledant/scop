@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/05 17:15:19 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/05 20:54:50 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 
 # define MAX_VAO 128
 # define MAX_MAT 128
+
+# define PRE_ALLOC 128
 
 typedef GLfloat		t_mat4[4][4];
 
@@ -88,10 +90,13 @@ typedef struct		s_obj
 {
 	t_vec3			*v_pos;
 	size_t			nb_pos;
+	size_t			max_pos;
 	t_vec3			*v_norm;
 	size_t			nb_norm;
+	size_t			max_norm;
 	t_vec2			*v_tex;
 	size_t			nb_tex;
+	size_t			max_tex;
 	t_mat			mat[MAX_MAT];
 	size_t			nb_mat;
 	t_vao			vao[MAX_VAO];
@@ -191,6 +196,16 @@ typedef struct		s_tga_header
 	unsigned char	img_desc;
 }					t_tga_header;
 
+typedef struct		s_obj_reader
+{
+	char			*line;
+	char			*cpy_line;
+	size_t			l_size;
+	int				valid_state[7];
+	size_t			counter;
+	size_t			ret;
+}					t_obj_reader;
+
 void				glBindVertexArray(GLuint arrays);
 void				glGenVertexArrays(GLsizei n, GLuint *arrays);
 /*
@@ -261,6 +276,7 @@ void				scop_init_env_matrix(t_env *env);
 ** OBJ FILE PARSER FUNCTIONS
 */
 int					scop_read_obj_files(t_env *env, const char *path);
+int					scop_reader_cases(t_obj_reader *reader, t_env *env);
 /*
 ** OTHER FUNCTIONS
 */

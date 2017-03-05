@@ -6,7 +6,7 @@
 #    By: cledant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 10:40:13 by cledant           #+#    #+#              #
-#    Updated: 2017/03/05 17:17:26 by cledant          ###   ########.fr        #
+#    Updated: 2017/03/05 20:55:19 by cledant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRCS_NAME = scop_init.c scop_glfw_close_callback.c scop_glfw_error_callback.c \
 			scop_execute_mouse_mov.c scop_init_env.c scop_glfw_init.c \
 			scop_gl_init_shaders.c scop_gl_init_uniforms.c scop_load_texture.c \
 			scop_set_origin_texture.c scop_gl_bind_texture.c \
-			scop_gl_init_first_mat.c scop_read_obj_files.c
+			scop_gl_init_first_mat.c scop_read_obj_files.c scop_reader_cases.c
 
 INCLUDES = ./includes
 
