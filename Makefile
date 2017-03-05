@@ -6,7 +6,7 @@
 #    By: cledant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 10:40:13 by cledant           #+#    #+#              #
-#    Updated: 2017/03/01 17:07:05 by cledant          ###   ########.fr        #
+#    Updated: 2017/03/05 14:33:51 by cledant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,9 @@ SRCS_NAME = scop_init.c scop_glfw_close_callback.c scop_glfw_error_callback.c \
 			scop_vec3_cross_prod.c scop_vec3_multiply_const.c \
 			scop_mat4_multiply.c scop_execute_mov.c scop_mat4_set_camera.c \
 			scop_math_dot_product.c scop_glfw_mouse_pos_callback.c \
-			scop_execute_mouse_mov.c scop_load_texture.c scop_gl_bind_texture.c \
-			scop_set_origin_texture.c
+			scop_execute_mouse_mov.c \
+			scop_init_env.c scop_glfw_init.c \
+			scop_gl_init_shaders.c scop_gl_init_uniforms.c
 
 INCLUDES = ./includes
 

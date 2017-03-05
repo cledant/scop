@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/02 19:26:35 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/05 14:14:16 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,15 @@ typedef struct		s_face
 	t_vec3			pos;
 	t_vec3			norm;
 	t_vec2			tex;
-}
+}					t_face;
 
 typedef struct		s_vao
 {
 	t_face			*face_array;
 	GLuint			gl_face_array;
 	size_t			nb_face;
-}
+	size_t			mat_id;
+}					t_vao;
 
 typedef struct		s_mat
 {
@@ -81,7 +82,7 @@ typedef struct		s_mat
 	size_t			tex_w;
 	int				tex_origin;
 	GLuint			gl_tex;
-}
+}					t_mat;
 
 typedef struct		s_obj
 {
@@ -95,7 +96,7 @@ typedef struct		s_obj
 	size_t			nb_mat;
 	t_vao			vao[MAX_VAO];
 	size_t			nb_vao;
-}
+}					t_obj;
 
 typedef struct		s_win
 {
@@ -117,21 +118,23 @@ typedef struct		s_light
 	t_vec3			pos;
 	t_vec3			color;
 	GLfloat			p_amb;
-	Glfloat			p_diff;
+	GLfloat			p_diff;
 	GLfloat			p_spec;
 }					t_light;
 
 typedef struct		s_matrix
 {
 	t_mat4			proj;
-	t_mat4			model;
+	t_mat4			model_orig;
+	t_mat4			model_rot;
 	t_mat4			view;
 }					t_matrix;
 
 typedef struct		s_uniform
 {
 	GLint			proj;
-	GLint			model;
+	GLint			model_orig;
+	GLint			model_rot;
 	GLint			view;
 	GLint			tex;
 	GLint			tex_origin;
@@ -204,7 +207,7 @@ void	scop_glfw_key_callback(GLFWwindow *win, int key, int scancode, int action,
 ** SHADER FUNCTIONS
 */
 int		scop_gl_init_shaders(t_env *env);
-int		scop_gl_init_matrix(t_env *env);
+int		scop_gl_init_uniforms(t_env *env);
 int		scop_gl_load_shader(GLuint *shader, GLenum s_type, const char *path);
 int		scop_gl_create_shader_program(t_env *env);
 /*
@@ -233,20 +236,29 @@ void	scop_vec3_multiply_const(t_vec3 *result, const t_vec3 a, const float cst);
 float	scop_math_deg_to_rad(const float deg);
 float	scop_math_dot_product(const t_vec3 a, const t_vec3 b);
 /*
+** ENV INIT FUNCTIONS
+*/
+void	scop_init_env(t_env *env);
+void	scop_init_env_win(t_env *env);
+void	scop_init_env_shader(t_env *env);
+void	scop_init_env_uniform(t_env *env);
+void	scop_init_env_obj(t_env *env);
+void	scop_init_env_light(t_env *env);
+void	scop_init_env_input(t_env *env);
+void	scop_init_env_camera(t_env *env);
+void	scop_init_env_matrix(t_env *env);
+/*
 ** OTHER FUNCTIONS
 */
 int		scop_exit(t_env *env);
-void	scop_init_env(t_env *env);
 void	*scop_get_env(void *addr);
 void	scop_execute_mov(t_env *env);
 void	scop_execute_mouse_mov(t_env *env);
-void	scop_vector_init_env(t_env *env);
 /*
 ** TEXTURE FUNCTIONS
 */
 char	*scop_load_texture(const char *path, t_env *env);
 void	scop_set_origin_texture(const char image_desc, t_env *env);
-void	scop_gl_bind_texture(t_env *env);
 /*
 ** TEST FUNCTIONS
 */

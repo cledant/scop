@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop_glfw_window_size_callback.c                   :+:      :+:    :+:   */
+/*   scop_gl_init_shaders.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/27 20:51:23 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/05 14:30:35 by cledant          ###   ########.fr       */
+/*   Created: 2017/03/05 13:35:22 by cledant           #+#    #+#             */
+/*   Updated: 2017/03/05 13:43:54 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	scop_glfw_window_size_callback(GLFWwindow *win, int w, int h)
+int		scop_gl_init_shaders(t_env *env)
 {
-	t_env	*env;
-
-	(void)win;
-	env = scop_get_env(NULL);
-	env->win.win_h = h;
-	env->win.win_w = w;
+	if (scop_gl_load_shader(&(env->shader.vertex_shader), GL_VERTEX_SHADER,
+			"./shaders/scop_vertex_shader.glsl") == 0)
+		return (0);
+	if (scop_gl_load_shader(&(env->shader.fragment_shader), GL_FRAGMENT_SHADER,
+			"./shaders/scop_fragment_shader.glsl") == 0)
+		return (0);
+	if (scop_gl_create_shader_program(env) == 0)
+		return (0);
+	return (1);
 }
