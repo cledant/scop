@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/05 15:29:20 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/05 17:15:19 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,10 +273,12 @@ int					scop_gl_init_uniforms(t_env *env);
 void				scop_execute_mov(t_env *env);
 void				scop_execute_mouse_mov(t_env *env);
 /*
-** TEXTURE FUNCTIONS //to update
+** TEXTURE FUNCTIONS
 */
-char				*scop_load_texture(const char *path, t_env *env);
-void				scop_set_origin_texture(const char image_desc, t_env *env);
+int					scop_gl_init_first_mat(t_env *env);
+char				*scop_load_texture(const char *path, t_mat *mat);
+void				scop_set_origin_texture(const char image_desc, t_mat *mat);
+void				scop_gl_bind_texture(t_mat *mat);
 /*
 ** TEST FUNCTIONS
 */

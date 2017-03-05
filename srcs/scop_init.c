@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/05 15:22:28 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/05 17:15:31 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,6 @@ void	debug_state(void)
 		printf("Invalid enum\n");
 	else if (err == GL_INVALID_VALUE)
 		printf("Invalid value\n");
-	else if (err == GL_INVALID_VALUE)
-		printf("Invalid value\n");
 	else if (err == GL_INVALID_OPERATION)
 		printf("Invalid operation\n");
 	else if (err == GL_INVALID_FRAMEBUFFER_OPERATION)
@@ -186,7 +184,7 @@ int						main(int argc, char **argv)
 	t_env		env;
 
 	if (argc != 2)
-		return (error_argv(argc))
+		return (error_argv(argc));
 	scop_get_env(&env);
 	glfwSetErrorCallback(scop_glfw_error_callback);
 	scop_init_env(&env);
@@ -196,9 +194,10 @@ int						main(int argc, char **argv)
 		return (scop_exit(&env));
 	if (scop_gl_init_uniforms(&env) == 0)
 		return (scop_exit(&env));
+	if (scop_gl_init_first_mat(&env) == 0)
+		return (scop_exit(&env));
 	if (scop_read_obj_files(&env, argv[1]) == 0)
 		return (scop_exit(&env));
-//	scop_gl_bind_texture(&env);
 	glfwSetKeyCallback(env.win.win, scop_glfw_key_callback);
 	glfwSetCursorPosCallback(env.win.win, scop_glfw_mouse_pos_callback);
 	glfwSetWindowSizeCallback(env.win.win, scop_glfw_window_size_callback);

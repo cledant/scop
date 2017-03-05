@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 11:35:14 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/01 17:03:54 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/05 16:59:20 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static char		*load_file(const char *path, long *size)
 }
 
 static char		*check_and_extract_file(const char *file, const long size,
-					t_env *env)
+					t_mat *mat)
 {
 	t_tga_header	*head;
 	char			*tex;
@@ -87,13 +87,13 @@ static char		*check_and_extract_file(const char *file, const long size,
 		return (NULL);
 	if ((tex = extract_tex(file)) == NULL)
 		return (NULL);
-	env->tex_w = head->img_w;
-	env->tex_h = head->img_h;
-	scop_set_origin_texture(head->img_desc, env);
+	mat->tex_w = head->img_w;
+	mat->tex_h = head->img_h;
+	scop_set_origin_texture(head->img_desc, mat);
 	return (tex);
 }
 
-char			*scop_load_texture(const char *path, t_env *env)
+char			*scop_load_texture(const char *path, t_mat *mat)
 {
 	long	file_size;
 	char	*tex_file;
@@ -104,7 +104,7 @@ char			*scop_load_texture(const char *path, t_env *env)
 		printf("Scop : Texture : Can't open : %s\n", path);
 		return (NULL);
 	}
-	if ((tex = check_and_extract_file(tex_file, file_size, env)) == NULL)
+	if ((tex = check_and_extract_file(tex_file, file_size, mat)) == NULL)
 	{
 		printf("Scop : Texture : Invalid file : %s\n", path);
 		if (tex_file != NULL)

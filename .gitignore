@@ -3,6 +3,8 @@
 *.o
 *.so
 *.a
+renko*
+merry*
 
 # Swap files #
 ##############
@@ -27,7 +29,6 @@ scop
 ###########
 obj
 resources
-texture
 
 # Debug #
 #########
