@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 12:50:23 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/06 13:05:11 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,7 @@ int					scop_read_obj_cases(t_obj_read *reader, t_env *env);
 int					scop_read_mtl_files(t_obj_read *reader, t_env *env);
 int					scop_read_mtl_parsing(FILE* stream, t_env *env);
 int					scop_read_mtl_cases(t_obj_read *reader, t_env *env);
+int					scop_mtl_newmtl(t_obj_read *mt, t_env *env);
 /*
 ** OTHER FUNCTIONS
 */
