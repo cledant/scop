@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 13:05:11 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/06 17:11:31 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,6 +261,7 @@ void				scop_vec3_multiply_const(t_vec3 *result, const t_vec3 a,
 */
 float				scop_math_deg_to_rad(const float deg);
 float				scop_math_dot_product(const t_vec3 a, const t_vec3 b);
+int					scop_math_is_valid_float(const float nbr);
 /*
 ** ENV INIT FUNCTIONS
 */
@@ -285,6 +286,11 @@ int					scop_read_mtl_files(t_obj_read *reader, t_env *env);
 int					scop_read_mtl_parsing(FILE* stream, t_env *env);
 int					scop_read_mtl_cases(t_obj_read *reader, t_env *env);
 int					scop_mtl_newmtl(t_obj_read *mt, t_env *env);
+int					scop_mtl_kd(t_obj_read *mt, t_env *env);
+int					scop_mtl_ka(t_obj_read *mt, t_env *env);
+int					scop_mtl_ks(t_obj_read *mt, t_env *env);
+int					scop_mtl_ns(t_obj_read *mt, t_env *env);
+int					scop_mtl_map_kd(t_obj_read *mt, t_env *env);
 /*
 ** OTHER FUNCTIONS
 */

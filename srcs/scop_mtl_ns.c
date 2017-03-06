@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop_mtl_newmtl.c                                  :+:      :+:    :+:   */
+/*   scop_mtl_ns.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/06 13:09:52 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 15:01:32 by cledant          ###   ########.fr       */
+/*   Created: 2017/03/06 16:27:13 by cledant           #+#    #+#             */
+/*   Updated: 2017/03/06 16:27:14 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-int		scop_mtl_newmtl(t_obj_read *mtl, t_env *env)
+int		scop_mtl_ns(t_obj_read *mtl, t_env *env)
 {
 	
-	if (mtl->l_size < 7 || *(mtl->cpy_line + 7) == '\0')
+	if (mtl->l_size < 3 || *(mtl->cpy_line + 3) == '\0')
 		return (0);
-	if ((env->obj.mat[env->obj.nb_mat].name = strdup(mtl->cpy_line + 7))
-			== NULL)
+	env->obj.mat[env->obj.nb_mat - 1].shine = strtof(mtl->cpy_line + 3, NULL);
+	if (scop_math_is_valid_float(env->obj.mat[env->obj.nb_mat - 1].shine) == 0)
 		return (0);
-	(env->obj.nb_mat)++;
-	(mtl->valid_state[0]) = 1;
-	(mtl->valid_state[1]) = 1;
-	(mtl->valid_state[2]) = 1;
-	(mtl->valid_state[3]) = 1;
-	(mtl->valid_state[4]) = 1;
-	(mtl->valid_state[5]) = 1;
+	(mtl->valid_state[4]) = 0;
 	return (1);
 }

@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop_mtl_newmtl.c                                  :+:      :+:    :+:   */
+/*   scop_math_is_valid_float.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/06 13:09:52 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 15:01:32 by cledant          ###   ########.fr       */
+/*   Created: 2017/03/06 16:13:50 by cledant           #+#    #+#             */
+/*   Updated: 2017/03/06 16:26:26 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-int		scop_mtl_newmtl(t_obj_read *mtl, t_env *env)
+int		scop_math_is_valid_float(const float nbr)
 {
-	
-	if (mtl->l_size < 7 || *(mtl->cpy_line + 7) == '\0')
+	int		test_error;
+
+	if (nbr == HUGE_VAL || nbr == HUGE_VALF || nbr == HUGE_VALL)
 		return (0);
-	if ((env->obj.mat[env->obj.nb_mat].name = strdup(mtl->cpy_line + 7))
-			== NULL)
+	test_error = fpclassify(nbr);
+	if (test_error == FP_NAN || test_error == FP_INFINITE ||
+			test_error = FP_SUBNORMAL)
 		return (0);
-	(env->obj.nb_mat)++;
-	(mtl->valid_state[0]) = 1;
-	(mtl->valid_state[1]) = 1;
-	(mtl->valid_state[2]) = 1;
-	(mtl->valid_state[3]) = 1;
-	(mtl->valid_state[4]) = 1;
-	(mtl->valid_state[5]) = 1;
 	return (1);
 }
