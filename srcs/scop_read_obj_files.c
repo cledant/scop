@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 15:06:36 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/05 20:53:08 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/06 12:52:55 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static inline int		error_obj(const char *path, FILE *stream)
 	return (0);
 }
 
-static inline void		init_reader(t_obj_reader *reader)
+static inline void		init_reader(t_obj_read *reader)
 {
 	(reader->valid_state)[0] = 1;
 	(reader->valid_state)[1] = 1;
-	(reader->valid_state)[2] = 1;
+	(reader->valid_state)[2] = 0;
 	(reader->valid_state)[3] = 0;
 	(reader->valid_state)[4] = 0;
 	(reader->valid_state)[5] = 0;
@@ -34,19 +34,21 @@ static inline void		init_reader(t_obj_reader *reader)
 	reader->l_size = 0;
 	reader->counter = 0;
 	reader->ret = 0;
+	reader->curr_line_nb = 0;
 }
 
-static inline int		error_read(t_obj_reader *reader)
+static inline int		error_read(t_obj_read *reader)
 {
+	printf("Scop : error reading file .obj at line %ld\n",
+		reader->curr_line_nb);
 	free(reader->cpy_line);
 	return (0);
 }
 
 static inline int		read_file(FILE *stream, t_env *env)
 {
-	static char		value[7][16] = {"mtllib", "v", "vt", "vn", "g",
-						"usemtl", "f"};
-	t_obj_reader	reader;
+	static char	value[7][16] = {"mtllib", "v", "vt", "vn", "g", "usemtl", "f"};
+	t_obj_read	reader;
 
 	init_reader(&reader);
 	while (getline(&(reader.line), &(reader.l_size), stream) != -1)
@@ -58,13 +60,14 @@ static inline int		read_file(FILE *stream, t_env *env)
 		{
 			if (reader.valid_state[reader.counter] == 1 &&
 					strcmp(value[reader.counter], reader.cpy_line) == 0)
-				reader.ret = scop_reader_cases(&reader, env);
+				reader.ret = scop_read_obj_cases(&reader, env);
 			if (reader.ret == 0)
 					return (error_read(&reader));
 			(reader.counter)++;
 		}
 		reader.counter = 0;
 		free(reader.cpy_line);
+		(reader.curr_line_nb)++;
 	}
 	if (feof(stream) != 0)
 		return (1);

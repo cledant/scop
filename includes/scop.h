@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/05 20:54:50 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/06 12:50:23 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ typedef struct		s_tga_header
 	unsigned char	img_desc;
 }					t_tga_header;
 
-typedef struct		s_obj_reader
+typedef struct		s_obj_read
 {
 	char			*line;
 	char			*cpy_line;
@@ -204,7 +204,8 @@ typedef struct		s_obj_reader
 	int				valid_state[7];
 	size_t			counter;
 	size_t			ret;
-}					t_obj_reader;
+	size_t			curr_line_nb;
+}					t_obj_read;
 
 void				glBindVertexArray(GLuint arrays);
 void				glGenVertexArrays(GLsizei n, GLuint *arrays);
@@ -276,7 +277,13 @@ void				scop_init_env_matrix(t_env *env);
 ** OBJ FILE PARSER FUNCTIONS
 */
 int					scop_read_obj_files(t_env *env, const char *path);
-int					scop_reader_cases(t_obj_reader *reader, t_env *env);
+int					scop_read_obj_cases(t_obj_read *reader, t_env *env);
+/*
+** MTL FILE PARSER FUNCTIONS
+*/
+int					scop_read_mtl_files(t_obj_read *reader, t_env *env);
+int					scop_read_mtl_parsing(FILE* stream, t_env *env);
+int					scop_read_mtl_cases(t_obj_read *reader, t_env *env);
 /*
 ** OTHER FUNCTIONS
 */
