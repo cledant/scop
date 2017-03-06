@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 12:10:59 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 12:55:24 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/06 18:10:44 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void			init_mtl_reader(t_obj_read *mtl)
 	(mtl->valid_state)[5] = 0;
 	mtl->line = NULL;
 	mtl->cpy_line = NULL;
-	mtl->l_line = 0;
+	mtl->l_size = 0;
 	mtl->counter = 0;
 	mtl->ret = 0;
 	mtl->curr_line_nb = 0;
@@ -38,7 +38,7 @@ static void			init_mtl_reader(t_obj_read *mtl)
 int					scop_read_mtl_parsing(FILE *stream, t_env *env)
 {
 	static char		value[6][16] = {"newmtl", "Kd", "Ka", "Ks", "Ns", "map_Kd"};
-	t_obj_reader	mtl;
+	t_obj_read		mtl;
 
 	init_mtl_reader(&mtl);
 	while (getline(&(mtl.line), &(mtl.l_size), stream) != -1)

@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 16:35:52 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 17:08:57 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/06 18:14:34 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static int		read_third_component(const char *begin_ptr, t_obj_read *mtl,
 					t_env *env)
 {
+	size_t		check;
+
 	if ((check = begin_ptr - mtl->cpy_line) >= mtl->l_size ||
 			*begin_ptr == '\0')
 		return (0);

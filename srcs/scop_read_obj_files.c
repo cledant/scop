@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 15:06:36 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 12:52:55 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/06 18:15:40 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static inline int		read_file(FILE *stream, t_env *env)
 					strcmp(value[reader.counter], reader.cpy_line) == 0)
 				reader.ret = scop_read_obj_cases(&reader, env);
 			if (reader.ret == 0)
-					return (error_read(&reader));
+				return (error_read(&reader));
 			(reader.counter)++;
 		}
 		reader.counter = 0;

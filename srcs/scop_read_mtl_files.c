@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 12:09:30 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 12:54:58 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/06 18:09:52 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ static int		error_mtllib(char *file, FILE *stream)
 	return (0);
 }
 
-static int		seek_second_arg(char *str, const size_t max)
+static char		*seek_second_arg(char *str, const size_t max)
 {
 	size_t		counter;
-	char		*path;
 
 	counter = 7;
 	str = str + 7;
@@ -37,7 +36,7 @@ static int		seek_second_arg(char *str, const size_t max)
 		counter++;
 	if (counter - 7 == 0)
 		return (NULL);
-	return (path);
+	return (str);
 }
 
 static int		load_textures(t_env *env)
@@ -47,34 +46,35 @@ static int		load_textures(t_env *env)
 	counter = 1;
 	while (counter < env->obj.nb_mat)
 	{
-		if (env->obj.mat[counter]->diff_tex_path != NULL)
+		if (env->obj.mat[counter].diff_tex_path != NULL)
 		{
-			if ((env->obj.mat[counter]->diff_tex =
-					scop_load_texture(env->obj.mat[counter]->diff_tex_path,
-					env->obj.mat[counter])) == NULL)
+			if ((env->obj.mat[counter].diff_tex =
+					scop_load_texture(env->obj.mat[counter].diff_tex_path,
+					&(env->obj.mat[counter]))) == NULL)
 				return (0);
-			scop_gl_bind_texture(env->obj.mat[counter]);
+			scop_gl_bind_texture(&(env->obj.mat[counter]));
 		}
 		counter++;
 	}
 	return (1);
 }
 
-int				scop_read_mtl_files(t_obj_reader *reader, t_env *env)
+int				scop_read_mtl_files(t_obj_read *reader, t_env *env)
 {
 	char	*file;
 	FILE	*stream;
 
 	if (env->obj.nb_mat == MAX_MAT)
 		return (error_mtllib(NULL, NULL));
-	if ((file = seek_second_arg(reader.cpy_line, reader.l_size)) == NULL)
+	if ((file = seek_second_arg(reader->cpy_line, reader->l_size)) == NULL)
 		return (error_mtllib(NULL, NULL));
 	if ((stream = fopen(file, "r")) == NULL)
 		return (error_mtllib(file, NULL));
-	if (read_mtl(stream, env) == 0)
+	if (scop_read_mtl_parsing(stream, env) == 0)
 		return (error_mtllib(file, stream));
 	if (load_textures(env) == 0)
 		return (error_mtllib(file, stream));
 	fclose(stream);
+	reader->valid_state[1] = 0;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 17:11:31 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/06 18:07:19 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,6 +279,12 @@ void				scop_init_env_matrix(t_env *env);
 */
 int					scop_read_obj_files(t_env *env, const char *path);
 int					scop_read_obj_cases(t_obj_read *reader, t_env *env);
+int					scop_obj_v(t_obj_read *mt, t_env *env);
+int					scop_obj_vt(t_obj_read *mt, t_env *env);
+int					scop_obj_vn(t_obj_read *mt, t_env *env);
+int					scop_obj_g(t_obj_read *mt, t_env *env);
+int					scop_obj_usemtl(t_obj_read *mt, t_env *env);
+int					scop_obj_f(t_obj_read *mt, t_env *env);
 /*
 ** MTL FILE PARSER FUNCTIONS
 */

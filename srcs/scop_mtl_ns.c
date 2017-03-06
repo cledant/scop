@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 16:27:13 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 16:27:14 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/06 18:16:42 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		scop_mtl_ns(t_obj_read *mtl, t_env *env)
 {
-	
 	if (mtl->l_size < 3 || *(mtl->cpy_line + 3) == '\0')
 		return (0);
 	env->obj.mat[env->obj.nb_mat - 1].shine = strtof(mtl->cpy_line + 3, NULL);
