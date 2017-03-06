@@ -6,14 +6,14 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 16:35:52 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 18:14:07 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/06 20:27:46 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static int		read_third_component(const char *begin_ptr, t_obj_read *mtl,
-					t_env *env)
+static inline int	read_third_component(const char *begin_ptr, t_obj_read *mtl,
+						t_env *env)
 {
 	size_t	check;
 
@@ -29,7 +29,7 @@ static int		read_third_component(const char *begin_ptr, t_obj_read *mtl,
 	return (1);
 }
 
-int				scop_mtl_kd(t_obj_read *mtl, t_env *env)
+int					scop_mtl_kd(t_obj_read *mtl, t_env *env)
 {
 	size_t	check;
 	char	*next_ptr;

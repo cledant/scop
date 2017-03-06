@@ -6,13 +6,13 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 12:09:30 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 18:09:52 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/06 20:26:09 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static int		error_mtllib(char *file, FILE *stream)
+static inline int	error_mtllib(char *file, FILE *stream)
 {
 	if (file == NULL)
 		puts("Scop : Error openning .mtl file");
@@ -26,7 +26,7 @@ static int		error_mtllib(char *file, FILE *stream)
 	return (0);
 }
 
-static char		*seek_second_arg(char *str, const size_t max)
+static inline char	*seek_second_arg(char *str, const size_t max)
 {
 	size_t		counter;
 
@@ -39,7 +39,7 @@ static char		*seek_second_arg(char *str, const size_t max)
 	return (str);
 }
 
-static int		load_textures(t_env *env)
+static inline int	load_textures(t_env *env)
 {
 	size_t		counter;
 
@@ -59,7 +59,7 @@ static int		load_textures(t_env *env)
 	return (1);
 }
 
-int				scop_read_mtl_files(t_obj_read *reader, t_env *env)
+int					scop_read_mtl_files(t_obj_read *reader, t_env *env)
 {
 	char	*file;
 	FILE	*stream;

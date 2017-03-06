@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 18:07:19 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/06 18:31:16 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,24 +279,24 @@ void				scop_init_env_matrix(t_env *env);
 */
 int					scop_read_obj_files(t_env *env, const char *path);
 int					scop_read_obj_cases(t_obj_read *reader, t_env *env);
-int					scop_obj_v(t_obj_read *mt, t_env *env);
-int					scop_obj_vt(t_obj_read *mt, t_env *env);
-int					scop_obj_vn(t_obj_read *mt, t_env *env);
-int					scop_obj_g(t_obj_read *mt, t_env *env);
-int					scop_obj_usemtl(t_obj_read *mt, t_env *env);
-int					scop_obj_f(t_obj_read *mt, t_env *env);
+int					scop_obj_v(t_obj_read *obj, t_env *env);
+int					scop_obj_vt(t_obj_read *obj, t_env *env);
+int					scop_obj_vn(t_obj_read *obj, t_env *env);
+int					scop_obj_g(t_obj_read *obj, t_env *env);
+int					scop_obj_usemtl(t_obj_read *obj, t_env *env);
+int					scop_obj_f(t_obj_read *obj, t_env *env);
 /*
 ** MTL FILE PARSER FUNCTIONS
 */
 int					scop_read_mtl_files(t_obj_read *reader, t_env *env);
 int					scop_read_mtl_parsing(FILE* stream, t_env *env);
 int					scop_read_mtl_cases(t_obj_read *reader, t_env *env);
-int					scop_mtl_newmtl(t_obj_read *mt, t_env *env);
-int					scop_mtl_kd(t_obj_read *mt, t_env *env);
-int					scop_mtl_ka(t_obj_read *mt, t_env *env);
-int					scop_mtl_ks(t_obj_read *mt, t_env *env);
-int					scop_mtl_ns(t_obj_read *mt, t_env *env);
-int					scop_mtl_map_kd(t_obj_read *mt, t_env *env);
+int					scop_mtl_newmtl(t_obj_read *mtl, t_env *env);
+int					scop_mtl_kd(t_obj_read *mtl, t_env *env);
+int					scop_mtl_ka(t_obj_read *mtl, t_env *env);
+int					scop_mtl_ks(t_obj_read *mtl, t_env *env);
+int					scop_mtl_ns(t_obj_read *mtl, t_env *env);
+int					scop_mtl_map_kd(t_obj_read *mtl, t_env *env);
 /*
 ** OTHER FUNCTIONS
 */

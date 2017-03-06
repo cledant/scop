@@ -6,20 +6,20 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 12:10:59 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 18:10:44 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/06 20:25:15 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static int			error_read_mtl(t_obj_read *mtl)
+static inline int		error_read_mtl(t_obj_read *mtl)
 {
 	printf("Scop : error reading .mtl file at line %ld\n", mtl->curr_line_nb);
 	free(mtl->cpy_line);
 	return (0);
 }
 
-static void			init_mtl_reader(t_obj_read *mtl)
+static inline void		init_mtl_reader(t_obj_read *mtl)
 {
 	(mtl->valid_state)[0] = 1;
 	(mtl->valid_state)[1] = 0;
