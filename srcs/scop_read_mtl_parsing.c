@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 12:10:59 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 20:25:15 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/07 11:19:25 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static inline void		init_mtl_reader(t_obj_read *mtl)
 	mtl->l_size = 0;
 	mtl->counter = 0;
 	mtl->ret = 0;
-	mtl->curr_line_nb = 0;
+	mtl->curr_line_nb = 1;
 }
 
 int					scop_read_mtl_parsing(FILE *stream, t_env *env)
@@ -43,6 +43,7 @@ int					scop_read_mtl_parsing(FILE *stream, t_env *env)
 	init_mtl_reader(&mtl);
 	while (getline(&(mtl.line), &(mtl.l_size), stream) != -1)
 	{
+		scop_delete_return_line(mtl.line);
 		mtl.cpy_line = mtl.line;
 		while (strsep(&(mtl.line), " ") != NULL)
 			(void)value;
@@ -50,9 +51,8 @@ int					scop_read_mtl_parsing(FILE *stream, t_env *env)
 		{
 			if (mtl.valid_state[mtl.counter] == 1 &&
 					strcmp(value[mtl.counter], mtl.cpy_line) == 0)
-				mtl.ret = scop_read_mtl_cases(&mtl, env);
-			if (mtl.ret == 0)
-				return (error_read_mtl(&mtl));
+				if ((mtl.ret = scop_read_mtl_cases(&mtl, env)) == 0)
+					return (error_read_mtl(&mtl));
 			(mtl.counter)++;
 		}
 		mtl.counter = 0;

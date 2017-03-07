@@ -6,7 +6,7 @@
 #    By: cledant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 10:40:13 by cledant           #+#    #+#              #
-#    Updated: 2017/03/07 09:55:29 by cledant          ###   ########.fr        #
+#    Updated: 2017/03/07 11:15:14 by cledant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRCS_NAME = scop_init.c scop_glfw_close_callback.c scop_glfw_error_callback.c \
 			scop_mtl_newmtl.c scop_mtl_map_kd.c scop_mtl_ns.c \
 			scop_math_is_valid_float.c scop_mtl_kd.c scop_mtl_ka.c scop_mtl_ks.c \
 			scop_obj_v.c scop_obj_vn.c scop_obj_vt.c scop_obj_g.c scop_obj_usemtl.c \
-			scop_init_vao.c scop_obj_f.c
+			scop_init_vao.c scop_obj_f.c scop_delete_return_line.c
 
 INCLUDES = ./includes
 

@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 15:06:36 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 18:15:40 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/07 11:17:18 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static inline void		init_reader(t_obj_read *reader)
 	reader->l_size = 0;
 	reader->counter = 0;
 	reader->ret = 0;
-	reader->curr_line_nb = 0;
+	reader->curr_line_nb = 1;
 }
 
 static inline int		error_read(t_obj_read *reader)
@@ -53,6 +53,7 @@ static inline int		read_file(FILE *stream, t_env *env)
 	init_reader(&reader);
 	while (getline(&(reader.line), &(reader.l_size), stream) != -1)
 	{
+		scop_delete_return_line(reader.line);
 		reader.cpy_line = reader.line;
 		while (strsep(&(reader.line), " ") != NULL)
 			(void)value;
@@ -60,9 +61,8 @@ static inline int		read_file(FILE *stream, t_env *env)
 		{
 			if (reader.valid_state[reader.counter] == 1 &&
 					strcmp(value[reader.counter], reader.cpy_line) == 0)
-				reader.ret = scop_read_obj_cases(&reader, env);
-			if (reader.ret == 0)
-				return (error_read(&reader));
+				if ((reader.ret = scop_read_obj_cases(&reader, env)) == 0)
+					return (error_read(&reader));
 			(reader.counter)++;
 		}
 		reader.counter = 0;

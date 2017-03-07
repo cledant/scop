@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/07 09:46:11 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/07 11:17:25 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,6 +305,7 @@ int					scop_mtl_map_kd(t_obj_read *mtl, t_env *env);
 int					scop_exit(t_env *env);
 void				*scop_get_env(void *addr);
 int					scop_gl_init_uniforms(t_env *env);
+void				scop_delete_return_line(char *str);
 /*
 ** UPDATE FROM INPUTS FUNCTIONS
 */
