@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 18:31:16 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/07 09:46:11 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define MAX_VAO 128
 # define MAX_MAT 128
 
-# define PRE_ALLOC 128
+# define PRE_ALLOC 512
 
 typedef GLfloat		t_mat4[4][4];
 
@@ -68,6 +68,7 @@ typedef struct		s_vao
 	t_face			*face_array;
 	GLuint			gl_face_array;
 	size_t			nb_face;
+	size_t			max_face;
 	size_t			mat_id;
 }					t_vao;
 
@@ -274,6 +275,7 @@ void				scop_init_env_light(t_env *env);
 void				scop_init_env_input(t_env *env);
 void				scop_init_env_camera(t_env *env);
 void				scop_init_env_matrix(t_env *env);
+int					scop_init_vao(t_env *env, size_t id);
 /*
 ** OBJ FILE PARSER FUNCTIONS
 */

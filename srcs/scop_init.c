@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/05 18:48:47 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/07 09:27:08 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,8 @@ int						main(int argc, char **argv)
 	if (scop_gl_init_uniforms(&env) == 0)
 		return (scop_exit(&env));
 	if (scop_gl_init_first_mat(&env) == 0)
+		return (scop_exit(&env));
+	if (scop_init_vao(&env, 0) == 0)
 		return (scop_exit(&env));
 	if (scop_read_obj_files(&env, argv[1]) == 0)
 		return (scop_exit(&env));
