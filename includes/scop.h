@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/07 12:24:32 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/07 17:34:10 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct		s_obj
 	size_t			nb_mat;
 	t_vao			vao[MAX_VAO];
 	size_t			nb_vao;
+	size_t			nb_obj;
 }					t_obj;
 
 typedef struct		s_win
@@ -203,7 +204,7 @@ typedef struct		s_obj_read
 	char			*line;
 	char			*cpy_line;
 	size_t			l_size;
-	int				valid_state[7];
+	int				valid_state[8];
 	size_t			counter;
 	size_t			ret;
 	size_t			curr_line_nb;
@@ -288,6 +289,7 @@ int					scop_obj_vn(t_obj_read *obj, t_env *env);
 int					scop_obj_g(t_obj_read *obj, t_env *env);
 int					scop_obj_usemtl(t_obj_read *obj, t_env *env);
 int					scop_obj_f(t_obj_read *obj, t_env *env);
+int					scop_obj_o(t_obj_read *obj, t_env *env);
 /*
 ** MTL FILE PARSER FUNCTIONS
 */

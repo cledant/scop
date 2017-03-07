@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 15:06:36 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/07 11:17:18 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/07 17:49:53 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static inline void		init_reader(t_obj_read *reader)
 	(reader->valid_state)[4] = 0;
 	(reader->valid_state)[5] = 0;
 	(reader->valid_state)[6] = 0;
+	(reader->valid_state)[7] = 1;
 	reader->line = NULL;
 	reader->cpy_line = NULL;
 	reader->l_size = 0;
@@ -45,29 +46,28 @@ static inline int		error_read(t_obj_read *reader)
 	return (0);
 }
 
-static inline int		read_file(FILE *stream, t_env *env)
+static inline int		read_file(FILE *stream, t_env *env, t_obj_read *reader)
 {
-	static char	value[7][16] = {"mtllib", "v", "vt", "vn", "g", "usemtl", "f"};
-	t_obj_read	reader;
+	static char	value[8][16] = {"mtllib", "v", "vt", "vn", "g", "usemtl", "f",
+									"o"};
 
-	init_reader(&reader);
-	while (getline(&(reader.line), &(reader.l_size), stream) != -1)
+	while (getline(&(reader->line), &(reader->l_size), stream) != -1)
 	{
-		scop_delete_return_line(reader.line);
-		reader.cpy_line = reader.line;
-		while (strsep(&(reader.line), " ") != NULL)
+		scop_delete_return_line(reader->line);
+		reader->cpy_line = reader->line;
+		while (strsep(&(reader->line), " ") != NULL)
 			(void)value;
-		while (reader.counter < 7 && *(reader.cpy_line) != '\0')
+		while (reader->counter < 7 && *(reader->cpy_line) != '\0')
 		{
-			if (reader.valid_state[reader.counter] == 1 &&
-					strcmp(value[reader.counter], reader.cpy_line) == 0)
-				if ((reader.ret = scop_read_obj_cases(&reader, env)) == 0)
-					return (error_read(&reader));
-			(reader.counter)++;
+			if (reader->valid_state[reader->counter] == 1 &&
+					strcmp(value[reader->counter], reader->cpy_line) == 0)
+				if ((reader->ret = scop_read_obj_cases(reader, env)) == 0)
+					return (error_read(reader));
+			(reader->counter)++;
 		}
-		reader.counter = 0;
-		free(reader.cpy_line);
-		(reader.curr_line_nb)++;
+		reader->counter = 0;
+		free(reader->cpy_line);
+		(reader->curr_line_nb)++;
 	}
 	if (feof(stream) != 0)
 		return (1);
@@ -77,6 +77,7 @@ static inline int		read_file(FILE *stream, t_env *env)
 int						scop_read_obj_files(t_env *env, const char *path)
 {
 	FILE	*stream;
+	t_obj_read	reader;
 
 	if ((stream = fopen(path, "r")) == NULL)
 		return (error_obj(path, stream));
@@ -90,7 +91,8 @@ int						scop_read_obj_files(t_env *env, const char *path)
 	if ((env->obj.v_tex = (t_vec2 *)malloc(sizeof(t_vec2) * PRE_ALLOC)) == NULL)
 		return (error_obj(path, stream));
 	env->obj.max_tex = PRE_ALLOC;
-	if (read_file(stream, env) == 0)
+	init_reader(&reader);
+	if (read_file(stream, env, &reader) == 0)
 		return (error_obj(path, stream));
 	fclose(stream);
 	return (1);

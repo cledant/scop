@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 19:28:16 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 20:21:13 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/07 17:47:56 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static inline int	read_third_component(const char *begin_ptr, t_obj_read *obj,
 	(obj->valid_state[5]) = 1;
 	(obj->valid_state[6]) = 1;
 	(env->obj.nb_pos)++;
+	(env->obj.nb_obj) = 1;
 	return (1);
 }
 
