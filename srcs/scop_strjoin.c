@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop_mtl_map_kd.c                                  :+:      :+:    :+:   */
+/*   scop_strjoin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/06 15:07:16 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/07 13:09:39 by cledant          ###   ########.fr       */
+/*   Created: 2017/03/07 12:24:40 by cledant           #+#    #+#             */
+/*   Updated: 2017/03/07 13:05:11 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-int		scop_mtl_map_kd(t_obj_read *mtl, t_env *env)
+char	*scop_strjoin(const char *s1, const char *s2)
 {
-	if (mtl->l_size < 7 || *(mtl->cpy_line + 7) == '\0')
-		return (0);
-	if ((env->obj.mat[env->obj.nb_mat - 1].diff_tex_path =
-			scop_strjoin(env->folder, mtl->cpy_line + 7)) == NULL)
-		return (0);
-	(mtl->valid_state[5]) = 0;
-	return (1);
+	size_t		len;
+	char		*ret;
+
+	len = strlen(s1) + strlen(s2);
+	if ((ret = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
+		return (NULL);
+	memset(ret, 0, len + 1);
+	strcat(ret, s1);
+	strcat(ret, s2);
+	return (ret);
 }

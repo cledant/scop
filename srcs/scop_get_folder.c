@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop_mtl_map_kd.c                                  :+:      :+:    :+:   */
+/*   scop_get_folder.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/06 15:07:16 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/07 13:09:39 by cledant          ###   ########.fr       */
+/*   Created: 2017/03/07 11:31:00 by cledant           #+#    #+#             */
+/*   Updated: 2017/03/07 12:08:28 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-int		scop_mtl_map_kd(t_obj_read *mtl, t_env *env)
+char	*scop_get_folder(const char *arg)
 {
-	if (mtl->l_size < 7 || *(mtl->cpy_line + 7) == '\0')
-		return (0);
-	if ((env->obj.mat[env->obj.nb_mat - 1].diff_tex_path =
-			scop_strjoin(env->folder, mtl->cpy_line + 7)) == NULL)
-		return (0);
-	(mtl->valid_state[5]) = 0;
-	return (1);
+	char	*last_sep;
+	char	*ret;
+	size_t	len;
+
+	ret = NULL;
+	if ((last_sep = strrchr(arg, '/')) != NULL)
+	{
+		len = last_sep - arg + 1;
+		if ((ret = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
+			return (NULL);
+		strncpy(ret, arg, len);
+		ret[len] = '\0';
+	}
+	else
+	{
+		if ((ret = strdup("./")) == NULL)
+			return (NULL);
+	}
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/07 11:17:25 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/07 12:24:32 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ typedef struct		s_env
 	t_input			input;
 	t_camera		cam;
 	t_matrix		matrix;
+	char			*folder;
 }					t_env;
 
 typedef struct		s_tga_header
@@ -306,6 +307,8 @@ int					scop_exit(t_env *env);
 void				*scop_get_env(void *addr);
 int					scop_gl_init_uniforms(t_env *env);
 void				scop_delete_return_line(char *str);
+char				*scop_get_folder(const char *arg);
+char				*scop_strjoin(const char *s1, const char *s2);
 /*
 ** UPDATE FROM INPUTS FUNCTIONS
 */

@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/07 09:27:08 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/07 12:14:02 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,8 @@ int						main(int argc, char **argv)
 	scop_get_env(&env);
 	glfwSetErrorCallback(scop_glfw_error_callback);
 	scop_init_env(&env);
+	if ((env.folder = scop_get_folder(argv[1])) == NULL)
+		return (scop_exit(&env));
 	if (scop_glfw_init(&env) == 0)
 		return (scop_exit(&env));
 	if (scop_gl_init_shaders(&env) == 0)
