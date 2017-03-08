@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 15:06:36 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/07 17:49:53 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/08 14:43:02 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ int						scop_read_obj_files(t_env *env, const char *path)
 	if ((env->obj.v_tex = (t_vec2 *)malloc(sizeof(t_vec2) * PRE_ALLOC)) == NULL)
 		return (error_obj(path, stream));
 	env->obj.max_tex = PRE_ALLOC;
+	if ((env->obj.poly = (t_poly *)malloc(sizeof(t_poly) * PRE_ALLOC)) == NULL)
+		return (error_obj(path, stream));
+	env->obj.max_poly = PRE_ALLOC;
 	init_reader(&reader);
 	if (read_file(stream, env, &reader) == 0)
 		return (error_obj(path, stream));

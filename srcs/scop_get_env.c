@@ -6,13 +6,13 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:49:21 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/05 14:40:51 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/08 16:28:39 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	*scop_get_env(void *addr)
+void	*scop_get_env(const void *addr)
 {
 	static t_env	*env = NULL;
 	static int		safety = 0;

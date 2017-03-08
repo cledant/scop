@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/08 13:07:23 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/08 17:19:49 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,13 @@ typedef struct		s_mat
 	GLuint			gl_tex;
 }					t_mat;
 
+typedef struct		s_poly
+{
+	long			vertex;
+	long			tex;
+	long			norm;
+}					t_poly;
+
 typedef struct		s_obj
 {
 	t_vec3			*v_pos;
@@ -104,6 +111,9 @@ typedef struct		s_obj
 	t_vao			vao[MAX_VAO];
 	size_t			nb_vao;
 	size_t			nb_obj;
+	t_poly			*poly;
+	size_t			nb_v_poly;
+	size_t			max_v_poly;
 }					t_obj;
 
 typedef struct		s_win
@@ -278,7 +288,7 @@ void				scop_init_env_light(t_env *env);
 void				scop_init_env_input(t_env *env);
 void				scop_init_env_camera(t_env *env);
 void				scop_init_env_matrix(t_env *env);
-int					scop_init_vao(t_env *env, size_t id);
+int					scop_init_vao(t_env *env, const size_t id);
 /*
 ** OBJ FILE PARSER FUNCTIONS
 */
@@ -291,6 +301,21 @@ int					scop_obj_g(t_obj_read *obj, t_env *env);
 int					scop_obj_usemtl(t_obj_read *obj, t_env *env);
 int					scop_obj_f(t_obj_read *obj, t_env *env);
 int					scop_obj_o(t_obj_read *obj, t_env *env);
+int					scop_determine_face_type(const char *str);
+int					scop_det_face_type_1(const char *str, const size_t cur_pos,
+						const size_t size);
+int					scop_det_face_type_2(const char *str, const size_t cur_pos,
+						const size_t size);
+int					scop_det_face_type_3(const char *str, const size_t cur_pos,
+						const size_t size);
+int					scop_det_face_type_4(const char *str, const size_t cur_pos,
+						const size_t size);
+int					scop_det_face_type_5(const char *str, const size_t cur_pos,
+						const size_t size);
+int					scop_det_face_type_6(const char *str, const size_t cur_pos,
+						const size_t size);
+int					scop_det_face_type_7(const char *str, const size_t cur_pos,
+						const size_t size);
 /*
 ** MTL FILE PARSER FUNCTIONS
 */
@@ -307,7 +332,7 @@ int					scop_mtl_map_kd(t_obj_read *mtl, t_env *env);
 ** OTHER FUNCTIONS
 */
 int					scop_exit(t_env *env);
-void				*scop_get_env(void *addr);
+void				*scop_get_env(const void *addr);
 int					scop_gl_init_uniforms(t_env *env);
 void				scop_delete_return_line(char *str);
 char				*scop_get_folder(const char *arg);

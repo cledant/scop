@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 12:58:39 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/05 14:42:26 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/08 16:50:37 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char				*read_shader_file(const char *path)
 		return (fail_read(shader_code, stream));
 	if ((size = ftell(stream)) == -1)
 		return (fail_read(shader_code, stream));
-	if ((shader_code = (char *)malloc(sizeof(char) * size + 1)) == NULL)
+	if ((shader_code = (char *)malloc(sizeof(char) * (size + 1))) == NULL)
 		return (fail_read(shader_code, stream));
 	if (fseek(stream, 0, SEEK_SET) == -1)
 		return (fail_read(shader_code, stream));
