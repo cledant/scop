@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/07 17:34:10 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/08 13:07:23 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/errno.h>
 # include "glfw3.h"
 
 # define PRESSED 1
