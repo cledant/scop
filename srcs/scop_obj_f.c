@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 09:53:41 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/09 10:32:09 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/09 16:53:59 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 int		scop_obj_f(t_obj_read *obj, t_env *env)
 {
 	static int	expected_type = 0;
-	static int	(*fct[4])(t_obj_read *, t_env *, int) = {scop_obj_face_v,
-			scop_obj_face_v_vt, scop_obj_face_v_vt_vn, scop_obj_face_v_vn};
+	static int	(*fct[1])(t_obj_read *, t_env *, int) = {scop_obj_face_v};
+/*	static int	(*fct[4])(t_obj_read *, t_env *, int) = {scop_obj_face_v,
+			scop_obj_face_v_vt, scop_obj_face_v_vt_vn, scop_obj_face_v_vn};*/
 	int			type;
 
 	if (expected_type == 0)
@@ -30,6 +31,8 @@ int		scop_obj_f(t_obj_read *obj, t_env *env)
 		type = 2;
 	else if (expected_type == 7)
 		type = 3;
+	else
+		return (0);
 	obj->valid_state[0] = 0;
 	obj->valid_state[1] = 0;
 	obj->valid_state[2] = 0;

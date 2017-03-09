@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/09 12:44:37 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/09 16:55:24 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,7 +304,7 @@ int					scop_obj_g(t_obj_read *obj, t_env *env);
 int					scop_obj_usemtl(t_obj_read *obj, t_env *env);
 int					scop_obj_f(t_obj_read *obj, t_env *env);
 int					scop_obj_o(t_obj_read *obj, t_env *env);
-int					scop_determine_face_type(const char *str);
+int					scop_determine_face_type(t_obj_read *obj);
 int					scop_det_face_type_1(const char *str, const size_t cur_pos,
 						const size_t size);
 int					scop_det_face_type_2(const char *str, const size_t cur_pos,
@@ -353,7 +353,7 @@ int					scop_mtl_map_kd(t_obj_read *mtl, t_env *env);
 ** OTHER FUNCTIONS
 */
 int					scop_exit(t_env *env);
-void				*scop_get_env(const void *addr);
+void				*scop_get_env(void *addr);
 int					scop_gl_init_uniforms(t_env *env);
 void				scop_delete_return_line(char *str);
 char				*scop_get_folder(const char *arg);

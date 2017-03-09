@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 15:51:37 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/08 17:21:47 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/09 16:56:11 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		scop_determine_face_type(t_obj_read *obj)
 	counter = 0;
 	while (counter < 7)
 	{
-		if ((*fct[counter])(env->cpy_obj + 2, 2, env->l_size) == 1)
+		if ((*fct[counter])(obj->cpy_line + 2, 2, obj->l_size) == 1)
 			return (counter + 1);
 		counter++;
 	}

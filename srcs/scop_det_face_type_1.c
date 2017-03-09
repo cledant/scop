@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 15:59:09 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/08 17:48:52 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/09 16:56:59 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		scop_det_face_type_1(const char *str, const size_t cur_pos,
 	char			*end;
 
 	errno = 0;
-	begin = str;
+	begin = (char *)str;
 	(void)size;
 	(void)cur_pos;
 	dummy = strtol(begin, &end, 10);
