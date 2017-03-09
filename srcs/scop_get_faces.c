@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop_obj_face_v.c                                  :+:      :+:    :+:   */
+/*   scop_get_faces.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 10:25:46 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/09 17:28:43 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/09 18:57:59 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static int		enlarge_array(t_env *env)
 	return (1);
 }
 
-int				scop_obj_face_v(t_obj_read *obj, t_env *env,
-					const int expected_type)
+int				scop_get_faces(t_obj_read *obj, t_env *env,
+					const int expected_type, const int group_type)
 {
 	size_t		cur_pos;
 	char		*begin;
@@ -43,8 +43,8 @@ int				scop_obj_face_v(t_obj_read *obj, t_env *env,
 			break ;
 		begin++;
 	}
-//	if (scop_convert_glpoint_to_vao(env, expected_type) == 0)
-//		return (0);
+	if (scop_convert_glpoint_to_vao(env, group_type) == 0)
+		return (0);
 	env->obj.nb_glpoint = 0;
 	return (1);
 }

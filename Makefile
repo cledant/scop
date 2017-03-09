@@ -6,7 +6,7 @@
 #    By: cledant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 10:40:13 by cledant           #+#    #+#              #
-#    Updated: 2017/03/09 17:28:10 by cledant          ###   ########.fr        #
+#    Updated: 2017/03/09 17:57:18 by cledant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,12 +46,13 @@ SRCS_NAME = scop_init.c scop_glfw_close_callback.c scop_glfw_error_callback.c \
 			scop_obj_v.c scop_obj_vn.c scop_obj_vt.c scop_obj_g.c scop_obj_usemtl.c \
 			scop_init_vao.c scop_obj_f.c scop_delete_return_line.c \
 			scop_get_folder.c scop_strjoin.c scop_obj_o.c \
-			scop_determine_face_type.c scop_det_face_type_1.c scop_det_face_type_2.c \
-			scop_det_face_type_3.c scop_det_face_type_4.c scop_det_face_type_5.c \
-			scop_det_face_type_6.c scop_det_face_type_7.c scop_obj_face_v.c \
-			scop_get_glpoint.c scop_get_face_type_1.c scop_get_face_type_2.c \
-			scop_get_face_type_3.c scop_get_face_type_4.c scop_get_face_type_5.c \
-			scop_get_face_type_6.c scop_get_face_type_7.c
+			scop_determine_face_type.c scop_det_face_type_1.c \
+			scop_det_face_type_2.c scop_det_face_type_3.c scop_det_face_type_4.c \
+			scop_det_face_type_5.c scop_det_face_type_6.c scop_det_face_type_7.c \
+			scop_get_faces.c scop_get_glpoint.c scop_get_face_type_1.c \
+			scop_get_face_type_2.c scop_get_face_type_3.c scop_get_face_type_4.c \
+			scop_get_face_type_5.c scop_get_face_type_6.c scop_get_face_type_7.c \
+			scop_cvrt_v.c
 
 INCLUDES = ./includes
 

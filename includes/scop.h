@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/09 16:55:24 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/09 18:55:46 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@
 # define BOT_RIGHT 1
 # define TOP_LEFT 2
 # define TOP_RIGHT 3
+
+# define GRP_V 0
+# define GRP_V_VT 1
+# define GRP_V_VT_VN 2
+# define GRP_V_VN 3
 
 # define MAX_VAO 128
 # define MAX_MAT 128
@@ -117,6 +122,7 @@ typedef struct		s_obj
 	t_face			*cvrt;
 	size_t			nb_cvrt;
 	size_t			max_cvrt;
+	int				group_type;
 }					t_obj;
 
 typedef struct		s_win
@@ -319,8 +325,8 @@ int					scop_det_face_type_6(const char *str, const size_t cur_pos,
 						const size_t size);
 int					scop_det_face_type_7(const char *str, const size_t cur_pos,
 						const size_t size);
-int					scop_obj_face_v(t_obj_read *obj, t_env *env,
-						const int expected_type);
+int					scop_get_faces(t_obj_read *obj, t_env *env,
+						const int expected_type, const int group_type);
 int					scop_get_glpoint(t_env *env, t_obj_read *obj, char **begin,
 						const int expected_type);
 int					scop_get_face_type_1(char **str, const size_t cur_pos,
@@ -337,6 +343,9 @@ int					scop_get_face_type_6(char **str, const size_t cur_pos,
 						const size_t size, t_glpoint *glpoint);
 int					scop_get_face_type_7(char **str, const size_t cur_pos,
 						const size_t size, t_glpoint *glpoint);
+int					scop_convert_glpoint_to_vao(t_env *env,
+						const int group_type);
+int					scop_cvrt_v(t_env *env);
 /*
 ** MTL FILE PARSER FUNCTIONS
 */
