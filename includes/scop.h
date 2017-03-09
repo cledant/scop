@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/08 17:19:49 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/09 11:47:00 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,12 @@ typedef struct		s_mat
 	GLuint			gl_tex;
 }					t_mat;
 
-typedef struct		s_poly
+typedef struct		s_glpoint
 {
 	long			vertex;
 	long			tex;
 	long			norm;
-}					t_poly;
+}					t_glpoint;
 
 typedef struct		s_obj
 {
@@ -111,9 +111,12 @@ typedef struct		s_obj
 	t_vao			vao[MAX_VAO];
 	size_t			nb_vao;
 	size_t			nb_obj;
-	t_poly			*poly;
-	size_t			nb_v_poly;
-	size_t			max_v_poly;
+	t_glpoint		*glpoint;
+	size_t			nb_glpoint;
+	size_t			max_glpoint;
+	t_face			*cvrt;
+	size_t			nb_cvrt;
+	size_t			max_cvrt;
 }					t_obj;
 
 typedef struct		s_win
@@ -316,6 +319,8 @@ int					scop_det_face_type_6(const char *str, const size_t cur_pos,
 						const size_t size);
 int					scop_det_face_type_7(const char *str, const size_t cur_pos,
 						const size_t size);
+int					scop_obj_face_v(t_obj_read *obj, t_env *env,
+						int expected_type);
 /*
 ** MTL FILE PARSER FUNCTIONS
 */
