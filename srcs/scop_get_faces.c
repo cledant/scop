@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 10:25:46 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/09 18:57:59 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/09 22:03:55 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int				scop_get_faces(t_obj_read *obj, t_env *env,
 	}
 	if (scop_convert_glpoint_to_vao(env, group_type) == 0)
 		return (0);
+	//faire fct de cpy de cvrt vers vao
 	env->obj.nb_glpoint = 0;
+	env->obj.nb_cvrt = 0;
 	return (1);
 }
