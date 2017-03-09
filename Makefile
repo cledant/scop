@@ -6,7 +6,7 @@
 #    By: cledant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 10:40:13 by cledant           #+#    #+#              #
-#    Updated: 2017/03/08 19:08:01 by cledant          ###   ########.fr        #
+#    Updated: 2017/03/09 12:45:52 by cledant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,10 @@ SRCS_NAME = scop_init.c scop_glfw_close_callback.c scop_glfw_error_callback.c \
 			scop_get_folder.c scop_strjoin.c scop_obj_o.c \
 			scop_determine_face_type.c scop_det_face_type_1.c scop_det_face_type_2.c \
 			scop_det_face_type_3.c scop_det_face_type_4.c scop_det_face_type_5.c \
-			scop_det_face_type_6.c scop_det_face_type_7.c
+			scop_det_face_type_6.c scop_det_face_type_7.c scop_obj_face_v.c \
+			scop_get_glpoint.c scop_get_face_type_1.c scop_get_face_type_2.c \
+			scop_get_face_type_3.c scop_get_face_type_4.c scop_get_face_type_5.c \
+			scop_get_face_type_6.c scop_get_face_type_7.c
 
 INCLUDES = ./includes
 

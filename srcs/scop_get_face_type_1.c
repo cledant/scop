@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop_det_face_type_2.c                             :+:      :+:    :+:   */
+/*   scop_get_face_type_1.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/08 15:59:09 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/09 13:04:03 by cledant          ###   ########.fr       */
+/*   Created: 2017/03/09 12:46:47 by cledant           #+#    #+#             */
+/*   Updated: 2017/03/09 13:06:35 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-int		scop_det_face_type_2(const char *str, const size_t cur_pos,
-			const size_t size)
+int		scop_get_face_type_1(char **str, const size_t cur_pos,
+			const size_t size, t_glpoint *glpoint)
 {
 	extern int		errno;
-	long			dummy;
-	char			*begin;
 	char			*end;
-	size_t			new_pos;
 
 	errno = 0;
-	begin = str;
-	dummy = strtol(begin, &end, 10);
-	if (errno == EINVAL || errno == ERANGE || dummy <= 0)
+	(void)size;
+	(void)cur_pos;
+	point->vertex = strtol(*str, &end, 10);
+	point->tex = 0;
+	point->norm = 0;
+	if (errno == EINVAL || errno == ERANGE || point->vertex <= 0)
 		return (0);
-	new_pos = end - str + 1 + cur_pos;
-	if (end == '\0' || (new_pos + 1) > size)
-		return (0);
-	if (*end == '/' && *(end + 1) == '\0')
+	if (end == '\0')
+	{
+		*str = end;
 		return (1);
+	}
 	return (0);
 }

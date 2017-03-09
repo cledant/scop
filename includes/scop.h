@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/09 11:47:00 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/09 12:44:37 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,7 +320,23 @@ int					scop_det_face_type_6(const char *str, const size_t cur_pos,
 int					scop_det_face_type_7(const char *str, const size_t cur_pos,
 						const size_t size);
 int					scop_obj_face_v(t_obj_read *obj, t_env *env,
-						int expected_type);
+						const int expected_type);
+int					scop_get_glpoint(t_env *env, t_obj_read *obj, char **begin,
+						const int expected_type);
+int					scop_get_face_type_1(char **str, const size_t cur_pos,
+						const size_t size, t_glpoint *glpoint);
+int					scop_get_face_type_2(char **str, const size_t cur_pos,
+						const size_t size, t_glpoint *glpoint);
+int					scop_get_face_type_3(char **str, const size_t cur_pos,
+						const size_t size, t_glpoint *glpoint);
+int					scop_get_face_type_4(char **str, const size_t cur_pos,
+						const size_t size, t_glpoint *glpoint);
+int					scop_get_face_type_5(char **str, const size_t cur_pos,
+						const size_t size, t_glpoint *glpoint);
+int					scop_get_face_type_6(char **str, const size_t cur_pos,
+						const size_t size, t_glpoint *glpoint);
+int					scop_get_face_type_7(char **str, const size_t cur_pos,
+						const size_t size, t_glpoint *glpoint);
 /*
 ** MTL FILE PARSER FUNCTIONS
 */
