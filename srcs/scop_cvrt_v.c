@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:56:12 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 10:45:05 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/10 16:28:02 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static inline int		subroutine_cvrt(size_t where, t_env *env)
 {
 	if (scop_cvrt_seek_vertex(env, where) == 0)
 		return (0);
-	(env->obj.nb_cvrt)++;
 	return (1);
 }
 

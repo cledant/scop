@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 21:54:53 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 10:59:22 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/10 16:25:34 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int		scop_cvrt_seek_vertex(t_env *env, size_t where)
 		return (0);
 	index = env->obj.glpoint[where].vertex - 1;
 	env->obj.cvrt[env->obj.nb_cvrt].pos.x = env->obj.v_pos[index].x;
+	env->obj.cvrt[env->obj.nb_cvrt].pos.y = env->obj.v_pos[index].y;
+	env->obj.cvrt[env->obj.nb_cvrt].pos.z = env->obj.v_pos[index].z;
 	(env->obj.nb_cvrt)++;
 	return (1);
 }

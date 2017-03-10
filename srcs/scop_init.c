@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 14:06:49 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/10 16:34:35 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,10 @@ void	scop_test_vertex_init(t_env	*env)
 void	print_parsing(t_env *env)
 {
 	size_t	counter;
+	size_t	c_vao;
 
 	counter = 0;
+	c_vao = 0;
 	printf("===Parsing dump===\n");
 	while (counter < env->obj.nb_pos)
 	{
@@ -122,6 +124,24 @@ void	print_parsing(t_env *env)
 		counter++;
 	}
 	counter = 0;
+	while (c_vao < env->obj.nb_vao)
+	{
+		printf("VAO number %ld\n", c_vao);
+		while (counter < env->obj.vao[c_vao].nb_face)
+		{
+			printf("Tex : %f, %f, %f, %f, %f, %f, %f, %f\n",
+				env->obj.vao[c_vao].face_array[counter].pos.x,
+				env->obj.vao[c_vao].face_array[counter].pos.y,
+				env->obj.vao[c_vao].face_array[counter].pos.z,
+				env->obj.vao[c_vao].face_array[counter].norm.x,
+				env->obj.vao[c_vao].face_array[counter].norm.y,
+				env->obj.vao[c_vao].face_array[counter].norm.z,
+				env->obj.vao[c_vao].face_array[counter].tex.x,
+				env->obj.vao[c_vao].face_array[counter].tex.y);
+			counter++;
+		}
+		c_vao++;
+	}
 }
 
 void	debug_state(void)
@@ -157,6 +177,7 @@ void	scop_main(t_env *env)
 	glEnable(GL_DEPTH_TEST);
 	glViewport(0, 0, env->win.win_w, env->win.win_h);
 	//Note secondaire : Calculer barycentrei de l obj + translater orig + ... + retour au centre ?
+	//Should check if there is something in vao 0 to draw and then exit or not
 	print_parsing(env);
 	while (!glfwWindowShouldClose(env->win.win))
 	{
