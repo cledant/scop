@@ -6,13 +6,13 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 10:21:44 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 10:31:59 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/10 11:03:29 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	scop_create_triangle_tex(t_env *env, const size_t index)
+int		scop_create_triangle_tex(t_env *env, const size_t index)
 {
 	static int		type = 0;
 

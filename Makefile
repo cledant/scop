@@ -6,7 +6,7 @@
 #    By: cledant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 10:40:13 by cledant           #+#    #+#              #
-#    Updated: 2017/03/10 10:45:29 by cledant          ###   ########.fr        #
+#    Updated: 2017/03/10 11:03:54 by cledant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRCS_NAME = scop_init.c scop_glfw_close_callback.c scop_glfw_error_callback.c \
 			scop_get_face_type_2.c scop_get_face_type_3.c scop_get_face_type_4.c \
 			scop_get_face_type_5.c scop_get_face_type_6.c scop_get_face_type_7.c \
 			scop_cvrt_v.c scop_cvrt_seek_vertex.c scop_create_triangle_normal.c \
+			scop_create_triangle_tex.c scop_convert_glpoint_to_vao.c \
 			scop_cpy_cvrt_to_cur_vao.c
 
 INCLUDES = ./includes
