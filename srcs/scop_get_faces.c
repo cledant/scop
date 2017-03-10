@@ -6,13 +6,13 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 10:25:46 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/09 22:03:55 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/10 10:45:07 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static int		enlarge_array(t_env *env)
+static inline int		enlarge_array(t_env *env)
 {
 	if ((env->obj.glpoint = (t_glpoint *)reallocf(env->obj.glpoint,
 			sizeof(t_glpoint) * (env->obj.max_glpoint + PRE_ALLOC))) == NULL)
@@ -21,8 +21,8 @@ static int		enlarge_array(t_env *env)
 	return (1);
 }
 
-int				scop_get_faces(t_obj_read *obj, t_env *env,
-					const int expected_type, const int group_type)
+int						scop_get_faces(t_obj_read *obj, t_env *env,
+							const int expected_type, const int group_type)
 {
 	size_t		cur_pos;
 	char		*begin;
@@ -45,8 +45,7 @@ int				scop_get_faces(t_obj_read *obj, t_env *env,
 	}
 	if (scop_convert_glpoint_to_vao(env, group_type) == 0)
 		return (0);
-	//faire fct de cpy de cvrt vers vao
-	env->obj.nb_glpoint = 0;
-	env->obj.nb_cvrt = 0;
+	if (scop_cpy_cvrt_to_cur_vao(env) == 0)
+		return (0);
 	return (1);
 }

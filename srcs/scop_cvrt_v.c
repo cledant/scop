@@ -6,39 +6,42 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:56:12 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/09 22:03:57 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/10 10:45:05 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static int		subroutine_cvrt(size_t where, t_env *env)
+static inline int		subroutine_cvrt(size_t where, t_env *env)
 {
-	if (scop_cvrt_seek_vertex(env->obj.glpoint[where],
-			env->obj.cvrt[env->obj.nb_cvrt], &(env->obj)) == 0) // verif
+	if (scop_cvrt_seek_vertex(env, where) == 0)
 		return (0);
 	(env->obj.nb_cvrt)++;
 	return (1);
 }
 
-int				scop_cvrt_v(t_env *env)
+int						scop_cvrt_v(t_env *env)
 {
 	size_t	counter;
+	size_t	index;
 
 	counter = 0;
 	while (counter < env->obj.nb_glpoint - 2)
 	{
+		index = env->obj.nb_cvrt;
 		if (env->obj.nb_cvrt + 3 >= env->obj.max_cvrt)
-			//faire cas de realloc a faire ici
+			if ((env->obj.cvrt = reallocf(env->obj.cvrt, sizeof(t_face) *
+					(PRE_ALLOC + env->obj.max_cvrt))) == NULL)
+				return (0);
 		if (subroutine_cvrt(0, env) == 0)
 			return (0);
 		if (subroutine_cvrt(counter + 1, env) == 0)
 			return (0);
 		if (subroutine_cvrt(counter + 2, env) == 0)
 			return (0);
-		scop_create_triangle_normal(env->obj.cvrt, env->obj.nb_cvrt); //verif
+		scop_create_triangle_normal(env, index);
+		scop_create_triangle_tex(env, index);
 		counter++;
-		env->obj.nb_cvrt += 3;
 	}
 	return (1);
 }

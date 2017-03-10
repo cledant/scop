@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/09 21:29:12 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/10 10:24:03 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,9 +346,9 @@ int					scop_get_face_type_7(char **str, const size_t cur_pos,
 int					scop_convert_glpoint_to_vao(t_env *env,
 						const int group_type);
 int					scop_cvrt_v(t_env *env);
-int					scop_crvt_seek_vertex(const t_glpoint *glpoint,
-						t_face *face, t_obj *obj);
-int					scop_create_triangle_normal(t_face *face, const size_t pos);
+int					scop_crvt_seek_vertex(t_env *env);
+int					scop_create_triangle_normal(t_env env, const size_t index);
+int					scop_create_triangle_tex(t_env env, const size_t index);
 /*
 ** MTL FILE PARSER FUNCTIONS
 */
