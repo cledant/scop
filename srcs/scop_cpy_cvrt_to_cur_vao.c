@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 10:42:11 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 16:48:44 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/10 19:28:48 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ int		scop_cpy_cvrt_to_cur_vao(t_env *env)
 
 	if (env->obj.vao[env->obj.nb_vao - 1].nb_face + env->obj.nb_cvrt >=
 			env->obj.vao[env->obj.nb_vao - 1].max_face)
+	{
 		if ((env->obj.vao[env->obj.nb_vao - 1].face_array =
 				(t_face *)reallocf(env->obj.vao[env->obj.nb_vao - 1].face_array,
 				sizeof(t_face) * (env->obj.vao[env->obj.nb_vao - 1].max_face +
 				PRE_ALLOC))) == NULL)
 			return (0);
+		env->obj.vao[env->obj.nb_vao - 1].max_face += PRE_ALLOC;
+	}
 	counter = 0;
 	f_index = &(env->obj.vao[env->obj.nb_vao - 1].nb_face);
 	while (counter < env->obj.nb_cvrt)

@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 17:06:52 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 17:26:46 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/10 19:21:22 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@ int						scop_cvrt_v_vt_vn(t_env *env)
 	while (counter < env->obj.nb_glpoint - 2)
 	{
 		if (env->obj.nb_cvrt + 3 >= env->obj.max_cvrt)
-			if ((env->obj.cvrt = reallocf(env->obj.cvrt, sizeof(t_face) *
-					(PRE_ALLOC + env->obj.max_cvrt))) == NULL)
+		{
+			if ((env->obj.cvrt = (t_face *)reallocf(env->obj.cvrt,
+					sizeof(t_face) * (PRE_ALLOC + env->obj.max_cvrt))) == NULL)
 				return (0);
+			env->obj.max_cvrt += PRE_ALLOC;
+		}
 		if (subroutine_cvrt(0, env) == 0)
 			return (0);
 		if (subroutine_cvrt(counter + 1, env) == 0)
