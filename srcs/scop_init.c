@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 18:46:47 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/10 20:21:09 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	print_parsing(t_env *env)
 	counter = 0;
 	c_vao = 0;
 	printf("===Parsing dump===\n");
+	printf("VAO\n");
 	while (counter < env->obj.nb_pos)
 	{
 		printf("Vertex : %f, %f, %f\n", env->obj.v_pos[counter].x,
@@ -126,7 +127,8 @@ void	print_parsing(t_env *env)
 	counter = 0;
 	while (c_vao < env->obj.nb_vao)
 	{
-		printf("VAO number %ld\n", c_vao);
+		printf("VAO number %ld | nb of triangle : %ld\n",
+			c_vao, env->obj.vao[c_vao].nb_face);
 		while (counter < env->obj.vao[c_vao].nb_face)
 		{
 			printf("Tex : %f, %f, %f, %f, %f, %f, %f, %f\n",
@@ -140,6 +142,7 @@ void	print_parsing(t_env *env)
 				env->obj.vao[c_vao].face_array[counter].tex.y);
 			counter++;
 		}
+		counter = 0;
 		c_vao++;
 	}
 	printf("===END PARSING===\n");
