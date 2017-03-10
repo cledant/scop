@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop_cvrt_v.c                                      :+:      :+:    :+:   */
+/*   scop_cvrt_v_vn.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/09 17:56:12 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 17:40:32 by cledant          ###   ########.fr       */
+/*   Created: 2017/03/10 17:26:22 by cledant           #+#    #+#             */
+/*   Updated: 2017/03/10 17:41:11 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ static inline int		subroutine_cvrt(size_t where, t_env *env)
 {
 	if (scop_cvrt_seek_vertex(env, where) == 0)
 		return (0);
+	if (scop_cvrt_seek_norm(env, where) == 0)
+		return (0);
 	(env->obj.nb_cvrt)++;
 	return (1);
 }
 
-int						scop_cvrt_v(t_env *env)
+int						scop_cvrt_v_vn(t_env *env)
 {
 	size_t	counter;
 	size_t	index;
@@ -39,7 +41,6 @@ int						scop_cvrt_v(t_env *env)
 			return (0);
 		if (subroutine_cvrt(counter + 2, env) == 0)
 			return (0);
-		scop_create_triangle_normal(env, index);
 		scop_create_triangle_tex(env, index);
 		counter++;
 	}

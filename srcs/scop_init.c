@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 16:34:35 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/10 17:56:16 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ void	print_parsing(t_env *env)
 		}
 		c_vao++;
 	}
+	printf("===END PARSING===\n");
 }
 
 void	debug_state(void)
@@ -254,7 +255,7 @@ int						main(int argc, char **argv)
 	if (scop_read_obj_files(&env, argv[1]) == 0)
 		return (scop_exit(&env));
 	glfwSetKeyCallback(env.win.win, scop_glfw_key_callback);
-	glfwSetCursorPosCallback(env.win.win, scop_glfw_mouse_pos_callback);
+//	glfwSetCursorPosCallback(env.win.win, scop_glfw_mouse_pos_callback);
 	glfwSetWindowSizeCallback(env.win.win, scop_glfw_window_size_callback);
 	scop_main(&env);
 	return (scop_exit(&env));

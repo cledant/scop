@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 13:19:02 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/10 17:21:14 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,7 +346,12 @@ int					scop_get_face_type_7(char **str, const size_t cur_pos,
 int					scop_convert_glpoint_to_vao(t_env *env,
 						const int group_type);
 int					scop_cvrt_v(t_env *env);
+int					scop_cvrt_v_vt_vn(t_env *env);
+int					scop_cvrt_v_vn(t_env *env);
+int					scop_cvrt_v_vt(t_env *env);
 int					scop_cvrt_seek_vertex(t_env *env, const size_t where);
+int					scop_cvrt_seek_norm(t_env *env, const size_t where);
+int					scop_cvrt_seek_tex(t_env *env, const size_t where);
 int					scop_create_triangle_normal(t_env *env, const size_t index);
 int					scop_create_triangle_tex(t_env *env, const size_t index);
 int					scop_cpy_cvrt_to_cur_vao(t_env *env);

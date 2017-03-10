@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop_convert_glpoint_to_vao.c                      :+:      :+:    :+:   */
+/*   scop_cvrt_seek_tex.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/09 17:39:19 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 17:03:12 by cledant          ###   ########.fr       */
+/*   Created: 2017/03/10 17:21:33 by cledant           #+#    #+#             */
+/*   Updated: 2017/03/10 17:21:40 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-int		scop_convert_glpoint_to_vao(t_env *env, const int group_type)
+int		scop_cvrt_seek_tex(t_env *env, size_t where)
 {
-	static int	(*fct[4])(t_env *) = {scop_cvrt_v, scop_cvrt_v_vt,
-		scop_cvrt_v_vt_vn, scop_cvrt_v_vn};
+	long	index;
 
-	if (env->obj.nb_glpoint <= 2)
+	if ((size_t)env->obj.glpoint[where].tex > env->obj.nb_tex)
 		return (0);
-	return ((*fct[group_type])(env));
+	index = env->obj.glpoint[where].vertex - 1;
+	env->obj.cvrt[env->obj.nb_cvrt].tex.x = env->obj.v_tex[index].x;
+	env->obj.cvrt[env->obj.nb_cvrt].tex.y = env->obj.v_tex[index].y;
+	return (1);
 }
