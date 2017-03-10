@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 19:28:16 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/06 20:23:51 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/10 14:28:43 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int				scop_obj_vt(t_obj_read *obj, t_env *env)
 		if (realloc_v_tex(env) == 0)
 			return (0);
 	}
-	if (obj->l_size < 2 || *(obj->cpy_line + 2) == '\0')
+	if (obj->l_size < 3 || *(obj->cpy_line + 3) == '\0')
 		return (0);
-	env->obj.v_tex[env->obj.nb_tex].x = strtof(obj->cpy_line + 2, &next_ptr);
+	env->obj.v_tex[env->obj.nb_tex].x = strtof(obj->cpy_line + 3, &next_ptr);
 	if (scop_math_is_valid_float(env->obj.v_tex[env->obj.nb_tex].x) == 0)
 		return (0);
 	begin_ptr = next_ptr + 1;

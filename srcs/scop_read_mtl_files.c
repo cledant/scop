@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 12:09:30 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/07 13:10:14 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/10 14:16:46 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ int					scop_read_mtl_files(t_obj_read *reader, t_env *env)
 		return (error_mtllib(file, stream, 4));
 	fclose(stream);
 	free(file);
-	reader->valid_state[1] = 0;
+	reader->valid_state[0] = 0;
 	return (1);
 }

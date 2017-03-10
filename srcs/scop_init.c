@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/07 12:14:02 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/10 14:06:49 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,35 @@ void	scop_test_vertex_init(t_env	*env)
 	glBindVertexArray(0);
 }*/
 
+void	print_parsing(t_env *env)
+{
+	size_t	counter;
+
+	counter = 0;
+	printf("===Parsing dump===\n");
+	while (counter < env->obj.nb_pos)
+	{
+		printf("Vertex : %f, %f, %f\n", env->obj.v_pos[counter].x,
+			env->obj.v_pos[counter].y, env->obj.v_pos[counter].z);
+		counter++;
+	}
+	counter = 0;
+	while (counter < env->obj.nb_norm)
+	{
+		printf("Norm : %f, %f, %f\n", env->obj.v_norm[counter].x,
+			env->obj.v_norm[counter].y, env->obj.v_norm[counter].z);
+		counter++;
+	}
+	counter = 0;
+	while (counter < env->obj.nb_tex)
+	{
+		printf("Tex : %f, %f\n", env->obj.v_tex[counter].x,
+			env->obj.v_tex[counter].y);
+		counter++;
+	}
+	counter = 0;
+}
+
 void	debug_state(void)
 {
 	GLenum		err;
@@ -128,6 +157,7 @@ void	scop_main(t_env *env)
 	glEnable(GL_DEPTH_TEST);
 	glViewport(0, 0, env->win.win_w, env->win.win_h);
 	//Note secondaire : Calculer barycentrei de l obj + translater orig + ... + retour au centre ?
+	print_parsing(env);
 	while (!glfwWindowShouldClose(env->win.win))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
