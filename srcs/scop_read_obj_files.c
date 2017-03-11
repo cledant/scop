@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 15:06:36 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 18:49:12 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/11 11:29:23 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ int						scop_read_obj_files(t_env *env, const char *path)
 	if (read_file(stream, env, &reader) == 0)
 		return (error_obj(path, stream));
 	fclose(stream);
+	if (scop_obj_get_center(env) == 0)
+		return (0);
 	return (1);
 }

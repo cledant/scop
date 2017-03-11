@@ -6,15 +6,21 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 12:58:39 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/08 16:50:37 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/11 18:08:10 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static inline int	shader_fail(void)
+static inline int	shader_fail(GLuint *shader)
 {
+	char	ret[4096];
+	int		ret_len;
+
 	puts("FAIL !");
+	glGetShaderInfoLog(*shader, 4095, &ret_len, ret);
+	ret[4095] = '\0';
+	puts(ret);
 	return (0);
 }
 
@@ -60,10 +66,10 @@ int					scop_gl_load_shader(GLuint *shader, GLenum type,
 	printf("Loading : %s ", path);
 	putchar('.');
 	if ((*shader = glCreateShader(type)) == 0)
-		return (shader_fail());
+		return (shader_fail(shader));
 	putchar('.');
 	if ((shader_code = read_shader_file(path)) == NULL)
-		return (shader_fail());
+		return (shader_fail(shader));
 	putchar('.');
 	glShaderSource(*shader, 1, (const GLchar *const *)&shader_code, NULL);
 	glCompileShader(*shader);
@@ -71,7 +77,7 @@ int					scop_gl_load_shader(GLuint *shader, GLenum type,
 		free(shader_code);
 	glGetShaderiv(*shader, GL_COMPILE_STATUS, &success);
 	if (!success)
-		return (shader_fail());
+		return (shader_fail(shader));
 	puts("OK !");
 	return (1);
 }

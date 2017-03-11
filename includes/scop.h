@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 17:21:14 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/11 17:46:30 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ typedef struct		s_face
 typedef struct		s_vao
 {
 	t_face			*face_array;
-	GLuint			gl_face_array;
+	GLuint			gl_vao;
+	GLuint			gl_vbo;
 	size_t			nb_face;
 	size_t			max_face;
 	size_t			mat_id;
@@ -123,6 +124,8 @@ typedef struct		s_obj
 	size_t			nb_cvrt;
 	size_t			max_cvrt;
 	int				group_type;
+	t_vec3			center;
+	t_vec3			position;
 }					t_obj;
 
 typedef struct		s_win
@@ -355,6 +358,7 @@ int					scop_cvrt_seek_tex(t_env *env, const size_t where);
 int					scop_create_triangle_normal(t_env *env, const size_t index);
 int					scop_create_triangle_tex(t_env *env, const size_t index);
 int					scop_cpy_cvrt_to_cur_vao(t_env *env);
+int					scop_obj_get_center(t_env *env);
 /*
 ** MTL FILE PARSER FUNCTIONS
 */
@@ -373,6 +377,7 @@ int					scop_mtl_map_kd(t_obj_read *mtl, t_env *env);
 int					scop_exit(t_env *env);
 void				*scop_get_env(void *addr);
 int					scop_gl_init_uniforms(t_env *env);
+void				scop_gl_init_vao(t_env *env);
 void				scop_delete_return_line(char *str);
 char				*scop_get_folder(const char *arg);
 char				*scop_strjoin(const char *s1, const char *s2);

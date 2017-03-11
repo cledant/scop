@@ -6,7 +6,7 @@
 #    By: cledant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 10:40:13 by cledant           #+#    #+#              #
-#    Updated: 2017/03/10 19:25:36 by cledant          ###   ########.fr        #
+#    Updated: 2017/03/11 17:47:05 by cledant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ SRCS_NAME = scop_init.c scop_glfw_close_callback.c scop_glfw_error_callback.c \
 			scop_cvrt_v.c scop_cvrt_seek_vertex.c scop_create_triangle_normal.c \
 			scop_create_triangle_tex.c scop_convert_glpoint_to_vao.c \
 			scop_cpy_cvrt_to_cur_vao.c scop_cvrt_seek_norm.c scop_cvrt_seek_tex.c \
-			scop_cvrt_v_vt_vn.c scop_cvrt_v_vt.c scop_cvrt_v_vn.c
+			scop_cvrt_v_vt_vn.c scop_cvrt_v_vt.c scop_cvrt_v_vn.c \
+			scop_obj_get_center.c
 
 INCLUDES = ./includes
 

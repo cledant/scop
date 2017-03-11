@@ -6,94 +6,43 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 20:21:09 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/11 18:40:51 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-/*
-void	scop_test_vertex_init(t_env	*env)
+void	scop_gl_init_vao(t_env *env)
 {
-	GLfloat vertices[] = {
-		-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-		 0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-		 0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-		 0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-		-0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
+	size_t		counter;
 
-		-0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-		 0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-		 0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-		-0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
+	counter = 0;
 
-		-0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-
-		 0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-		 0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-		 0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-
-		-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-		 0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-		 0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-		-0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-		-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-
-		-0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-		 0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-		 0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f
-	};
-	GLuint indices[] = {
-		0, 1, 2,
-		3, 4, 5,
-		6, 7, 8,
-		9, 10, 11,
-		12, 13, 14,
-		15, 16, 17,
-		18, 19, 20,
-		21, 22, 23,
-		24, 25, 26,
-		27, 28, 29,
-		30, 31, 32,
-		33, 34, 35
-	};
-	//Tout return du void !
-	//Init
-	glGenBuffers(1, &(env->vbo));  //nbr obj ds buffer
-	glGenVertexArrays(1, &(env->vao));
-	glGenBuffers(1, &(env->ebo));
-	//Attrib
-	glBindVertexArray(env->vao);
-	glBindBuffer(GL_ARRAY_BUFFER, env->vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, env->ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid *)0);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
-		(GLvoid *)(3 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
-		(GLvoid *)(6 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(2);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-}*/
+	while (counter < env->obj.nb_vao)
+	{
+		if (env->obj.vao[counter].nb_face > 0)
+		{
+			glGenVertexArrays(1, &(env->obj.vao[counter].gl_vao));
+			glGenBuffers(1, &(env->obj.vao[counter].gl_vbo));
+			glBindVertexArray(env->obj.vao[counter].gl_vao);
+			glBindBuffer(GL_ARRAY_BUFFER, env->obj.vao[counter].gl_vbo);
+			glBufferData(GL_ARRAY_BUFFER,
+				sizeof(env->obj.vao[counter].face_array),
+				env->obj.vao[counter].face_array, GL_STATIC_DRAW);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+				(GLvoid *)0);
+			glEnableVertexAttribArray(0);
+			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+				(GLvoid *)(3 * sizeof(GLfloat)));
+			glEnableVertexAttribArray(1);
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+				(GLvoid *)(6 * sizeof(GLfloat)));
+			glEnableVertexAttribArray(2);
+			glBindVertexArray(0);
+		}
+		counter++;
+	}
+}
 
 void	print_parsing(t_env *env)
 {
@@ -175,18 +124,23 @@ void	scop_main(t_env *env)
 {
 	t_vec3	pos_front;
 	float	curr_time;
+	size_t	counter;
 
 	glUseProgram(env->shader.shader_prog);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
 	glViewport(0, 0, env->win.win_w, env->win.win_h);
-	//Note secondaire : Calculer barycentrei de l obj + translater orig + ... + retour au centre ?
 	//Should check if there is something in vao 0 to draw and then exit or not
-	print_parsing(env);
+	//print_parsing(env);
+	scop_gl_init_vao(env);
+	scop_mat4_set_translation(&(env->matrix.model_orig), env->obj.center);
+	glUniformMatrix4fv(env->uniform.model_orig, 1, GL_TRUE,
+		(GLfloat *)&(env->matrix.model_orig));
 	while (!glfwWindowShouldClose(env->win.win))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		//get_time
+		counter = 0;
 		curr_time = glfwGetTime();
 		env->input.delta_time = curr_time - env->input.prev_time;
 		env->input.prev_time = curr_time;
@@ -206,21 +160,24 @@ void	scop_main(t_env *env)
 			(GLfloat *)&(env->matrix.view));
 		glUniformMatrix4fv(env->uniform.proj, 1, GL_TRUE,
 			(GLfloat *)&(env->matrix.proj));
-		//Use texture
-/*		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, env->texture);
-		glUniform1i(env->u_tex, 0);
-		glUniform1iv(env->u_tex_origin, 1, (GLint *)&(env->tex_origin));
-		//Draw vertex
-		glBindVertexArray(env->vao);
-		while (counter < 10)
+		glUniformMatrix4fv(env->uniform.model_rot, 1, GL_TRUE,
+			(GLfloat *)&(env->matrix.model_rot));
+		while (counter < env->obj.nb_vao)
 		{
-			scop_mat4_set_translation(&(env->model), cube_pos[counter]);
-			glUniformMatrix4fv(env->u_model, 1, GL_TRUE, (GLfloat *)&(env->model));
-			glDrawElements(GL_TRIANGLES, 3 * 12, GL_UNSIGNED_INT, 0);
+			//Use texture
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D,
+				env->obj.mat[env->obj.vao[counter].mat_id].gl_tex);
+			glUniform1i(env->uniform.tex, 0);
+			glUniform1iv(env->uniform.tex_origin, 1,
+				(GLint *)&(env->obj.mat[env->obj.vao[counter].mat_id].tex_origin));
+			//Draw vertex
+			glBindVertexArray(env->obj.vao[counter].gl_vao);
+			glDrawArrays(GL_TRIANGLES, 0, env->obj.vao[counter].nb_face);
+			glBindTexture(GL_TEXTURE_2D, 0);
+			glBindVertexArray(0);
 			counter++;
 		}
-		glBindVertexArray(0);*/
 		glfwSwapBuffers(env->win.win);
 	}
 }
