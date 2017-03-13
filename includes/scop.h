@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/13 16:45:34 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/13 18:24:09 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,8 @@ typedef struct		s_input
 	GLfloat			delta_time;
 	GLfloat			prev_time;
 	GLfloat			scale;
+	GLfloat			timer;
+	int				wire;
 }					t_input;
 
 typedef struct		s_env

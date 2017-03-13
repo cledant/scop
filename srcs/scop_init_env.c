@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 11:18:10 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/13 16:57:02 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/13 18:25:32 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	scop_init_env_input(t_env *env)
 	env->input.delta_time = 0.0f;
 	env->input.prev_time = 0.0f;
 	env->input.scale = 1.0f;
+	env->input.timer = 1.1f;
+	env->input.wire = 0;
 }
 
 void	scop_init_env_camera(t_env *env)

@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/13 16:36:57 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/13 18:27:51 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ void	scop_main(t_env *env)
 		curr_time = glfwGetTime();
 		env->input.delta_time = curr_time - env->input.prev_time;
 		env->input.prev_time = curr_time;
+		if (env->input.timer < 1.0f)
+			env->input.timer += env->input.delta_time;
 		//get events
 		glfwPollEvents();
 		scop_execute_mov(env);
@@ -179,7 +181,9 @@ void	scop_main(t_env *env)
 				(GLint *)&(env->obj.mat[env->obj.vao[counter].mat_id].tex_origin));
 			//Draw vertex
 			glBindVertexArray(env->obj.vao[counter].gl_vao);
-			glDrawArrays(GL_TRIANGLES, 0, env->obj.vao[counter].nb_face);
+			(env->input.wire == 0) ? glDrawArrays(GL_TRIANGLES, 0,
+				env->obj.vao[counter].nb_face) : glDrawArrays(GL_LINES, 0,
+				env->obj.vao[counter].nb_face);
 			glBindTexture(GL_TEXTURE_2D, 0);
 			glBindVertexArray(0);
 			counter++;
