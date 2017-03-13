@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/13 14:52:48 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/13 16:36:57 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void	scop_main(t_env *env)
 	//print_parsing(env);
 	scop_gl_init_vao(env);
 	scop_mat4_set_translation(&(env->matrix.model_orig), env->obj.center);
-	glUniformMatrix4fv(env->uniform.model_orig, 1, GL_TRUE,
+	glUniformMatrix4fv(env->uniform.mat_model_orig, 1, GL_TRUE,
 		(GLfloat *)&(env->matrix.model_orig));
 	while (!glfwWindowShouldClose(env->win.win))
 	{
@@ -159,20 +159,23 @@ void	scop_main(t_env *env)
 			(GLfloat)env->win.win_w / (GLfloat)env->win.win_h, 0.1f, 100.0f});
 		scop_mat4_set_rotation(&(env->matrix.model_rot), env->input.prev_time
 			* 50.0f, (t_vec3){0.0f, 1.0f, 0.0f});
-		glUniformMatrix4fv(env->uniform.view, 1, GL_TRUE,
+		scop_mat4_set_scale(&(env->matrix.scale), env->input.scale);
+		glUniformMatrix4fv(env->uniform.mat_view, 1, GL_TRUE,
 			(GLfloat *)&(env->matrix.view));
-		glUniformMatrix4fv(env->uniform.proj, 1, GL_TRUE,
+		glUniformMatrix4fv(env->uniform.mat_proj, 1, GL_TRUE,
 			(GLfloat *)&(env->matrix.proj));
-		glUniformMatrix4fv(env->uniform.model_rot, 1, GL_TRUE,
+		glUniformMatrix4fv(env->uniform.mat_model_rot, 1, GL_TRUE,
 			(GLfloat *)&(env->matrix.model_rot));
+		glUniformMatrix4fv(env->uniform.mat_scale, 1, GL_TRUE,
+			(GLfloat *)&(env->matrix.scale));
 		while (counter < env->obj.nb_vao)
 		{
 			//Use texture
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D,
 				env->obj.mat[env->obj.vao[counter].mat_id].gl_tex);
-			glUniform1i(env->uniform.tex, 0);
-			glUniform1iv(env->uniform.tex_origin, 1,
+			glUniform1i(env->uniform.tex_tex, 0);
+			glUniform1iv(env->uniform.var_tex_origin, 1,
 				(GLint *)&(env->obj.mat[env->obj.vao[counter].mat_id].tex_origin));
 			//Draw vertex
 			glBindVertexArray(env->obj.vao[counter].gl_vao);

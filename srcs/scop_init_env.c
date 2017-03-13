@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 11:18:10 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/11 18:49:11 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/13 16:57:02 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ void	scop_init_env_shader(t_env *env)
 
 void	scop_init_env_uniform(t_env *env)
 {
-	env->uniform.proj = -1;
-	env->uniform.model_orig = -1;
-	env->uniform.model_rot = -1;
-	env->uniform.view = -1;
-	env->uniform.tex = -1;
-	env->uniform.tex_origin = -1;
+	env->uniform.mat_proj = -1;
+	env->uniform.mat_model_orig = -1;
+	env->uniform.mat_model_rot = -1;
+	env->uniform.mat_view = -1;
+	env->uniform.mat_scale = -1;
+	env->uniform.tex_tex = -1;
+	env->uniform.var_tex_origin = -1;
 }
 
 void	scop_init_env_input(t_env *env)
@@ -46,6 +47,7 @@ void	scop_init_env_input(t_env *env)
 	env->input.sensitivity = 0.05f;
 	env->input.delta_time = 0.0f;
 	env->input.prev_time = 0.0f;
+	env->input.scale = 1.0f;
 }
 
 void	scop_init_env_camera(t_env *env)
@@ -82,6 +84,7 @@ void	scop_init_env_matrix(t_env *env)
 			env->cam.up_vec);
 	scop_mat4_set_identity(&(env->matrix.model_orig));
 	scop_mat4_set_identity(&(env->matrix.model_rot));
+	scop_mat4_set_identity(&(env->matrix.scale));
 }
 
 void	scop_init_env(t_env *env)

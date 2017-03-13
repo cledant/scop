@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/11 17:46:30 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/13 16:45:34 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,16 +158,18 @@ typedef struct		s_matrix
 	t_mat4			model_orig;
 	t_mat4			model_rot;
 	t_mat4			view;
+	t_mat4			scale;
 }					t_matrix;
 
 typedef struct		s_uniform
 {
-	GLint			proj;
-	GLint			model_orig;
-	GLint			model_rot;
-	GLint			view;
-	GLint			tex;
-	GLint			tex_origin;
+	GLint			mat_proj;
+	GLint			mat_model_orig;
+	GLint			mat_model_rot;
+	GLint			mat_view;
+	GLint			mat_scale;
+	GLint			tex_tex;
+	GLint			var_tex_origin;
 }					t_uniform;
 
 typedef struct		s_camera
@@ -189,6 +191,7 @@ typedef struct		s_input
 	GLfloat			rot_y;
 	GLfloat			delta_time;
 	GLfloat			prev_time;
+	GLfloat			scale;
 }					t_input;
 
 typedef struct		s_env
@@ -268,6 +271,7 @@ void				scop_mat4_set_camera(t_mat4 *view, const t_vec3 pos,
 						const t_vec3 target, const t_vec3 vec_up);
 void				scop_mat4_multiply(t_mat4 *result, const t_mat4 a,
 						const t_mat4 b);
+void				scop_mat4_set_scale(t_mat4 *matrix, const float size);
 /*
 ** VEC3 FUNCTIONS
 */

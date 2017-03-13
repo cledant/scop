@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 10:37:03 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/05 14:31:00 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/13 17:41:54 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,19 @@ void	scop_execute_mov(t_env *env)
 	{
 		scop_vec3_multiply_const(&tmp, env->cam.up_vec, corr_cam_speed);
 		scop_vec3_substract(&(env->cam.pos), env->cam.pos, tmp);
+	}
+	if (env->input.p_key[GLFW_KEY_KP_SUBTRACT] == PRESSED)
+	{
+		env->input.scale /= 1.1f;
+		if (scop_math_is_valid_float(env->input.scale) == 0 ||
+				fpclassify(env->input.scale) == FP_ZERO)
+			env->input.scale = 1;
+	}
+	if (env->input.p_key[GLFW_KEY_KP_ADD] == PRESSED)
+	{
+		env->input.scale *= 1.1f;
+		if (scop_math_is_valid_float(env->input.scale) == 0 ||
+				fpclassify(env->input.scale) == FP_ZERO)
+			env->input.scale = 1;
 	}
 }
