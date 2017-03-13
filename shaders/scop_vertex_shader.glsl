@@ -15,9 +15,9 @@ out vec2			vertex_tex;
 
 void main (void)
 {
-	gl_Position = proj * view * model_rot  * model_orig *
+	gl_Position = proj * view * model_rot * model_orig *
 		vec4(pos.x, pos.y, pos.z, 1.0f);
-	vertex_norm = proj * view * model_rot  * model_orig *
+	vertex_norm = proj * view * model_rot * model_orig *
 		vec4(norm.x, norm.y, norm.z, 1.0f);
 	if (tex_origin == 2)
 		vertex_tex = vec2(texture.x, 1.0f - texture.y);

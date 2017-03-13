@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 11:17:29 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/11 18:47:30 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/13 12:23:48 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int		scop_obj_get_center(t_env *env)
 		return (0);
 	if (env->obj.nb_pos > 0)
 	{
-		env->obj.center.x /= env->obj.nb_pos;
-		env->obj.center.y /= env->obj.nb_pos;
-		env->obj.center.z /= env->obj.nb_pos;
+		env->obj.center.x /= -env->obj.nb_pos;
+		env->obj.center.y /= -env->obj.nb_pos;
+		env->obj.center.z /= -env->obj.nb_pos;
 	}
 	return (1);
 }

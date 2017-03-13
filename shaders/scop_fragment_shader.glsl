@@ -9,4 +9,5 @@ out vec4	color;
 void main (void)
 {
 	color = texture(tex, vertex_tex);
+//	color = vec4(1.0f, 1.0f, 1.0f, 1.0f);
 }

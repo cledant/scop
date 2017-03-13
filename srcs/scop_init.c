@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/11 18:40:51 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/13 14:52:48 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ void	scop_gl_init_vao(t_env *env)
 			glBindVertexArray(env->obj.vao[counter].gl_vao);
 			glBindBuffer(GL_ARRAY_BUFFER, env->obj.vao[counter].gl_vbo);
 			glBufferData(GL_ARRAY_BUFFER,
-				sizeof(env->obj.vao[counter].face_array),
+				sizeof(GLfloat) * 8 * env->obj.vao[counter].nb_face,
 				env->obj.vao[counter].face_array, GL_STATIC_DRAW);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat),
 				(GLvoid *)0);
 			glEnableVertexAttribArray(0);
-			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat),
 				(GLvoid *)(3 * sizeof(GLfloat)));
 			glEnableVertexAttribArray(1);
-			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat),
 				(GLvoid *)(6 * sizeof(GLfloat)));
 			glEnableVertexAttribArray(2);
 			glBindVertexArray(0);
@@ -59,6 +59,7 @@ void	print_parsing(t_env *env)
 			env->obj.v_pos[counter].y, env->obj.v_pos[counter].z);
 		counter++;
 	}
+	printf("Vertex counter : %ld\n", counter);
 	counter = 0;
 	while (counter < env->obj.nb_norm)
 	{
@@ -66,6 +67,7 @@ void	print_parsing(t_env *env)
 			env->obj.v_norm[counter].y, env->obj.v_norm[counter].z);
 		counter++;
 	}
+	printf("Norm counter : %ld\n", counter);
 	counter = 0;
 	while (counter < env->obj.nb_tex)
 	{
@@ -73,6 +75,7 @@ void	print_parsing(t_env *env)
 			env->obj.v_tex[counter].y);
 		counter++;
 	}
+	printf("Tex counter : %ld\n", counter);
 	counter = 0;
 	while (c_vao < env->obj.nb_vao)
 	{
@@ -155,7 +158,7 @@ void	scop_main(t_env *env)
 		scop_mat4_set_perspective(&(env->matrix.proj), (t_vec4){env->win.fov,
 			(GLfloat)env->win.win_w / (GLfloat)env->win.win_h, 0.1f, 100.0f});
 		scop_mat4_set_rotation(&(env->matrix.model_rot), env->input.prev_time
-			* 50.0f, (t_vec3){0.0f, 0.0f, 1.0f});
+			* 50.0f, (t_vec3){0.0f, 1.0f, 0.0f});
 		glUniformMatrix4fv(env->uniform.view, 1, GL_TRUE,
 			(GLfloat *)&(env->matrix.view));
 		glUniformMatrix4fv(env->uniform.proj, 1, GL_TRUE,
