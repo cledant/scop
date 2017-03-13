@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 10:37:03 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/13 18:29:18 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/13 18:40:21 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,14 @@ void	scop_execute_mov(t_env *env)
 				fpclassify(env->input.scale) == FP_ZERO)
 			env->input.scale = 1;
 	}
-	if (env->input.p_key[GLFW_KEY_KP_0] == PRESSED)
+	if (env->input.p_key[GLFW_KEY_KP_0] == PRESSED && env->input.timer > 0.25f)
 	{
-		if (env->input.timer > 0.25f)
-		{
-			env->input.wire = (env->input.wire == 0) ? 1 : 0;
-			env->input.timer = 0.0f;
-		}
+		env->input.wire = (env->input.wire == 0) ? 1 : 0;
+		env->input.timer = 0.0f;
+	}
+	if (env->input.p_key[GLFW_KEY_SPACE] == PRESSED && env->input.timer > 0.25f)
+	{
+		env->input.toggle_rot = (env->input.toggle_rot == 0) ? 1 : 0;
+		env->input.timer = 0.0f;
 	}
 }

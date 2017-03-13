@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/13 18:27:51 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/13 18:57:23 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,13 @@ void	scop_main(t_env *env)
 		curr_time = glfwGetTime();
 		env->input.delta_time = curr_time - env->input.prev_time;
 		env->input.prev_time = curr_time;
+		//angle update
+		if (env->input.toggle_rot == 1)
+		{
+			env->obj.model_angle += env->input.delta_time * 50.0f;
+			if (env->obj.model_angle > 360.0f)
+				env->obj.model_angle -= 360.0f;
+		}
 		if (env->input.timer < 1.0f)
 			env->input.timer += env->input.delta_time;
 		//get events
@@ -159,8 +166,8 @@ void	scop_main(t_env *env)
 			env->cam.up_vec);
 		scop_mat4_set_perspective(&(env->matrix.proj), (t_vec4){env->win.fov,
 			(GLfloat)env->win.win_w / (GLfloat)env->win.win_h, 0.1f, 100.0f});
-		scop_mat4_set_rotation(&(env->matrix.model_rot), env->input.prev_time
-			* 50.0f, (t_vec3){0.0f, 1.0f, 0.0f});
+		scop_mat4_set_rotation(&(env->matrix.model_rot), env->obj.model_angle,
+			(t_vec3){0.0f, 1.0f, 0.0f});
 		scop_mat4_set_scale(&(env->matrix.scale), env->input.scale);
 		glUniformMatrix4fv(env->uniform.mat_view, 1, GL_TRUE,
 			(GLfloat *)&(env->matrix.view));
