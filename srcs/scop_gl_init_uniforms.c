@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:06:44 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/13 17:27:25 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/14 12:04:48 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,18 @@ int					scop_gl_init_uniforms(t_env *env)
 	if ((env->uniform.mat_model_orig = glGetUniformLocation(
 			env->shader.shader_prog, "mat_model_orig")) == -1)
 		return (uniforms_error("mat_model_orig"));
-	if ((env->uniform.mat_model_rot = glGetUniformLocation(
-			env->shader.shader_prog, "mat_model_rot")) == -1)
-		return (uniforms_error("mat_model_rot"));
+	if ((env->uniform.mat_model_auto_rot = glGetUniformLocation(
+			env->shader.shader_prog, "mat_model_auto_rot")) == -1)
+		return (uniforms_error("mat_model_auto_rot"));
+	if ((env->uniform.mat_model_rot_phi = glGetUniformLocation(
+			env->shader.shader_prog, "mat_model_rot_phi")) == -1)
+		return (uniforms_error("mat_model_rot_phi"));
+	if ((env->uniform.mat_model_rot_theta = glGetUniformLocation(
+			env->shader.shader_prog, "mat_model_rot_theta")) == -1)
+		return (uniforms_error("mat_model_rot_theta"));
+	if ((env->uniform.mat_model_tr = glGetUniformLocation(
+			env->shader.shader_prog, "mat_model_tr")) == -1)
+		return (uniforms_error("mat_model_tr"));
 	if ((env->uniform.mat_proj = glGetUniformLocation(
 			env->shader.shader_prog, "mat_proj")) == -1)
 		return (uniforms_error("mat_proj"));

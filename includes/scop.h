@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/13 18:54:18 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/14 11:46:59 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,7 @@ typedef struct		s_obj
 	size_t			max_cvrt;
 	int				group_type;
 	t_vec3			center;
-	t_vec3			position;
-	GLfloat			model_angle;
+	GLfloat			auto_rot_angle;
 }					t_obj;
 
 typedef struct		s_win
@@ -157,7 +156,10 @@ typedef struct		s_matrix
 {
 	t_mat4			proj;
 	t_mat4			model_orig;
-	t_mat4			model_rot;
+	t_mat4			model_auto_rot;
+	t_mat4			model_rot_phi;
+	t_mat4			model_rot_theta;
+	t_mat4			model_tr;
 	t_mat4			view;
 	t_mat4			scale;
 }					t_matrix;
@@ -166,9 +168,12 @@ typedef struct		s_uniform
 {
 	GLint			mat_proj;
 	GLint			mat_model_orig;
-	GLint			mat_model_rot;
+	GLint			mat_model_auto_rot;
 	GLint			mat_view;
 	GLint			mat_scale;
+	GLint			mat_model_rot_theta;
+	GLint			mat_model_rot_phi;
+	GLint			mat_model_tr;
 	GLint			tex_tex;
 	GLint			var_tex_origin;
 }					t_uniform;
@@ -196,6 +201,9 @@ typedef struct		s_input
 	GLfloat			timer;
 	int				wire;
 	int				toggle_rot;
+	GLfloat			model_rot_phi;
+	GLfloat			model_rot_theta;
+	t_vec3			model_pos;
 }					t_input;
 
 typedef struct		s_env

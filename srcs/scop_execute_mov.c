@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 10:37:03 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/13 18:40:21 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/14 12:30:25 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,41 @@ void	scop_execute_mov(t_env *env)
 	{
 		env->input.toggle_rot = (env->input.toggle_rot == 0) ? 1 : 0;
 		env->input.timer = 0.0f;
+	}
+	if (env->input.p_key[GLFW_KEY_KP_8] == PRESSED)
+		env->input.model_pos.x += 1.0f * corr_cam_speed;
+	if (env->input.p_key[GLFW_KEY_KP_5] == PRESSED)
+		env->input.model_pos.x -= 1.0f * corr_cam_speed;
+	if (env->input.p_key[GLFW_KEY_KP_9] == PRESSED)
+		env->input.model_pos.y += 1.0f * corr_cam_speed;
+	if (env->input.p_key[GLFW_KEY_KP_7] == PRESSED)
+		env->input.model_pos.y -= 1.0f * corr_cam_speed;
+	if (env->input.p_key[GLFW_KEY_KP_4] == PRESSED)
+		env->input.model_pos.z += 1.0f * corr_cam_speed;
+	if (env->input.p_key[GLFW_KEY_KP_6] == PRESSED)
+		env->input.model_pos.z -= 1.0f * corr_cam_speed;
+	if (env->input.p_key[GLFW_KEY_UP] == PRESSED)
+	{
+		env->input.model_rot_phi += 10.0f * corr_cam_speed;
+		if (env->input.model_rot_phi > 360.0f)
+			env->input.model_rot_phi -= 360.0f;
+	}
+	if (env->input.p_key[GLFW_KEY_DOWN] == PRESSED)
+	{
+		env->input.model_rot_phi -= 10.0f * corr_cam_speed;
+		if (env->input.model_rot_phi < 0.0f)
+			env->input.model_rot_phi += 360.0f;
+	}
+	if (env->input.p_key[GLFW_KEY_LEFT] == PRESSED)
+	{
+		env->input.model_rot_theta += 10.0f * corr_cam_speed;
+		if (env->input.model_rot_theta > 360.0f)
+			env->input.model_rot_theta -= 360.0f;
+	}
+	if (env->input.p_key[GLFW_KEY_RIGHT] == PRESSED)
+	{
+		env->input.model_rot_theta -= 10.0f * corr_cam_speed;
+		if (env->input.model_rot_theta < 0.0f)
+			env->input.model_rot_theta += 360.0f;
 	}
 }

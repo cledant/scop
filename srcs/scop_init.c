@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/13 18:57:23 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/14 12:29:04 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void	debug_state(void)
 void	scop_main(t_env *env)
 {
 	t_vec3	pos_front;
+	t_vec3	inv_model_tr;
 	float	curr_time;
 	size_t	counter;
 
@@ -150,9 +151,9 @@ void	scop_main(t_env *env)
 		//angle update
 		if (env->input.toggle_rot == 1)
 		{
-			env->obj.model_angle += env->input.delta_time * 50.0f;
-			if (env->obj.model_angle > 360.0f)
-				env->obj.model_angle -= 360.0f;
+			env->obj.auto_rot_angle += env->input.delta_time * 50.0f;
+			if (env->obj.auto_rot_angle > 360.0f)
+				env->obj.auto_rot_angle -= 360.0f;
 		}
 		if (env->input.timer < 1.0f)
 			env->input.timer += env->input.delta_time;
@@ -166,15 +167,29 @@ void	scop_main(t_env *env)
 			env->cam.up_vec);
 		scop_mat4_set_perspective(&(env->matrix.proj), (t_vec4){env->win.fov,
 			(GLfloat)env->win.win_w / (GLfloat)env->win.win_h, 0.1f, 100.0f});
-		scop_mat4_set_rotation(&(env->matrix.model_rot), env->obj.model_angle,
-			(t_vec3){0.0f, 1.0f, 0.0f});
+		scop_mat4_set_rotation(&(env->matrix.model_auto_rot),
+			env->obj.auto_rot_angle, (t_vec3){0.0f, 1.0f, 0.0f});
+		scop_mat4_set_rotation(&(env->matrix.model_rot_theta),
+			env->input.model_rot_theta, (t_vec3){1.0f, 0.0f, 0.0f});
+		scop_mat4_set_rotation(&(env->matrix.model_rot_phi),
+			env->input.model_rot_phi, (t_vec3){0.0f, 0.0f, 1.0f});
 		scop_mat4_set_scale(&(env->matrix.scale), env->input.scale);
+		inv_model_tr.x = -env->input.model_pos.x;
+		inv_model_tr.y = -env->input.model_pos.y;
+		inv_model_tr.z = -env->input.model_pos.z;
+		scop_mat4_set_translation(&(env->matrix.model_tr), inv_model_tr);
 		glUniformMatrix4fv(env->uniform.mat_view, 1, GL_TRUE,
 			(GLfloat *)&(env->matrix.view));
 		glUniformMatrix4fv(env->uniform.mat_proj, 1, GL_TRUE,
 			(GLfloat *)&(env->matrix.proj));
-		glUniformMatrix4fv(env->uniform.mat_model_rot, 1, GL_TRUE,
-			(GLfloat *)&(env->matrix.model_rot));
+		glUniformMatrix4fv(env->uniform.mat_model_auto_rot, 1, GL_TRUE,
+			(GLfloat *)&(env->matrix.model_auto_rot));
+		glUniformMatrix4fv(env->uniform.mat_model_rot_phi, 1, GL_TRUE,
+			(GLfloat *)&(env->matrix.model_rot_phi));
+		glUniformMatrix4fv(env->uniform.mat_model_rot_theta, 1, GL_TRUE,
+			(GLfloat *)&(env->matrix.model_rot_theta));
+		glUniformMatrix4fv(env->uniform.mat_model_tr, 1, GL_TRUE,
+			(GLfloat *)&(env->matrix.model_tr));
 		glUniformMatrix4fv(env->uniform.mat_scale, 1, GL_TRUE,
 			(GLfloat *)&(env->matrix.scale));
 		while (counter < env->obj.nb_vao)

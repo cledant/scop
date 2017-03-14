@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 11:18:10 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/13 18:54:21 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/14 11:47:57 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ void	scop_init_env_uniform(t_env *env)
 {
 	env->uniform.mat_proj = -1;
 	env->uniform.mat_model_orig = -1;
-	env->uniform.mat_model_rot = -1;
+	env->uniform.mat_model_auto_rot = -1;
 	env->uniform.mat_view = -1;
 	env->uniform.mat_scale = -1;
+	env->uniform.mat_model_rot_theta = -1;
+	env->uniform.mat_model_rot_phi = -1;
+	env->uniform.mat_model_tr = -1;
 	env->uniform.tex_tex = -1;
 	env->uniform.var_tex_origin = -1;
 }
@@ -51,6 +54,9 @@ void	scop_init_env_input(t_env *env)
 	env->input.timer = 1.1f;
 	env->input.wire = 0;
 	env->input.toggle_rot = 1;
+	env->input.model_rot_theta = 0.0f;
+	env->input.model_rot_phi = 0.0f;
+	scop_vec3_set(&(env->input.model_pos), 0.0f, 0.0f, 0.0f);
 }
 
 void	scop_init_env_camera(t_env *env)
@@ -86,8 +92,11 @@ void	scop_init_env_matrix(t_env *env)
 	scop_mat4_set_camera(&(env->matrix.view), env->cam.pos, pos_front,
 			env->cam.up_vec);
 	scop_mat4_set_identity(&(env->matrix.model_orig));
-	scop_mat4_set_identity(&(env->matrix.model_rot));
+	scop_mat4_set_identity(&(env->matrix.model_auto_rot));
 	scop_mat4_set_identity(&(env->matrix.scale));
+	scop_mat4_set_identity(&(env->matrix.model_rot_theta));
+	scop_mat4_set_identity(&(env->matrix.model_rot_phi));
+	scop_mat4_set_identity(&(env->matrix.model_tr));
 }
 
 void	scop_init_env(t_env *env)
