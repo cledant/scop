@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/14 18:43:36 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/14 19:15:58 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,6 @@ void	scop_main(t_env *env)
 	glUseProgram(env->shader.shader_prog);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
-	glViewport(0, 0, env->win.win_w, env->win.win_h);
 	//Should check if there is something in vao 0 to draw and then exit or not
 	//print_parsing(env);
 	scop_gl_init_vao(env);
@@ -167,6 +166,7 @@ void	scop_main(t_env *env)
 			env->cam.up_vec);
 		scop_mat4_set_perspective(&(env->matrix.proj), (t_vec4){env->win.fov,
 			(GLfloat)env->win.win_w / (GLfloat)env->win.win_h, 0.1f, 100.0f});
+		glViewport(0, 0, env->win.win_w, env->win.win_h);
 		scop_mat4_set_rotation(&(env->matrix.model_auto_rot),
 			env->obj.auto_rot_angle, (t_vec3){0.0f, 1.0f, 0.0f});
 		scop_mat4_set_rotation(&(env->matrix.model_rot_theta),
