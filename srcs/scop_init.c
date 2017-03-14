@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/14 12:29:04 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/14 15:31:24 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ void	scop_main(t_env *env)
 		{
 			env->obj.auto_rot_angle += env->input.delta_time * 50.0f;
 			if (env->obj.auto_rot_angle > 360.0f)
-				env->obj.auto_rot_angle -= 360.0f;
+				env->obj.auto_rot_angle -= 720.0f;
 		}
 		if (env->input.timer < 1.0f)
 			env->input.timer += env->input.delta_time;

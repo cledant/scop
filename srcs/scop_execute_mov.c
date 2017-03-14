@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 10:37:03 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/14 12:30:25 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/14 15:08:43 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,23 +93,31 @@ void	scop_execute_mov(t_env *env)
 		env->input.model_rot_phi += 10.0f * corr_cam_speed;
 		if (env->input.model_rot_phi > 360.0f)
 			env->input.model_rot_phi -= 360.0f;
+		else if (env->input.model_rot_theta < 360.0f)
+			env->input.model_rot_theta += 360.0f;
 	}
 	if (env->input.p_key[GLFW_KEY_DOWN] == PRESSED)
 	{
 		env->input.model_rot_phi -= 10.0f * corr_cam_speed;
 		if (env->input.model_rot_phi < 0.0f)
 			env->input.model_rot_phi += 360.0f;
+		else if (env->input.model_rot_theta < 360.0f)
+			env->input.model_rot_theta += 360.0f;
 	}
 	if (env->input.p_key[GLFW_KEY_LEFT] == PRESSED)
 	{
 		env->input.model_rot_theta += 10.0f * corr_cam_speed;
 		if (env->input.model_rot_theta > 360.0f)
 			env->input.model_rot_theta -= 360.0f;
+		else if (env->input.model_rot_theta < 360.0f)
+			env->input.model_rot_theta += 360.0f;
 	}
 	if (env->input.p_key[GLFW_KEY_RIGHT] == PRESSED)
 	{
 		env->input.model_rot_theta -= 10.0f * corr_cam_speed;
 		if (env->input.model_rot_theta < 0.0f)
+			env->input.model_rot_theta += 360.0f;
+		else if (env->input.model_rot_theta < 360.0f)
 			env->input.model_rot_theta += 360.0f;
 	}
 }
