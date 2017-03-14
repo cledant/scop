@@ -6,32 +6,34 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 11:35:14 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/05 16:59:20 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/14 17:07:37 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static char		*extract_tex(const char *file)
+static char		*extract_tex(const char *file, const size_t depth)
 {
 	t_tga_header	*head;
 	char			*tex;
 	size_t			size;
 	size_t			counter;
-	char			swap;
 
 	counter = 0;
 	head = (t_tga_header *)file;
-	size = sizeof(char) * 3 * head->img_w * head->img_h;
-	if ((tex = (char *)malloc(size)) == NULL)
-		return (NULL);
-	memcpy(tex, file + 18, size);
-	while (counter < (head->img_w * head->img_h * 3))
+	if (depth == 24)
 	{
-		swap = tex[counter];
-		tex[counter] = tex[counter + 2];
-		tex[counter + 2] = swap;
-		counter += 3;
+		size = sizeof(char) * 3 * head->img_w * head->img_h;
+		if ((tex = (char *)malloc(size)) == NULL)
+			return (NULL);
+		memcpy(tex, file + 18, size);
+	}
+	else
+	{
+		size = sizeof(char) * 4 * head->img_w * head->img_h;
+		if ((tex = (char *)malloc(size)) == NULL)
+			return (NULL);
+		memcpy(tex, file + 18, size);
 	}
 	return (tex);
 }
@@ -81,14 +83,15 @@ static char		*check_and_extract_file(const char *file, const long size,
 		return (NULL);
 	if (head->image_type != 2)
 		return (NULL);
-	if (head->pixel_depth != 24)
+	if (head->pixel_depth != 24 && head->pixel_depth != 32)
 		return (NULL);
 	if (head->img_w * head->img_h * 3 + 18 > size)
 		return (NULL);
-	if ((tex = extract_tex(file)) == NULL)
+	if ((tex = extract_tex(file, head->pixel_depth)) == NULL)
 		return (NULL);
 	mat->tex_w = head->img_w;
 	mat->tex_h = head->img_h;
+	mat->depth = head->pixel_depth;
 	scop_set_origin_texture(head->img_desc, mat);
 	return (tex);
 }

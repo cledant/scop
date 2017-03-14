@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/14 11:46:59 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/14 17:06:17 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct		s_mat
 	size_t			tex_w;
 	int				tex_origin;
 	GLuint			gl_tex;
+	size_t			depth;
 }					t_mat;
 
 typedef struct		s_glpoint
