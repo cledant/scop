@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/14 17:06:17 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/14 19:56:12 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ typedef struct		s_uniform
 	GLint			mat_model_tr;
 	GLint			tex_tex;
 	GLint			var_tex_origin;
+	GLint			var_wiremode;
 }					t_uniform;
 
 typedef struct		s_camera

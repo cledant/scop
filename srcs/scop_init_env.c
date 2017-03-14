@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 11:18:10 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/14 15:31:33 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/14 19:57:13 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	scop_init_env_uniform(t_env *env)
 	env->uniform.mat_model_tr = -1;
 	env->uniform.tex_tex = -1;
 	env->uniform.var_tex_origin = -1;
+	env->uniform.var_wiremode = -1;
 }
 
 void	scop_init_env_input(t_env *env)

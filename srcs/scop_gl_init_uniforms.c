@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:06:44 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/14 12:04:48 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/14 19:58:48 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,8 @@ int					scop_gl_init_uniforms(t_env *env)
 	if ((env->uniform.var_tex_origin = glGetUniformLocation(
 			env->shader.shader_prog, "var_tex_origin")) == -1)
 		return (uniforms_error("var_tex_origin"));
+	if ((env->uniform.var_wiremode = glGetUniformLocation(
+			env->shader.shader_prog, "var_wiremode")) == -1)
+		return (uniforms_error("var_wiremode"));
 	return (1);
 }

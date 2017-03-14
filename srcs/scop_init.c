@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/14 19:15:58 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/14 20:00:34 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ void	scop_main(t_env *env)
 			(GLfloat *)&(env->matrix.model_tr));
 		glUniformMatrix4fv(env->uniform.mat_scale, 1, GL_TRUE,
 			(GLfloat *)&(env->matrix.scale));
+		glUniform1iv(env->uniform.var_wiremode, 1, (GLint *)&(env->input.wire));
 		while (counter < env->obj.nb_vao)
 		{
 			//Use texture
