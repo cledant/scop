@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/15 12:42:09 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 13:59:18 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ void	scop_main(t_env *env)
 		{
 			//Use texture
 			glActiveTexture(GL_TEXTURE0);
-			if (env->obj.mat[env->obj.vao[counter].mat_id].name != NULL)
+			if (env->obj.mat[env->obj.vao[counter].mat_id].diff_tex_path != NULL)
 			{
 				glBindTexture(GL_TEXTURE_2D,
 					env->obj.mat[env->obj.vao[counter].mat_id].gl_tex);
@@ -235,9 +235,11 @@ void	scop_main(t_env *env)
 			}
 			//Draw vertex
 			glBindVertexArray(env->obj.vao[counter].gl_vao);
-			(env->input.wire == 0) ? glDrawArrays(GL_TRIANGLES, 0,
-				env->obj.vao[counter].nb_face) : glDrawArrays(GL_LINES, 0,
-				env->obj.vao[counter].nb_face);
+			if (env->input.wire == 0)
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			else
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			glDrawArrays(GL_TRIANGLES, 0, env->obj.vao[counter].nb_face);
 			glBindTexture(GL_TEXTURE_2D, 0);
 			glBindVertexArray(0);
 			counter++;
