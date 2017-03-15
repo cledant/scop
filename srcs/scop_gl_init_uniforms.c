@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:06:44 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/15 10:33:26 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 20:23:03 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,23 @@ static inline int	uniforms_error(char *name)
 	printf("Scop : GL : Could not get info about this variable : %s\n",
 		name);
 	return (0);
+}
+
+static inline int	next_part_1(t_env *env)
+{
+	if ((env->uniform.tex_tex = glGetUniformLocation(
+			env->shader.shader_prog, "tex_tex")) == -1)
+		return (uniforms_error("tex_tex"));
+	if ((env->uniform.var_tex_origin = glGetUniformLocation(
+			env->shader.shader_prog, "var_tex_origin")) == -1)
+		return (uniforms_error("var_tex_origin"));
+	if ((env->uniform.var_wiremode = glGetUniformLocation(
+			env->shader.shader_prog, "var_wiremode")) == -1)
+		return (uniforms_error("var_wiremode"));
+	if ((env->uniform.var_color_transition = glGetUniformLocation(
+			env->shader.shader_prog, "var_color_transition")) == -1)
+		return (uniforms_error("var_color_transition"));
+	return (1);
 }
 
 int					scop_gl_init_uniforms(t_env *env)
@@ -45,17 +62,5 @@ int					scop_gl_init_uniforms(t_env *env)
 	if ((env->uniform.mat_scale = glGetUniformLocation(
 			env->shader.shader_prog, "mat_scale")) == -1)
 		return (uniforms_error("mat_scale"));
-	if ((env->uniform.tex_tex = glGetUniformLocation(
-			env->shader.shader_prog, "tex_tex")) == -1)
-		return (uniforms_error("tex_tex"));
-	if ((env->uniform.var_tex_origin = glGetUniformLocation(
-			env->shader.shader_prog, "var_tex_origin")) == -1)
-		return (uniforms_error("var_tex_origin"));
-	if ((env->uniform.var_wiremode = glGetUniformLocation(
-			env->shader.shader_prog, "var_wiremode")) == -1)
-		return (uniforms_error("var_wiremode"));
-	if ((env->uniform.var_color_transition = glGetUniformLocation(
-			env->shader.shader_prog, "var_color_transition")) == -1)
-		return (uniforms_error("var_color_transition"));
-	return (1);
+	return (next_part_1(env));
 }

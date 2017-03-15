@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/15 15:54:40 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 20:53:33 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -391,7 +391,7 @@ int					scop_obj_get_center(t_env *env);
 ** MTL FILE PARSER FUNCTIONS
 */
 int					scop_read_mtl_files(t_obj_read *reader, t_env *env);
-int					scop_read_mtl_parsing(FILE* stream, t_env *env);
+int					scop_read_mtl_parsing(FILE *stream, t_env *env);
 int					scop_read_mtl_cases(t_obj_read *reader, t_env *env);
 int					scop_mtl_newmtl(t_obj_read *mtl, t_env *env);
 int					scop_mtl_kd(t_obj_read *mtl, t_env *env);
