@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:57:41 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/15 15:05:08 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 19:52:51 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int						scop_det_face_type_6(const char *str,
 	dummy = strtol(begin, &end, 10);
 	if (errno == EINVAL || errno == ERANGE || dummy <= 0)
 		return (0);
-	new_pos = str - end + 1 + cur_pos;
+	new_pos = end - str + 1 + cur_pos;
 	if (*end != '/' || (new_pos + 1) > size || *(end + 1) == '\0')
 		return (0);
 	begin = end + 1;
@@ -51,7 +51,7 @@ int						scop_det_face_type_6(const char *str,
 	dummy = strtol(begin, &end, 10);
 	if (errno == EINVAL || errno == ERANGE || dummy <= 0)
 		return (0);
-	new_pos = str - end + 1 + cur_pos;
+	new_pos = end - str + 1 + cur_pos;
 	if (*end != '/' || (new_pos + 1) > size || *(end + 1) == '\0')
 		return (0);
 	return (last_part(end));

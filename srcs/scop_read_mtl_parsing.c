@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 12:10:59 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/07 11:19:25 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 18:45:35 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static inline void		init_mtl_reader(t_obj_read *mtl)
 	mtl->curr_line_nb = 1;
 }
 
-int					scop_read_mtl_parsing(FILE *stream, t_env *env)
+int						scop_read_mtl_parsing(FILE *stream, t_env *env)
 {
 	static char		value[6][16] = {"newmtl", "Kd", "Ka", "Ks", "Ns", "map_Kd"};
 	t_obj_read		mtl;

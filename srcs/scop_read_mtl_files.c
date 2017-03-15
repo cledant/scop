@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 12:09:30 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 14:16:46 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 18:00:19 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static inline char	*seek_second_arg(char *str, const size_t max,
 	}
 	if (counter - 7 == 0)
 		return (NULL);
-	if ((ret = scop_strjoin(folder, cpy_str)) == NULL) 
+	if ((ret = scop_strjoin(folder, cpy_str)) == NULL)
 		return (NULL);
 	return (ret);
 }
