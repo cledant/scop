@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/14 20:00:34 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 11:37:13 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,20 @@ void	scop_gl_init_vao(t_env *env)
 			glBindVertexArray(env->obj.vao[counter].gl_vao);
 			glBindBuffer(GL_ARRAY_BUFFER, env->obj.vao[counter].gl_vbo);
 			glBufferData(GL_ARRAY_BUFFER,
-				sizeof(GLfloat) * 8 * env->obj.vao[counter].nb_face,
+				sizeof(t_face) * env->obj.vao[counter].nb_face,
 				env->obj.vao[counter].face_array, GL_STATIC_DRAW);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat),
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(t_face),
 				(GLvoid *)0);
 			glEnableVertexAttribArray(0);
-			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat),
+			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(t_face),
 				(GLvoid *)(3 * sizeof(GLfloat)));
 			glEnableVertexAttribArray(1);
-			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat),
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(t_face),
 				(GLvoid *)(6 * sizeof(GLfloat)));
 			glEnableVertexAttribArray(2);
+			glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(t_face),
+				(GLvoid *)(8 * sizeof(GLfloat)));
+			glEnableVertexAttribArray(3);
 			glBindVertexArray(0);
 		}
 		counter++;
@@ -160,6 +163,21 @@ void	scop_main(t_env *env)
 		glfwPollEvents();
 		scop_execute_mov(env);
 		scop_execute_mouse_mov(env);
+		//Update transition
+		if (env->input.toggle_color_transition == 0
+			&& env->obj.color_transition > 0.0f)
+		{
+			env->obj.color_transition -= env->input.delta_time;
+			if (env->obj.color_transition < 0.0f)
+				env->obj.color_transition = 0.0f;
+		}
+		else if (env->input.toggle_color_transition == 1
+			&& env->obj.color_transition < 1.0f)
+		{
+			env->obj.color_transition += env->input.delta_time;
+			if (env->obj.color_transition > 1.0f)
+				env->obj.color_transition = 1.0f;
+		}
 		//Maj matrix
 		scop_vec3_add(&pos_front, env->cam.pos, env->cam.front);
 		scop_mat4_set_camera(&(env->matrix.view), env->cam.pos, pos_front,
@@ -193,15 +211,28 @@ void	scop_main(t_env *env)
 		glUniformMatrix4fv(env->uniform.mat_scale, 1, GL_TRUE,
 			(GLfloat *)&(env->matrix.scale));
 		glUniform1iv(env->uniform.var_wiremode, 1, (GLint *)&(env->input.wire));
+		glUniform1iv(env->uniform.var_color_transition, 1,
+			(GLint *)&(env->obj.color_transition));
 		while (counter < env->obj.nb_vao)
 		{
 			//Use texture
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D,
-				env->obj.mat[env->obj.vao[counter].mat_id].gl_tex);
-			glUniform1i(env->uniform.tex_tex, 0);
-			glUniform1iv(env->uniform.var_tex_origin, 1,
-				(GLint *)&(env->obj.mat[env->obj.vao[counter].mat_id].tex_origin));
+			if (env->obj.mat[env->obj.vao[counter].mat_id].name != NULL)
+			{
+				glBindTexture(GL_TEXTURE_2D,
+					env->obj.mat[env->obj.vao[counter].mat_id].gl_tex);
+				glUniform1i(env->uniform.tex_tex, 0);
+				glUniform1iv(env->uniform.var_tex_origin, 1,
+					(GLint *)&(env->obj.mat[env->obj.vao[counter].mat_id].
+					tex_origin));
+			}
+			else
+			{
+				glBindTexture(GL_TEXTURE_2D, env->obj.mat[0].gl_tex);
+				glUniform1i(env->uniform.tex_tex, 0);
+				glUniform1iv(env->uniform.var_tex_origin, 1,
+					(GLint *)&(env->obj.mat[0].tex_origin));
+			}
 			//Draw vertex
 			glBindVertexArray(env->obj.vao[counter].gl_vao);
 			(env->input.wire == 0) ? glDrawArrays(GL_TRIANGLES, 0,

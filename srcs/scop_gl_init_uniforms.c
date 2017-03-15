@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:06:44 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/14 19:58:48 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 10:33:26 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,8 @@ int					scop_gl_init_uniforms(t_env *env)
 	if ((env->uniform.var_wiremode = glGetUniformLocation(
 			env->shader.shader_prog, "var_wiremode")) == -1)
 		return (uniforms_error("var_wiremode"));
+	if ((env->uniform.var_color_transition = glGetUniformLocation(
+			env->shader.shader_prog, "var_color_transition")) == -1)
+		return (uniforms_error("var_color_transition"));
 	return (1);
 }

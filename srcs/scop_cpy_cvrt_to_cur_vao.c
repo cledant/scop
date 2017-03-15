@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 10:42:11 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 20:23:47 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 10:55:35 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ int		scop_cpy_cvrt_to_cur_vao(t_env *env)
 			env->obj.cvrt[counter].tex.x;
 		env->obj.vao[env->obj.nb_vao - 1].face_array[*f_index - 1].tex.y =
 			env->obj.cvrt[counter].tex.y;
+		env->obj.vao[env->obj.nb_vao - 1].face_array[*f_index - 1].color.x =
+			env->obj.cvrt[counter].color.x;
+		env->obj.vao[env->obj.nb_vao - 1].face_array[*f_index - 1].color.y =
+			env->obj.cvrt[counter].color.y;
+		env->obj.vao[env->obj.nb_vao - 1].face_array[*f_index - 1].color.z =
+			env->obj.cvrt[counter].color.z;
 		counter++;
 	}
 	env->obj.nb_glpoint = 0;

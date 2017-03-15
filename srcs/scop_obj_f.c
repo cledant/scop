@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 09:53:41 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/13 14:42:36 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 10:39:20 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int		scop_obj_f(t_obj_read *obj, t_env *env)
 		else
 			return (0);
 	}
-//	printf("EXPECTED TYPE : %d\n", expected_type);
-//	printf("EXPECTED GROUP : %d\n", env->obj.group_type);
 	obj->valid_state[0] = 0;
 	obj->valid_state[1] = 0;
 	obj->valid_state[2] = 0;

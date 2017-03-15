@@ -3,6 +3,7 @@
 layout (location = 0) in vec3 pos;
 layout (location = 1) in vec3 norm;
 layout (location = 2) in vec2 texture;
+layout (location = 3) in vec4 color;
 
 uniform mat4		mat_proj;
 uniform mat4		mat_view;
@@ -16,6 +17,7 @@ uniform int			var_tex_origin;
 
 out vec4			vertex_norm;
 out vec2			vertex_tex;
+out	vec4			vertex_color;
 
 void main (void)
 {
@@ -33,4 +35,5 @@ void main (void)
 		vertex_tex = vec2(1.0f - texture.x, 1.0f - texture.y);
 	else if (var_tex_origin == 1)
 		vertex_tex = vec2(1.0f - texture.x, texture.y);
+	vertex_color = color;
 }

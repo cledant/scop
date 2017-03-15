@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:56:12 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 19:22:34 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 11:31:49 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int						scop_cvrt_v(t_env *env)
 			return (0);
 		scop_create_triangle_normal(env, index);
 		scop_create_triangle_tex(env, index);
+		scop_create_triangle_color(env, index);
 		counter++;
 	}
 	return (1);

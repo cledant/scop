@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/14 19:56:12 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 11:20:20 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct		s_face
 	t_vec3			pos;
 	t_vec3			norm;
 	t_vec2			tex;
+	t_vec4			color;
 }					t_face;
 
 typedef struct		s_vao
@@ -127,6 +128,7 @@ typedef struct		s_obj
 	int				group_type;
 	t_vec3			center;
 	GLfloat			auto_rot_angle;
+	GLfloat			color_transition;
 }					t_obj;
 
 typedef struct		s_win
@@ -178,6 +180,7 @@ typedef struct		s_uniform
 	GLint			tex_tex;
 	GLint			var_tex_origin;
 	GLint			var_wiremode;
+	GLint			var_color_transition;
 }					t_uniform;
 
 typedef struct		s_camera
@@ -203,6 +206,7 @@ typedef struct		s_input
 	GLfloat			timer;
 	int				wire;
 	int				toggle_rot;
+	int				toggle_color_transition;
 	GLfloat			model_rot_phi;
 	GLfloat			model_rot_theta;
 	t_vec3			model_pos;
@@ -375,6 +379,7 @@ int					scop_cvrt_seek_norm(t_env *env, const size_t where);
 int					scop_cvrt_seek_tex(t_env *env, const size_t where);
 int					scop_create_triangle_normal(t_env *env, const size_t index);
 int					scop_create_triangle_tex(t_env *env, const size_t index);
+int					scop_create_triangle_color(t_env *env, const size_t index);
 int					scop_cpy_cvrt_to_cur_vao(t_env *env);
 int					scop_obj_get_center(t_env *env);
 /*

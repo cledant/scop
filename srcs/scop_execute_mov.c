@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 10:37:03 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/14 15:08:43 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 10:36:40 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,11 @@ void	scop_execute_mov(t_env *env)
 			env->input.model_rot_theta += 360.0f;
 		else if (env->input.model_rot_theta < 360.0f)
 			env->input.model_rot_theta += 360.0f;
+	}
+	if (env->input.p_key[GLFW_KEY_T] == PRESSED && env->input.timer > 0.25f)
+	{
+		env->input.toggle_color_transition = (env->input.toggle_color_transition
+			== 0) ? 1 : 0;
+		env->input.timer = 0.0f;
 	}
 }

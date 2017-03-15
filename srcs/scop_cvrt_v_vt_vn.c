@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 17:06:52 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 19:21:22 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 11:38:01 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ static inline int		subroutine_cvrt(size_t where, t_env *env)
 int						scop_cvrt_v_vt_vn(t_env *env)
 {
 	size_t	counter;
+	size_t	index;
 
 	counter = 0;
 	while (counter < env->obj.nb_glpoint - 2)
 	{
+		index = env->obj.nb_cvrt;
 		if (env->obj.nb_cvrt + 3 >= env->obj.max_cvrt)
 		{
 			if ((env->obj.cvrt = (t_face *)reallocf(env->obj.cvrt,
@@ -45,6 +47,7 @@ int						scop_cvrt_v_vt_vn(t_env *env)
 		if (subroutine_cvrt(counter + 2, env) == 0)
 			return (0);
 		counter++;
+		scop_create_triangle_color(env, index);
 	}
 	return (1);
 }
