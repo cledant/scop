@@ -18,9 +18,13 @@ void main (void)
 	if (var_wiremode == 0 && alpha_test.a < 0.5f)
 			discard;
 	color_transition = vertex_color;
-	alpha_test.xyzw = alpha_test.xyzw * (1 - var_color_transition);
-	color = alpha_test * color_transition;
-	color = vertex_color;
+	if (var_color_transition == 0.0f)
+		color = color_transition;
+	else if (var_color_transition == 1.0f)
+		color = alpha_test;
+	else
+	color = alpha_test * var_color_transition +
+		color_transition * (1 - var_color_transition);
 	if (var_wiremode == 1)
 		color.a = 1.0f;
 }

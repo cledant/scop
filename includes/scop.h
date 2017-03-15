@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/15 11:20:20 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 12:18:16 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,6 +304,10 @@ void				scop_vec3_cross_prod(t_vec3 *result, const t_vec3 a,
 						const t_vec3 b);
 void				scop_vec3_multiply_const(t_vec3 *result, const t_vec3 a,
 						const float cst);
+/*
+** VEC4 FUNCTIONS
+*/
+void				scop_vec4_set(t_vec4 *vec, const t_vec4 a);
 /*
 ** MATH FUNCTIONS
 */

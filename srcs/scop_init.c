@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/15 11:37:13 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 12:42:09 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,8 +211,8 @@ void	scop_main(t_env *env)
 		glUniformMatrix4fv(env->uniform.mat_scale, 1, GL_TRUE,
 			(GLfloat *)&(env->matrix.scale));
 		glUniform1iv(env->uniform.var_wiremode, 1, (GLint *)&(env->input.wire));
-		glUniform1iv(env->uniform.var_color_transition, 1,
-			(GLint *)&(env->obj.color_transition));
+		glUniform1fv(env->uniform.var_color_transition, 1,
+			(GLfloat *)&(env->obj.color_transition));
 		while (counter < env->obj.nb_vao)
 		{
 			//Use texture
