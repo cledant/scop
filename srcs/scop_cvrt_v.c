@@ -6,18 +6,25 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:56:12 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/15 11:31:49 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 14:59:03 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static inline int		subroutine_cvrt(size_t where, t_env *env)
+static inline int		subroutine_cvrt(const size_t where, t_env *env)
 {
 	if (scop_cvrt_seek_vertex(env, where) == 0)
 		return (0);
 	(env->obj.nb_cvrt)++;
 	return (1);
+}
+
+static inline void		create_routine(t_env *env, const size_t index)
+{
+	scop_create_triangle_normal(env, index);
+	scop_create_triangle_tex(env, index);
+	scop_create_triangle_color(env, index);
 }
 
 int						scop_cvrt_v(t_env *env)
@@ -42,9 +49,7 @@ int						scop_cvrt_v(t_env *env)
 			return (0);
 		if (subroutine_cvrt(counter + 2, env) == 0)
 			return (0);
-		scop_create_triangle_normal(env, index);
-		scop_create_triangle_tex(env, index);
-		scop_create_triangle_color(env, index);
+		create_routine(env, index);
 		counter++;
 	}
 	return (1);

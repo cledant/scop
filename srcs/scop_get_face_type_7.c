@@ -6,14 +6,20 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:32:13 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/09 17:24:18 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 15:05:41 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-int		scop_get_face_type_7(char **str, const size_t cur_pos,
-			const size_t size, t_glpoint *glpoint)
+static inline int		succes_ret(char **str, char *end)
+{
+	*str = end;
+	return (1);
+}
+
+int						scop_get_face_type_7(char **str, const size_t cur_pos,
+							const size_t size, t_glpoint *glpoint)
 {
 	extern int		errno;
 	char			*begin;
@@ -36,9 +42,6 @@ int		scop_get_face_type_7(char **str, const size_t cur_pos,
 	if (errno == EINVAL || errno == ERANGE || glpoint->norm <= 0)
 		return (0);
 	if (*end == '\0')
-	{
-		*str = end;
-		return (1);
-	}
+		return (succes_ret(str, end));
 	return (0);
 }

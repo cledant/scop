@@ -6,20 +6,20 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:57:41 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/09 17:21:57 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 15:02:55 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static int		return_fct(char **str, const char *end)
+static inline int		return_fct(char **str, const char *end)
 {
-		*str = (char *)end + 1;
-		return (1);
+	*str = (char *)end + 1;
+	return (1);
 }
 
-int				scop_get_face_type_5(char **str, const size_t cur_pos,
-					const size_t size, t_glpoint *glpoint)
+int						scop_get_face_type_5(char **str, const size_t cur_pos,
+							const size_t size, t_glpoint *glpoint)
 {
 	extern int		errno;
 	char			*begin;

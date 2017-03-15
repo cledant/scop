@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 15:59:09 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 14:36:38 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 14:47:05 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		scop_get_face_type_2(char **str, const size_t cur_pos,
 
 	errno = 0;
 	begin = *str;
-	glpoint->vertex= strtol(*str, &end, 10);
+	glpoint->vertex = strtol(*str, &end, 10);
 	glpoint->tex = 0;
 	glpoint->norm = 0;
 	if (errno == EINVAL || errno == ERANGE || glpoint->vertex <= 0)

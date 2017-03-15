@@ -6,13 +6,13 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:57:41 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/13 14:48:11 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 15:02:35 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static int		last_part(char **prev_end, t_glpoint *glpoint)
+static inline int		last_part(char **prev_end, t_glpoint *glpoint)
 {
 	extern int		errno;
 	char			*begin;
@@ -31,8 +31,8 @@ static int		last_part(char **prev_end, t_glpoint *glpoint)
 	return (0);
 }
 
-int				scop_get_face_type_6(char **str, const size_t cur_pos,
-					const size_t size, t_glpoint *glpoint)
+int						scop_get_face_type_6(char **str, const size_t cur_pos,
+							const size_t size, t_glpoint *glpoint)
 {
 	extern int		errno;
 	char			*begin;

@@ -6,13 +6,13 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 11:35:14 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/14 17:07:37 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 15:01:03 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static char		*extract_tex(const char *file, const size_t depth)
+static inline char		*extract_tex(const char *file, const size_t depth)
 {
 	t_tga_header	*head;
 	char			*tex;
@@ -38,7 +38,7 @@ static char		*extract_tex(const char *file, const size_t depth)
 	return (tex);
 }
 
-static char		*fail_load(char *file, FILE *stream)
+static inline char		*fail_load(char *file, FILE *stream)
 {
 	if (file != NULL)
 		free(file);
@@ -46,7 +46,7 @@ static char		*fail_load(char *file, FILE *stream)
 	return (NULL);
 }
 
-static char		*load_file(const char *path, long *size)
+static inline char		*load_file(const char *path, long *size)
 {
 	FILE	*stream;
 	char	*file;
@@ -68,8 +68,8 @@ static char		*load_file(const char *path, long *size)
 	return (file);
 }
 
-static char		*check_and_extract_file(const char *file, const long size,
-					t_mat *mat)
+static inline char		*check_and_extract_file(const char *file,
+							const long size, t_mat *mat)
 {
 	t_tga_header	*head;
 	char			*tex;
@@ -96,7 +96,7 @@ static char		*check_and_extract_file(const char *file, const long size,
 	return (tex);
 }
 
-char			*scop_load_texture(const char *path, t_mat *mat)
+char					*scop_load_texture(const char *path, t_mat *mat)
 {
 	long	file_size;
 	char	*tex_file;

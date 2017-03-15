@@ -6,13 +6,13 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:57:41 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/09 17:00:30 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 15:05:08 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static int		last_part(const char *prev_end)
+static inline int		last_part(const char *prev_end)
 {
 	extern int		errno;
 	long			dummy;
@@ -29,8 +29,8 @@ static int		last_part(const char *prev_end)
 	return (0);
 }
 
-int				scop_det_face_type_6(const char *str, const size_t cur_pos,
-					const size_t size)
+int						scop_det_face_type_6(const char *str,
+							const size_t cur_pos, const size_t size)
 {
 	extern int		errno;
 	long			dummy;
