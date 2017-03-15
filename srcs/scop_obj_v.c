@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 19:28:16 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/07 17:47:56 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 15:58:29 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static inline int	realloc_v_pos(t_env *env)
 	return (1);
 }
 
-int				scop_obj_v(t_obj_read *obj, t_env *env)
+int					scop_obj_v(t_obj_read *obj, t_env *env)
 {
 	size_t	check;
 	char	*next_ptr;

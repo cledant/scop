@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 15:06:36 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/11 11:29:23 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 15:57:17 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,29 +76,13 @@ static inline int		read_file(FILE *stream, t_env *env, t_obj_read *reader)
 
 int						scop_read_obj_files(t_env *env, const char *path)
 {
-	FILE	*stream;
+	FILE		*stream;
 	t_obj_read	reader;
 
 	if ((stream = fopen(path, "r")) == NULL)
 		return (error_obj(path, stream));
-	if ((env->obj.v_pos = (t_vec3 *)malloc(sizeof(t_vec3) * PRE_ALLOC)) == NULL)
+	if (scop_read_obj_alloc(env) == 0)
 		return (error_obj(path, stream));
-	env->obj.max_pos = PRE_ALLOC;
-	if ((env->obj.v_norm = (t_vec3 *)malloc(sizeof(t_vec3) * PRE_ALLOC))
-			== NULL)
-		return (error_obj(path, stream));
-	env->obj.max_norm = PRE_ALLOC;
-	if ((env->obj.v_tex = (t_vec2 *)malloc(sizeof(t_vec2) * PRE_ALLOC)) == NULL)
-		return (error_obj(path, stream));
-	env->obj.max_tex = PRE_ALLOC;
-	if ((env->obj.glpoint = (t_glpoint *)malloc(sizeof(t_glpoint) * PRE_ALLOC))
-			== NULL)
-		return (error_obj(path, stream));
-	env->obj.max_glpoint = PRE_ALLOC;
-	if ((env->obj.cvrt = (t_face *)malloc(sizeof(t_face) * PRE_ALLOC))
-			== NULL)
-		return (error_obj(path, stream));
-	env->obj.max_cvrt = PRE_ALLOC;
 	init_reader(&reader);
 	if (read_file(stream, env, &reader) == 0)
 		return (error_obj(path, stream));

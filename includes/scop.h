@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/15 12:18:16 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/15 15:54:40 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,6 +331,7 @@ int					scop_init_vao(t_env *env, const size_t id);
 ** OBJ FILE PARSER FUNCTIONS
 */
 int					scop_read_obj_files(t_env *env, const char *path);
+int					scop_read_obj_alloc(t_env *env);
 int					scop_read_obj_cases(t_obj_read *reader, t_env *env);
 int					scop_obj_v(t_obj_read *obj, t_env *env);
 int					scop_obj_vt(t_obj_read *obj, t_env *env);
