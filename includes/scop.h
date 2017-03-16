@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/16 17:04:37 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/16 17:38:41 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -415,6 +415,7 @@ void				scop_gl_bind_texture(t_mat *mat);
 ** OTHER FUNCTIONS
 */
 void				scop_main(t_env *env);
+void				scop_main_init(t_env *env);
 int					scop_exit(t_env *env);
 void				*scop_get_env(void *addr);
 int					scop_gl_init_uniforms(t_env *env);
