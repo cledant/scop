@@ -6,7 +6,7 @@
 #    By: cledant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 10:40:13 by cledant           #+#    #+#              #
-#    Updated: 2017/03/16 18:10:47 by cledant          ###   ########.fr        #
+#    Updated: 2017/03/16 21:12:02 by cledant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,13 @@ FRAMEWORK = -framework OpenGL -framework Cocoa -framework IOkit -framework CoreV
 
 INCLUDES_GLFW = ./glfw/include/GLFW
 
-GLFW_PATH = ./glfw/src
+GLFW_NAME = libglfw3.a
+
+GLFW_DIR = ./glfw
+
+GLFW_BUILD_DIR = ./glfw/build
+
+GLFW_PATH = $(GLFW_BUILD_DIR)/src
 
 SRCS_NAME = scop_init.c scop_glfw_close_callback.c scop_glfw_error_callback.c \
 			scop_exit.c scop_gl_load_shader.c scop_gl_create_shader_program.c \
@@ -66,7 +72,13 @@ OBJ_SRCS = $(SRCS_NAME:%.c=$(OBJ_DIR_NAME)/%.o)
 
 NAME = scop
 
-all : $(NAME)
+all : glfw $(NAME)
+
+glfw : $(GLFW_PATH)/$(GLFW_NAME)
+
+$(GLFW_PATH)/$(GLFW_NAME) :
+	cmake -B$(GLFW_BUILD_DIR) -H$(GLFW_DIR)
+	make -C $(GLFW_BUILD_DIR)
 
 $(NAME) : $(OBJ_SRCS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS) -L$(GLFW_PATH) $(FRAMEWORK)
@@ -77,10 +89,12 @@ $(OBJ_DIR_NAME)/%.o : $(SRCS_PATH)/%.c
 
 clean :
 	rm -rf $(OBJ_DIR_NAME)
+	make -C $(GLFW_BUILD_DIR) clean
 
 fclean : clean
 	rm -rf $(NAME)
+	rm -rf $(GLFW_BUILD_DIR)
 
 re : fclean all
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re glfw
