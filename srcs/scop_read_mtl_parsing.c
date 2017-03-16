@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 12:10:59 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/15 18:45:35 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/16 16:32:11 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ int						scop_read_mtl_parsing(FILE *stream, t_env *env)
 					return (error_read_mtl(&mtl));
 			(mtl.counter)++;
 		}
+		mtl.line = mtl.cpy_line;
 		mtl.counter = 0;
-		free(mtl.cpy_line);
 		(mtl.curr_line_nb)++;
 	}
+	free(mtl.cpy_line);
 	if (feof(stream) != 0)
 		return (1);
 	return (0);

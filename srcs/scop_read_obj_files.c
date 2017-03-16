@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 15:06:36 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/15 15:57:17 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/16 16:31:24 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ static inline int		read_file(FILE *stream, t_env *env, t_obj_read *reader)
 			(reader->counter)++;
 		}
 		reader->counter = 0;
-		free(reader->cpy_line);
+		reader->line = reader->cpy_line;
 		(reader->curr_line_nb)++;
 	}
+	free(reader->cpy_line);
 	if (feof(stream) != 0)
 		return (1);
 	return (0);
