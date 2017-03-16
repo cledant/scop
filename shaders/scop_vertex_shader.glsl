@@ -19,14 +19,16 @@ out vec4			vertex_norm;
 out vec2			vertex_tex;
 out	vec4			vertex_color;
 
+mat4				mat_routine;
+
 void main (void)
 {
-	gl_Position = mat_proj * mat_view * mat_model_tr * mat_model_rot_theta *
-		mat_model_rot_phi  * mat_model_auto_rot * mat_scale *
-		mat_model_orig * vec4(pos.x, pos.y, pos.z, 1.0f);
-	vertex_norm = mat_proj * mat_view * mat_model_tr  * mat_model_rot_theta *
-		mat_model_rot_phi  * mat_model_auto_rot * mat_model_orig *
-		vec4(norm.x, norm.y, norm.z, 1.0f);
+	mat_routine = mat_proj * mat_view * mat_model_tr * mat_model_rot_theta *
+		mat_model_rot_phi  * mat_model_auto_rot;
+
+	gl_Position = mat_routine * mat_scale * mat_model_orig *
+		vec4(pos.x, pos.y, pos.z, 1.0f);
+	vertex_norm = mat_routine * mat_model_orig * vec4(norm.x, norm.y, norm.z, 1.0f);
 	if (var_tex_origin == 2)
 		vertex_tex = vec2(texture.x, 1.0f - texture.y);
 	else if (var_tex_origin == 0)

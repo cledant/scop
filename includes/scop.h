@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/15 20:53:33 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/16 11:27:53 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,9 +141,9 @@ typedef struct		s_win
 
 typedef struct		s_shader
 {
-	GLuint			shader_prog;	//to free
-	GLuint			vertex_shader;	//to free
-	GLuint			fragment_shader;	//to free
+	GLuint			shader_prog;
+	GLuint			vertex_shader;
+	GLuint			fragment_shader;
 }					t_shader;
 
 typedef struct		s_light
