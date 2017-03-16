@@ -6,11 +6,9 @@
 #    By: cledant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 10:40:13 by cledant           #+#    #+#              #
-#    Updated: 2017/03/16 17:39:03 by cledant          ###   ########.fr        #
+#    Updated: 2017/03/16 18:10:47 by cledant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-##Ajouter plus tard la compile de glfw
 
 CC = gcc
 
@@ -70,13 +68,11 @@ NAME = scop
 
 all : $(NAME)
 
-$(OBJ_DIR_NAME) :
-	mkdir $(OBJ_DIR_NAME)
-
 $(NAME) : $(OBJ_SRCS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS) -L$(GLFW_PATH) $(FRAMEWORK)
 
-$(OBJ_DIR_NAME)/%.o : $(SRCS_PATH)/%.c $(OBJ_DIR_NAME)
+$(OBJ_DIR_NAME)/%.o : $(SRCS_PATH)/%.c 
+	mkdir -p $(OBJ_DIR_NAME)
 	$(CC) -o $@ -c $< $(CFLAGS) -I$(INCLUDES) -I$(INCLUDES_GLFW)
 
 clean :
