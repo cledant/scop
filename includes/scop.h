@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/16 11:27:53 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/16 17:04:37 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -400,16 +400,6 @@ int					scop_mtl_ks(t_obj_read *mtl, t_env *env);
 int					scop_mtl_ns(t_obj_read *mtl, t_env *env);
 int					scop_mtl_map_kd(t_obj_read *mtl, t_env *env);
 /*
-** OTHER FUNCTIONS
-*/
-int					scop_exit(t_env *env);
-void				*scop_get_env(void *addr);
-int					scop_gl_init_uniforms(t_env *env);
-void				scop_gl_init_vao(t_env *env);
-void				scop_delete_return_line(char *str);
-char				*scop_get_folder(const char *arg);
-char				*scop_strjoin(const char *s1, const char *s2);
-/*
 ** UPDATE FROM INPUTS FUNCTIONS
 */
 void				scop_execute_mov(t_env *env);
@@ -422,7 +412,14 @@ char				*scop_load_texture(const char *path, t_mat *mat);
 void				scop_set_origin_texture(const char image_desc, t_mat *mat);
 void				scop_gl_bind_texture(t_mat *mat);
 /*
-** TEST FUNCTIONS
+** OTHER FUNCTIONS
 */
-void				debug_state(void);
+void				scop_main(t_env *env);
+int					scop_exit(t_env *env);
+void				*scop_get_env(void *addr);
+int					scop_gl_init_uniforms(t_env *env);
+void				scop_gl_init_vao(t_env *env);
+void				scop_delete_return_line(char *str);
+char				*scop_get_folder(const char *arg);
+char				*scop_strjoin(const char *s1, const char *s2);
 #endif

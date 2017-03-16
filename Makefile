@@ -6,7 +6,7 @@
 #    By: cledant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 10:40:13 by cledant           #+#    #+#              #
-#    Updated: 2017/03/15 20:51:11 by cledant          ###   ########.fr        #
+#    Updated: 2017/03/16 17:03:36 by cledant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,10 +43,10 @@ SRCS_NAME = scop_init.c scop_glfw_close_callback.c scop_glfw_error_callback.c \
 			scop_read_mtl_files.c scop_read_mtl_parsing.c scop_read_mtl_cases.c \
 			scop_mtl_newmtl.c scop_mtl_map_kd.c scop_mtl_ns.c \
 			scop_math_is_valid_float.c scop_mtl_kd.c scop_mtl_ka.c scop_mtl_ks.c \
-			scop_obj_v.c scop_obj_vn.c scop_obj_vt.c scop_obj_g.c scop_obj_usemtl.c \
-			scop_init_vao.c scop_obj_f.c scop_delete_return_line.c \
-			scop_get_folder.c scop_strjoin.c scop_obj_o.c \
-			scop_determine_face_type.c scop_det_face_type_1.c \
+			scop_obj_v.c scop_obj_vn.c scop_obj_vt.c scop_obj_g.c \
+			scop_obj_usemtl.c scop_init_vao.c scop_obj_f.c \
+			scop_delete_return_line.c scop_get_folder.c scop_strjoin.c \
+			scop_obj_o.c scop_determine_face_type.c scop_det_face_type_1.c \
 			scop_det_face_type_2.c scop_det_face_type_3.c scop_det_face_type_4.c \
 			scop_det_face_type_5.c scop_det_face_type_6.c scop_det_face_type_7.c \
 			scop_get_faces.c scop_get_glpoint.c scop_get_face_type_1.c \
@@ -58,7 +58,7 @@ SRCS_NAME = scop_init.c scop_glfw_close_callback.c scop_glfw_error_callback.c \
 			scop_cvrt_v_vt_vn.c scop_cvrt_v_vt.c scop_cvrt_v_vn.c \
 			scop_obj_get_center.c scop_mat4_set_scale.c \
 			scop_create_triangle_color.c scop_vec4_set.c scop_read_obj_alloc.c \
-			scop_init_env_2.c
+			scop_init_env_2.c scop_main.c scop_gl_init_vao.c
 
 INCLUDES = ./includes
 

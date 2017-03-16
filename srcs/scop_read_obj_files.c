@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 15:06:36 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/16 16:31:24 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/16 16:47:06 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int						scop_read_obj_files(t_env *env, const char *path)
 	t_obj_read	reader;
 
 	if ((stream = fopen(path, "r")) == NULL)
-		return (error_obj(path, stream));
+		return (error_obj(path, NULL));
 	if (scop_read_obj_alloc(env) == 0)
 		return (error_obj(path, stream));
 	init_reader(&reader);
@@ -89,6 +89,6 @@ int						scop_read_obj_files(t_env *env, const char *path)
 		return (error_obj(path, stream));
 	fclose(stream);
 	if (scop_obj_get_center(env) == 0)
-		return (0);
+		return (error_obj(path, NULL));
 	return (1);
 }
