@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/16 17:38:41 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/17 14:42:38 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ typedef struct		s_input
 	int				wire;
 	int				toggle_rot;
 	int				toggle_color_transition;
+	int				toggle_mouse;
 	GLfloat			model_rot_phi;
 	GLfloat			model_rot_theta;
 	t_vec3			model_pos;
@@ -268,6 +269,7 @@ void				scop_glfw_mouse_pos_callback(GLFWwindow *win, double xpos,
 						double ypos);
 void				scop_glfw_key_callback(GLFWwindow *win, int key,
 						int scancode, int action, int mods);
+void				scop_glfw_disable_enable_mouse(t_env *env);
 /*
 ** SHADER FUNCTIONS
 */

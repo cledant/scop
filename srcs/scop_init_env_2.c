@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 11:18:10 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/15 20:50:45 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/17 15:38:21 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	scop_init_env_input(t_env *env)
 	env->input.timer = 1.1f;
 	env->input.wire = 0;
 	env->input.toggle_rot = 1;
+	env->input.toggle_mouse = 1;
 	env->input.toggle_color_transition = 0;
 	env->input.model_rot_theta = 0.0f;
 	env->input.model_rot_phi = 0.0f;

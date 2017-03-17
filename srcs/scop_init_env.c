@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 11:18:10 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/15 20:50:17 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/17 15:27:45 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	scop_init_env_matrix(t_env *env)
 void	scop_init_env(t_env *env)
 {
 	scop_init_env_win(env);
+	scop_init_env_matrix(env);
 	scop_init_env_shader(env);
 	scop_init_env_uniform(env);
 	scop_init_env_obj(env);
 	scop_init_env_light(env);
 	scop_init_env_input(env);
 	scop_init_env_camera(env);
-	scop_init_env_matrix(env);
 	env->folder = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 10:37:03 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/15 20:45:51 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/17 15:49:05 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static inline void		execute_part_5(t_env *env, const float corr_cam_speed)
 			== 0) ? 1 : 0;
 		env->input.timer = 0.0f;
 	}
+	if (env->input.p_key[GLFW_KEY_M] == PRESSED && env->input.timer > 0.5f)
+		scop_glfw_disable_enable_mouse(env);
 }
 
 static inline void		execute_part_4(t_env *env, const float corr_cam_speed)
