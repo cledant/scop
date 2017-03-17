@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 09:53:41 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/17 13:03:25 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/17 16:24:16 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		scop_obj_f(t_obj_read *obj, t_env *env)
 	obj->valid_state[2] = 0;
 	obj->valid_state[3] = 0;
 	obj->valid_state[4] = 1;
-	obj->valid_state[5] = 0;
+	obj->valid_state[5] = 1;
 	obj->valid_state[6] = 1;
 	return (scop_get_faces(obj, env, expected_type, env->obj.group_type));
 }

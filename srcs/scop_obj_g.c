@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 20:29:18 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/10 20:17:46 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/17 16:17:33 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		scop_obj_g(t_obj_read *obj, t_env *env)
 {
 	if (env->obj.nb_vao == MAX_VAO)
 		return (0);
-	if (env->obj.nb_vao == 1 && env->obj.vao[0].nb_face == 0)
+	if (env->obj.vao[env->obj.nb_vao - 1].nb_face == 0)
 		return (1);
 	if (scop_init_vao(env, env->obj.nb_vao) == 0)
 		return (0);
