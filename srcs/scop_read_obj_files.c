@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 15:06:36 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/16 16:47:06 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/17 12:55:10 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static inline int		read_file(FILE *stream, t_env *env, t_obj_read *reader)
 		reader->cpy_line = reader->line;
 		while (strsep(&(reader->line), " ") != NULL)
 			(void)value;
-		while (reader->counter < 7 && *(reader->cpy_line) != '\0')
+		while (reader->counter < 8 && *(reader->cpy_line) != '\0')
 		{
 			if (reader->valid_state[reader->counter] == 1 &&
 					strcmp(value[reader->counter], reader->cpy_line) == 0)
