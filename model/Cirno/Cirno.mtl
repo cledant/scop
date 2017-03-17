@@ -1,0 +1,35 @@
+# Blender MTL File: 'Cirno.blend'
+# Material Count: 3
+
+newmtl eyes01.tga
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.200000 0.200000 0.200000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd eyes01.tga
+map_Ks eyes01.tga
+
+newmtl mouth01.tga
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.200000 0.200000 0.200000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd mouth01.tga
+map_Ks mouth01.tga
+
+newmtl tex01.tga
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.200000 0.200000 0.200000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd tex01.tga
+map_Ks tex01.tga
