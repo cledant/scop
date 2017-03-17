@@ -6,16 +6,31 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/16 17:11:57 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/17 17:13:22 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
+static inline void		display_keys(void)
+{
+	puts("===>Scop Keys<===");
+	puts("WASDRF = Move Camera");
+	puts("Mouse = Move Camera Angle");
+	puts("M = Enable / Disable Mouse");
+	puts("T = Enable / Disable Texture");
+	puts("845679 = Move Model");
+	puts("Arrows = Rotate model");
+	puts("Space = stop auto-rotation");
+	puts("Keypad + : Increase Model Size");
+	puts("Keypad - : Decrease Model Size");
+	puts("ESC = Exit Scop");
+}
+
 static inline int		error_argv(int argc)
 {
 	if (argc < 2)
-		puts("Scop : no file");
+		display_keys();
 	else if (argc > 2)
 		puts("Scop : too much arguments");
 	return (0);
