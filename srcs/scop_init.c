@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:26:38 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/17 17:13:22 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/17 17:42:40 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ static inline void		display_keys(void)
 	puts("845679 = Move Model");
 	puts("Arrows = Rotate model");
 	puts("Space = stop auto-rotation");
-	puts("Keypad + : Increase Model Size");
-	puts("Keypad - : Decrease Model Size");
+	puts("Keypad + = Increase Model Size");
+	puts("Keypad - = Decrease Model Size");
+	puts("Keypad 0 = Wireframe mode");
 	puts("ESC = Exit Scop");
 }
 
