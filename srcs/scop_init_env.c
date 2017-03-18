@@ -6,7 +6,7 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 11:18:10 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/17 15:27:45 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/18 12:00:08 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	scop_init_env_camera(t_env *env)
 {
-	scop_vec3_set(&(env->cam.pos), 0.0f, 0.0f, -1.0f);
+	scop_vec3_set(&(env->cam.pos), -6.0f, 0.0f, 0.0f);
 	scop_vec3_set(&(env->cam.target), 0.0f, 0.0f, 0.0f);
 	scop_vec3_set(&(env->cam.up_vec), 0.0f, 1.0f, 0.0f);
 	scop_vec3_set(&(env->cam.front), 1.0f, 0.0f, 0.0f);

@@ -6,7 +6,7 @@
 #    By: cledant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 10:40:13 by cledant           #+#    #+#              #
-#    Updated: 2017/03/17 14:42:53 by cledant          ###   ########.fr        #
+#    Updated: 2017/03/18 11:43:57 by cledant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,6 @@ $(OBJ_DIR_NAME)/%.o : $(SRCS_PATH)/%.c
 
 clean :
 	rm -rf $(OBJ_DIR_NAME)
-	make -C $(GLFW_BUILD_DIR) clean
 
 fclean : clean
 	rm -rf $(NAME)

@@ -6,14 +6,15 @@
 /*   By: cledant <cledant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:28:43 by cledant           #+#    #+#             */
-/*   Updated: 2017/03/17 14:42:38 by cledant          ###   ########.fr       */
+/*   Updated: 2017/03/18 11:46:58 by cledant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCOP_H
 # define SCOP_H
 
-# include <OpenGL/gl.h>
+# define GLFW_INCLUDE_GLCOREARB
+
 # include <stdio.h>
 # include <math.h>
 # include <stdlib.h>
@@ -255,8 +256,6 @@ typedef struct		s_obj_read
 	size_t			curr_line_nb;
 }					t_obj_read;
 
-void				glBindVertexArray(GLuint arrays);
-void				glGenVertexArrays(GLsizei n, GLuint *arrays);
 /*
 ** GLFW FUNCTIONS
 */
