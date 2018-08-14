@@ -1,5 +1,7 @@
 # scop
 
+![screenshot](/screenshot/scop.png?raw=true)
+
 42 project which aims to make a .obj file viewer with modern OpenGL and C.
 
 ## Compiling
